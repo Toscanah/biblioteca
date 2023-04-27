@@ -1,8 +1,6 @@
 # Biblioteca
 
 
-# Biblioteca
-
 Si vuole realizzare un sistema informativo per la gestione di una catena di biblioteche.
 
 Ciascuna biblioteca contiene libri, enciclopedie e carte geo-politiche:
