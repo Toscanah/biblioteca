@@ -7,14 +7,52 @@
     <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
     <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    
+
     <link rel="stylesheet" type="text/css" href="src/css/style.css">
+    <link rel="stylesheet" type="text/css" href="src/css/index.css">
 </head>
 
 <body>
+    <main class="container">
+        <section class="intro observer-element">
+            <p class="title">boocek.</p>
+            <p class="desc">books By cecchini</p>
+        </section>
+
+        <section class="info-container">
+            <div class="observer-element info left">
+                <h1>Info 1</h1>
+                <h4>con titolo, desc e img</h2>
+            </div>
+            <div class="observer-element info right">
+                <h1>Info 2</h1>
+                <h4>con titolo, desc e img</h2>
+            </div>
+        </section>
+
+        <section class="observer-element go-container">
+            <div class="background"></div>
+            <div class="go">DA dare titolo + desc</div>
+
+            <form action="src/catalog.html">
+                <button type="submit" class="mdc-button mdc-button--raised">
+                    <span class="mdc-button__ripple"></span>
+                    <span class="mdc-button__focus-ring"></span>
+                    <span class="mdc-button__label">VEDI CATALOGO</span>
+                </button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <!-- TODO: mappa in JS -->
+    </footer>
+
     <script type="text/javascript">
         window.mdc.autoInit(document.body);
     </script>
+
+    <script src="src/scripts/index.js"></script>
 </body>
 
 </html>
