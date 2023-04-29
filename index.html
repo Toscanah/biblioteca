@@ -2,24 +2,27 @@
 <html lang="en">
 
 <head>
-    <title>Index</title>
+    <title>boocek</title>
 
     <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
     <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
+    <script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0RLgPIM87iDhK6rJww_Wb6VuIMXnjS_U"></script>
     <link rel="stylesheet" type="text/css" href="src/css/style.css">
     <link rel="stylesheet" type="text/css" href="src/css/index.css">
 </head>
 
 <body>
     <main class="container">
-        <section class="intro observer-element">
+        <div class="intro observer-element">
             <p class="title">boocek.</p>
             <p class="desc">books By cecchini</p>
-        </section>
+            <div class="title-divider">&nbsp;</div>
+        </div>
 
-        <section class="info-container">
+        <div class="info-container">
             <div class="observer-element info left">
                 <h1>Info 1</h1>
                 <h4>con titolo, desc e img</h2>
@@ -28,25 +31,47 @@
                 <h1>Info 2</h1>
                 <h4>con titolo, desc e img</h2>
             </div>
-        </section>
+        </div>
 
-        <section class="observer-element go-container">
+        <div class="divider-container">
+            <div class="section-divider">&nbsp;</div>
+        </div>
+
+        <div class="observer-element go-container">
             <div class="background"></div>
-            <div class="go">DA dare titolo + desc</div>
+            <div class="go">
+                <h1>Sei pronto?</h1>
+                <h2>inizia a leggere</h2>
 
-            <form action="src/catalog.html">
-                <button type="submit" class="mdc-button mdc-button--raised">
-                    <span class="mdc-button__ripple"></span>
-                    <span class="mdc-button__focus-ring"></span>
-                    <span class="mdc-button__label">VEDI CATALOGO</span>
-                </button>
-            </form>
-        </section>
+                <form action="src/catalog.html" id="go">
+                    <button type="submit" class="mdc-button mdc-button--raised" id="catalog">
+                        <span class="mdc-button__ripple"></span>
+                        <span class="mdc-button__focus-ring"></span>
+                        <span class="mdc-button__label">VAI AL CATALOGO</span>
+                    </button>
+                </form>
+            </div>
+        </div>
     </main>
 
-    <footer>
-        <!-- TODO: mappa in JS -->
+    <div class="divider-container">
+        <div class="section-divider">&nbsp;</div>
+    </div>
+
+    <footer class="observer-element map-container">
+        <div class="map-info">
+            <h1>Le nostre sedi.</h1>
+            <p>boocek ti accompagna per tutt'Italia!<br>
+                Per sapere di piu' su una sede, clicca l'icona e
+                verrai reindirizzato alla sua pagina<br>
+                Buona lettura!<br>
+                // TODO: TESTO MIGLIORE
+            </p>
+        </div>
+        <div id="map"></div>
     </footer>
+
+    <h1>boocek.</h1>
 
     <script type="text/javascript">
         window.mdc.autoInit(document.body);

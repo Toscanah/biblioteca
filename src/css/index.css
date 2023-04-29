@@ -22,7 +22,8 @@ html {
 }
 
 .title,
-.desc {
+.desc,
+.title-divider {
     margin: 0;
     opacity: 0;
     animation-name: fade-in;
@@ -36,8 +37,18 @@ html {
 }
 
 .desc {
-    font-size: 3.5em;
+    font-size: 3em;
     opacity: 0;
+    animation-delay: 3s;
+}
+
+.title-divider {
+    opacity: 0;
+    height: 2px;
+    width: 60%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    background-image: linear-gradient(90deg, white, black, white);
     animation-delay: 3s;
 }
 
@@ -71,11 +82,6 @@ html {
     align-self: flex-start;
 }
 
-.info img {
-    width: 400px;
-    height: 400px;
-}
-
 .go-container {
     position: relative;
     height: 500px;
@@ -83,8 +89,6 @@ html {
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    margin-top: 50px;
-    margin-bottom: 50px;
     margin-left: 80px;
     margin-right: 80px;
 }
@@ -106,8 +110,60 @@ html {
 
 .go {
     display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
     position: relative;
     z-index: 1;
     font-size: 4em;
-    color: wheat;
+    color: white;
+}
+
+#catalog {
+    margin-top: 20px;
+    color: black;
+    font-weight: bold;
+    border: 1px solid black;
+}
+
+.divider-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.section-divider {
+    height: 2px;
+    width: 90%;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    background-image: linear-gradient(90deg, white, black, white);
+}
+
+#map {
+    padding: 20px;
+    width: 60%;
+    height: 500px;
+}
+
+.map-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.map-info {
+    padding: 20px;
+    width: 30%;
+    height: 500px;
+}
+
+.map-info h1 {
+    font-size: 4em;
+}
+
+.map-info p {
+    font-size: 2.2em;
+    font-weight: 5%;
 }
