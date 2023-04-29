@@ -27,7 +27,7 @@ html {
     margin: 0;
     opacity: 0;
     animation-name: fade-in;
-    animation-duration: 3s;
+    animation-duration: 2s;
     animation-fill-mode: forwards;
 }
 
@@ -39,7 +39,7 @@ html {
 .desc {
     font-size: 3em;
     opacity: 0;
-    animation-delay: 3s;
+    animation-delay: 2s;
 }
 
 .title-divider {
@@ -49,7 +49,7 @@ html {
     margin-top: 30px;
     margin-bottom: 30px;
     background-image: linear-gradient(90deg, white, black, white);
-    animation-delay: 3s;
+    animation-delay: 2s;
 }
 
 .observer-element {
@@ -166,4 +166,10 @@ html {
 .map-info p {
     font-size: 2.2em;
     font-weight: 5%;
+}
+
+.up {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
 }

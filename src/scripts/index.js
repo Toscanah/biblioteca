@@ -16,6 +16,41 @@ elements.forEach(element => {
     observer.observe(element);
 });
 
+function quadraticEaseInOut(t, startValue, changeInValue, duration) {
+    t /= duration / 2;
+    if (t < 1) {
+        return changeInValue / 2 * t * t + startValue;
+    }
+    t--;
+    return -changeInValue / 2 * (t * (t - 2) - 1) + startValue;
+};
+
+const upBtn = document.getElementById('up');
+upBtn.addEventListener('click', () => {
+    const targetPosition = 0;
+    const startPosition = window.pageYOffset;
+    const distance = targetPosition - startPosition;
+    const duration = 2500;
+
+    let start = null;
+
+    function step(timestamp) {
+        if (!start) {
+            start = timestamp;
+        }
+
+        const progress = timestamp - start;
+        const ease = quadraticEaseInOut(progress, startPosition, distance, duration);
+        window.scrollTo(0, ease);
+
+        if (progress < duration) {
+            requestAnimationFrame(step);
+        }
+    }
+
+    requestAnimationFrame(step);
+});
+
 window.addEventListener('load', function () {
     const latitude = 45.6499974;
     const longitude = 13.767330264;
@@ -44,7 +79,7 @@ window.addEventListener('load', function () {
                     position: coordinates,
                     map: map,
                     icon: markerImage,
-                    url: 'src/pages/biblioteca.html?id=' + site.id
+                    url: 'src/pages/library.html?id=' + site.id
                 });
 
                 google.maps.event.addListener(marker, 'click', function () {

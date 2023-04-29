@@ -41,15 +41,15 @@
             <div class="background"></div>
             <div class="go">
                 <h1>Sei pronto?</h1>
-                <h2>inizia a leggere</h2>
+                <h4>inizia a leggere</h3>
 
-                <form action="src/catalog.html" id="go">
-                    <button type="submit" class="mdc-button mdc-button--raised" id="catalog">
-                        <span class="mdc-button__ripple"></span>
-                        <span class="mdc-button__focus-ring"></span>
-                        <span class="mdc-button__label">VAI AL CATALOGO</span>
-                    </button>
-                </form>
+                    <form action="src/pages/catalog.html" id="go">
+                        <button type="submit" class="mdc-button mdc-button--raised" id="catalog">
+                            <span class="mdc-button__ripple"></span>
+                            <span class="mdc-button__focus-ring"></span>
+                            <span class="mdc-button__label">VAI AL CATALOGO</span>
+                        </button>
+                    </form>
             </div>
         </div>
     </main>
@@ -71,7 +71,14 @@
         <div id="map"></div>
     </footer>
 
-    <h1>boocek.</h1>
+    <!--<h1>boocek.</h1>-->
+
+    // TODO: fare il bottome come iconcina con la freccia in su
+    <button type="submit" class="mdc-button mdc-button--raised" id="up">
+        <span class="mdc-button__ripple"></span>
+        <span class="mdc-button__focus-ring"></span>
+        <span class="mdc-button__label">TORNA SU</span>
+    </button>
 
     <script type="text/javascript">
         window.mdc.autoInit(document.body);
