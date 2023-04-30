@@ -56,7 +56,7 @@ goDownArrow.addEventListener('click', () => {
     const targetPosition = window.innerHeight;
     const startPosition = window.pageYOffset;
     const distance = targetPosition - startPosition;
-    const duration = 3000;
+    const duration = 1500;
 
     let start = null;
 

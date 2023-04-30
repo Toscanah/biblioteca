@@ -19,8 +19,8 @@ $get_books =
         LEFT JOIN tAutore ON tAutore.id = tProduzione.idAutore
     GROUP BY isbn";
 
-$get_books_res = mysqli_query($db, $get_books);
-while ($book = mysqli_fetch_array($get_books_res)) {
+$get_books_res = mysqli_query($db, $get_books);  
+while ($book = mysqli_fetch_assoc($get_books_res)) {
     $book['type'] = 'Libro';
     $products[] = $book;
 }
@@ -40,7 +40,7 @@ $get_volumes =
         LEFT JOIN tAutore ON tAutore.id = tProduzione.idAutore
     GROUP BY isbn, volume";
 $get_volumes_res = mysqli_query($db, $get_volumes);
-while ($volume = mysqli_fetch_array($get_volumes_res)) {
+while ($volume = mysqli_fetch_assoc($get_volumes_res)) {
     $volume['type'] = 'Volume enciclopedia';
     $products[] = $volume;
 }

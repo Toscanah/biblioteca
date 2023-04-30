@@ -7,6 +7,14 @@
     font-family: main;
 }
 
+input.mdc-text-field__input {
+    font-family: main;
+}
+
+label {
+    font-family: main;
+}
+
 body,
 p,
 h1,
@@ -18,8 +26,8 @@ h4 {
 }
 
 :root {
-    --mdc-theme-primary: #865528;
-    --mdc-theme-secondary: #018786;
+    --mdc-theme-primary: #ff8400;
+    --mdc-theme-secondary: #f2a156;
     --mdc-theme-background: #fff;
     --mdc-theme-surface: #fff;
     --mdc-theme-error: #b00020;
@@ -27,4 +35,41 @@ h4 {
     --mdc-theme-on-secondary: #fff;
     --mdc-theme-on-surface: #000;
     --mdc-theme-on-error: #fff;
+}
+
+.header:visited,
+.header:active,
+.header {
+    text-decoration: none;
+    color: black;
+}
+
+.header h1 {
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 4em;
+}
+
+.header {
+    margin-left: 50px;
+    position: relative;
+}
+
+.header::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    border-radius: 4px;
+    background-color: #18272F;
+    bottom: 0;
+    left: 0;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform .4s ease-in-out;
+}
+
+.header:hover::before {
+    transform-origin: left;
+    transform: scaleX(1);
 }

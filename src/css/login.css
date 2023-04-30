@@ -1,0 +1,106 @@
+header {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.main-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.login {
+    width: 30%;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+}
+
+#login-form {
+    height: 500px;
+    width: 320px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-title {
+    align-self: flex-start;
+}
+
+#remind-me {
+    align-self: flex-start;
+}
+
+.login-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1000px;
+    height: 500px;
+}
+
+.login-img img {
+    transform: scale(0.5);
+    box-shadow: 0px 0px 35px rgb(0, 0, 0);
+}
+
+.vertical-divider {
+    height: 800px;
+    width: 2px;
+    background-image: linear-gradient(0deg, white, black, white);
+}
+
+.vertical-horizzontal {
+    height: 2px;
+    width: 100%;
+    background-image: linear-gradient(90deg, white, black, white);
+}
+
+#login-btn,
+#register-btn {
+    width: inherit;
+    color: black;
+    font-weight: bold;
+}
+
+#register-btn {}
+
+label.mdc-text-field {
+    width: 100%;
+}
+
+hr {
+    width: 100%;
+    border: 1px solid black;
+}
+
+.mdc-text-field:not(.mdc-text-field--disabled) .mdc-floating-label--float-above {
+    color: var(--mdc-theme-primary);
+}
+
+.mdc-checkbox .mdc-checkbox__native-control:enabled:checked~.mdc-checkbox__background {
+    /*border-color: #e79b22;
+    background-color: #f6d264;*/
+}
+
+.error-message {
+    color: red;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.error-message.show {
+    opacity: 1;
+}
+
+#toggle-psw:hover {
+    cursor: pointer;
+}

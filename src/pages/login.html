@@ -13,15 +13,79 @@
 </head>
 
 <body>
-    <main>
-        <form id="login-form">
-            <input type="email" id="email">
-            <input type="password" id="password">
-            <button type="submit">Login</button>
-        </form>
+    <header>
+        <a class="header" href="catalog.html">
+            <h1>boocek.</h1>
+        </a>
+    </header>
 
-        <script src="scripts/login.js"></script>
+    <main class="main-container">
+        <div class="login">
+
+            <form id="login-form" method="POST">
+                <h1 class="login-title">Login</h1>
+
+                <label data-mdc-auto-init="MDCTextField" class="mdc-text-field mdc-text-field--filled">
+                    <span class="mdc-text-field__ripple"></span>
+                    <span class="mdc-floating-label">Indirizzo mail</span>
+                    <input required type="email" class="mdc-text-field__input" id="email">
+                    <span class="mdc-line-ripple"></span>
+                </label>
+
+                <label data-mdc-auto-init="MDCTextField" class="mdc-text-field mdc-text-field--filled">
+                    <span class="mdc-text-field__ripple"></span>
+                    <span class="mdc-floating-label">Password</span>
+                    <input required type="password" class="mdc-text-field__input" id="password">
+                    <i class="material-icons mdc-button__icon" id="toggle-psw">visibility</i>
+                    <span class="mdc-line-ripple"></span>
+                </label>
+
+                <div data-mdc-auto-init="MDCCheckbox" class="mdc-form-field" id="remind-me">
+                    <div class="mdc-checkbox">
+                        <input type="checkbox" class="mdc-checkbox__native-control" id="remind-check" />
+                        <div class="mdc-checkbox__background">
+                            <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                                <path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28
+                                    22.79,4.59" />
+                            </svg>
+                            <div class="mdc-checkbox__mixedmark"></div>
+                        </div>
+                        <div class="mdc-checkbox__ripple"></div>
+                    </div>
+                    <label>Rimani loggato</label>
+                </div>
+
+                <button type="submit" class="mdc-button mdc-button--raised" id="login-btn">
+                    <span class="mdc-button__ripple"></span>
+                    <span class="mdc-button__focus-ring"></span>
+                    <span class="mdc-button__label">ACCEDI</span>
+                </button>
+
+                <div class="vertical-horizzontal">&nbsp;</div>
+
+                <p>Non sei registrato? Diventa un nostro lettore!</p>
+                <button type="submit" class="mdc-button mdc-button--outlined" id="register-btn">
+                    <span class="mdc-button__ripple"></span>
+                    <!--<span class="mdc-button__focus-ring"></span>-->
+                    <span class="mdc-button__label">REGISTRATI</span>
+                </button>
+
+            </form>
+        </div>
+
+        <div class="vertical-divider">&nbsp;</div>
+
+        <div class="login-img">
+            <img src="../images/login2.jpg">
+        </div>
+
+        <script src="../scripts/login.js"></script>
     </main>
 </body>
+
+<script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+<script type="text/javascript">
+    window.mdc.autoInit(document.body);
+</script>
 
 </html>

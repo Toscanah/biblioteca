@@ -18,6 +18,7 @@ fetch('../php/catalog.php', {
     .then((response) => response.json())
     .then((products) => {
         let currentRow = null;
+        console.log(products);
 
         const pageNumber = document.getElementById('page').value;
         const productsPerPage = 10;
@@ -27,7 +28,6 @@ fetch('../php/catalog.php', {
 
         for (let i = 0; i < currentProducts.length; i++) {
             let singleProduct = currentProducts[i];
-            //console.log(singleProduct);
 
             if (i % 2 === 0) {
                 currentRow = document.createElement('div');
@@ -37,7 +37,6 @@ fetch('../php/catalog.php', {
 
             const product = document.createElement('div');
             product.classList.add('catalog-item', 'observer-element');
-
 
             // immagine
             const image = document.createElement('img');
@@ -72,6 +71,12 @@ fetch('../php/catalog.php', {
                 <span class="mdc-button__ripple"></span>
                 <span class="mdc-button__focus-ring"></span>
                 <span class="mdc-button__label">PRENOTA</span>`;
+            button.setAttribute('id', 'book');
+
+            button.addEventListener('click', (e) => {
+                // manda alla pagina di prenotazione
+            })
+            // TODO: manca il listener
             infoDiv.appendChild(button);
 
             // animazioni (observer)
@@ -85,4 +90,31 @@ fetch('../php/catalog.php', {
     })
     .catch((error) => console.log(error));
 
+function getCookie(name) {
+    const cookies = document.cookie.split('; ');
+    for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i];
+        if (cookie.indexOf(name) === 0) {
+            return cookie.substring(name.length + 1);
+        }
+    }
+    return null;
+}
 
+const user = getCookie('user');
+const login = document.getElementById('login');
+
+if (user) {
+    const info = user.slice(0, 2).toUpperCase();
+    const initials = document.createElement('h1');
+    initials.textContent = info;
+    initials.title = "Area personale";
+    login.href = '../pages/user.html';
+    login.appendChild(initials);
+} else {
+    const loginIcon = document.createElement('img');
+    loginIcon.src = '../images/login_icon.svg';
+    loginIcon.title = "Login";
+    login.href = '../pages/login.html';
+    login.appendChild(loginIcon);
+}

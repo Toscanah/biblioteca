@@ -6,23 +6,16 @@ header {
     justify-content: space-between;
 }
 
-a:visited,
-a:active,
-a {
-    text-decoration: none;
-    color: black;
-}
-
-header h1 {
-    padding-left: 25px;
-    font-size: 4em;
-}
-
 .login {
     padding-right: 25px;
     height: 48px;
     width: 48px;
     transition: transform 0.2s ease-in-out;
+    text-decoration: none;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .login:hover {
@@ -64,6 +57,7 @@ header h1 {
     justify-content: space-between;
     text-align: center;
     height: 300px;
+    margin: 20px;
 }
 
 .catalog-item img {
@@ -84,4 +78,9 @@ header h1 {
 
 .observer-element.show {
     opacity: 1;
+}
+
+#book {
+    color: black;
+    font-weight: bold;
 }
