@@ -23,7 +23,8 @@ html {
 
 .title,
 .desc,
-.title-divider {
+.title-divider,
+#arrow-down {
     margin: 0;
     opacity: 0;
     animation-name: fade-in;
@@ -38,18 +39,24 @@ html {
 
 .desc {
     font-size: 3em;
-    opacity: 0;
     animation-delay: 2s;
 }
 
 .title-divider {
-    opacity: 0;
     height: 2px;
     width: 60%;
     margin-top: 30px;
     margin-bottom: 30px;
     background-image: linear-gradient(90deg, white, black, white);
     animation-delay: 2s;
+}
+
+#arrow-down {
+    animation-delay: 2s;
+}
+
+#arrow-down:hover {
+    cursor: pointer;
 }
 
 .observer-element {

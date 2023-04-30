@@ -51,6 +51,32 @@ upBtn.addEventListener('click', () => {
     requestAnimationFrame(step);
 });
 
+const goDownArrow = document.getElementById('arrow-down');
+goDownArrow.addEventListener('click', () => {
+    const targetPosition = window.innerHeight;
+    const startPosition = window.pageYOffset;
+    const distance = targetPosition - startPosition;
+    const duration = 3000;
+
+    let start = null;
+
+    function step(timestamp) {
+        if (!start) {
+            start = timestamp;
+        }
+
+        const progress = timestamp - start;
+        const ease = quadraticEaseInOut(progress, startPosition, distance, duration);
+        window.scrollTo(0, ease);
+
+        if (progress < duration) {
+            requestAnimationFrame(step);
+        }
+    }
+
+    requestAnimationFrame(step);
+});
+
 window.addEventListener('load', function () {
     const latitude = 45.6499974;
     const longitude = 13.767330264;
@@ -89,3 +115,4 @@ window.addEventListener('load', function () {
         })
         .catch((error) => console.log(error));
 });
+

@@ -28,11 +28,16 @@
     </div>
 
     <main class="catalog-container" id="catalog">
-        
     </main>
 
     <footer>
-
+        <!-- TODO: da fare meglio, magari con le frecciette-->
+        <input type="number" id="page">
+        <script>
+            const urlSearchParams = new URLSearchParams(window.location.search);
+            const page = urlSearchParams.get('page');
+            document.getElementById('page').value = page;
+        </script>
     </footer>
 
     <script src="../scripts/catalog.js"></script>

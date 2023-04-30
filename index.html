@@ -20,6 +20,7 @@
             <p class="title">boocek.</p>
             <p class="desc">books By cecchini</p>
             <div class="title-divider">&nbsp;</div>
+            <img id="arrow-down" src="src/images/arrow_down.svg">
         </div>
 
         <div class="info-container">
@@ -41,15 +42,15 @@
             <div class="background"></div>
             <div class="go">
                 <h1>Sei pronto?</h1>
-                <h4>inizia a leggere</h3>
-
-                    <form action="src/pages/catalog.html" id="go">
-                        <button type="submit" class="mdc-button mdc-button--raised" id="catalog">
-                            <span class="mdc-button__ripple"></span>
-                            <span class="mdc-button__focus-ring"></span>
-                            <span class="mdc-button__label">VAI AL CATALOGO</span>
-                        </button>
-                    </form>
+                <h4>inizia a leggere</h4>
+                <form method="GET" action="src/pages/catalog.html" id="go">
+                    <button type="submit" class="mdc-button mdc-button--raised" id="catalog">
+                        <span class="mdc-button__ripple"></span>
+                        <span class="mdc-button__focus-ring"></span>
+                        <span class="mdc-button__label">VAI AL CATALOGO</span>
+                    </button>
+                    <input type="hidden" name="page" value="0">
+                </form>
             </div>
         </div>
     </main>

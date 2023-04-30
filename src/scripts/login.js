@@ -5,15 +5,14 @@ loginForm.addEventListener('submit', (e) => {
 
     const email = document.getElementById('email');
     const password = document.getElementById('password');
-
-    const data = {
+    const login = {
         email: email,
         password: password
     }
 
     fetch('./php/login.php', {
         method: 'POST',
-        body: JSON.stringify(data)
+        body: JSON.stringify(login)
     })
         .then((response) => response.json())
         .then((responseData) => console.log(responseData))
