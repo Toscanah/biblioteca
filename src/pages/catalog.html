@@ -31,7 +31,14 @@
 
     <footer>
         <!-- TODO: da fare meglio, magari con le frecciette-->
-        <input type="number" id="page">
+
+        <label data-mdc-auto-init="MDCTextField" class="mdc-text-field mdc-text-field--filled">
+            <span class="mdc-text-field__ripple"></span>
+            <span class="mdc-floating-label">Pagina</span>
+            <input type="number" class="mdc-text-field__input" id="page">
+            <span class="mdc-line-ripple"></span>
+        </label>
+        
         <script>
             const urlSearchParams = new URLSearchParams(window.location.search);
             const page = urlSearchParams.get('page');
@@ -40,6 +47,9 @@
     </footer>
 
     <script src="../scripts/catalog.js"></script>
+    <script type="text/javascript">
+        window.mdc.autoInit(document.body);
+    </script>
 </body>
 
 </html>

@@ -180,3 +180,8 @@ html {
     bottom: 20px;
     right: 20px;
 }
+
+.go h1,
+.go h4 {
+    text-shadow: 0 0 15px black
+}

@@ -84,3 +84,14 @@ header {
     color: black;
     font-weight: bold;
 }
+
+footer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 200px;
+}
+
+#page {
+    width: 50px;
+}

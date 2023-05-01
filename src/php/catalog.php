@@ -19,12 +19,12 @@ $get_books =
         LEFT JOIN tAutore ON tAutore.id = tProduzione.idAutore
     GROUP BY isbn";
 
-$get_books_res = mysqli_query($db, $get_books);  
+$get_books_res = mysqli_query($db, $get_books);
 while ($book = mysqli_fetch_assoc($get_books_res)) {
     $book['type'] = 'Libro';
     $products[] = $book;
 }
- 
+
 $get_volumes =
     "SELECT 
         isbn, titolo, descrizione, annoPubblicazione, stato, foto, volume,
@@ -45,7 +45,20 @@ while ($volume = mysqli_fetch_assoc($get_volumes_res)) {
     $products[] = $volume;
 }
 
-$get_map = "SELECT *, 'Carta geopolitica' AS type FROM tCartaGeopolitica";
+$get_map = 
+    "SELECT 
+        isbn, titolo, descrizione, annoPubblicazione, stato, foto,
+        tBiblioteca.nome AS nomeBiblioteca, 'Carta geopolitica' AS type,
+        GROUP_CONCAT(CONCAT(tAutore.nome, ' ', tAutore.cognome) SEPARATOR ' - ') AS autori
+    FROM tCartaGeopolitica
+        INNER JOIN tFoto ON tFoto.id = tCartaGeopolitica.idFoto
+        INNER JOIN tScaffale ON tScaffale.id = tCartaGeopolitica.idScaffale
+        INNER JOIN tArmadio ON tArmadio.id = tScaffale.idArmadio
+        INNER JOIN tStanza ON tStanza.id = tArmadio.idStanza
+        INNER JOIN tBiblioteca ON tBiblioteca.id = tStanza.idBiblioteca
+        LEFT JOIN tProduzione ON tProduzione.isbnOperato = tCartaGeopolitica.isbn
+        LEFT JOIN tAutore ON tAutore.id = tProduzione.idAutore
+    GROUP BY isbn";
 $get_map_res = mysqli_query($db, $get_map);
 while ($map = mysqli_fetch_array($get_map_res)) {
     $map['type'] = 'Carta geopolitica';
