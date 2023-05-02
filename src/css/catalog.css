@@ -74,6 +74,7 @@ header {
 .observer-element {
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
+    padding: 20px;
 }
 
 .observer-element.show {
@@ -94,4 +95,51 @@ footer {
 
 #page {
     width: 50px;
+}
+
+.pagination {
+    width: 400px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.arrow {
+    transition: transform 0.2s ease-in-out;
+}
+
+.arrow:hover {
+    transform: scale(1.5);
+    transform-origin: center center;
+    cursor: pointer;
+}
+
+.index {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+    border-radius: 15px;
+    transition: background-color 0.2s ease-in-out;
+    font-weight: bold;
+}
+
+.index:hover {
+    background-color: var(--mdc-theme-primary);
+    cursor: pointer;
+}
+
+.selected {
+    background-color: var(--mdc-theme-primary);
+}
+
+.no-products {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 50px;
+    height: 300px;
 }

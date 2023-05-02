@@ -30,19 +30,55 @@
     </main>
 
     <footer>
-        <!-- TODO: da fare meglio, magari con le frecciette-->
+        <div class="pagination">
+            <div class="arrow" id="left">
+                <img src="../images/page_left.svg">
+            </div>
+            <div class="index">
+                <p></p>
+            </div>
+            <div class="index">
+                <p></p>
+            </div>
+            <div class="index">
+                <p></p>
+            </div>
+            <div class="arrow" id="right">
+                <img src="../images/page_right.svg">
+            </div>
+        </div>
 
-        <label data-mdc-auto-init="MDCTextField" class="mdc-text-field mdc-text-field--filled">
-            <span class="mdc-text-field__ripple"></span>
-            <span class="mdc-floating-label">Pagina</span>
-            <input type="number" class="mdc-text-field__input" id="page">
-            <span class="mdc-line-ripple"></span>
-        </label>
-        
         <script>
+            const pages = document.querySelectorAll('.index');
             const urlSearchParams = new URLSearchParams(window.location.search);
             const page = urlSearchParams.get('page');
-            document.getElementById('page').value = page;
+            let counter = page == 1 ? 0 : -1;
+
+            pages.forEach(element => {
+                element.classList.remove('selected');
+                const index = element.querySelector('p');
+                index.textContent = counter + parseInt(page);
+
+                if (page == index.textContent) {
+                    element.classList.add('selected');
+                }
+                counter++;
+
+                element.addEventListener('click', () => {
+                    const index = element.querySelector('p').textContent;
+                    window.location.href = 'catalog.html?page=' + index;
+                })
+            });
+
+            const previousPage = document.getElementById('left');
+            previousPage.addEventListener('click', () => {
+                window.location.href = 'catalog.html?page=' + (parseInt(page) - 1 !== 0 ? parseInt(page) - 1 : 1);
+            });
+
+            const nextPage = document.getElementById('right');
+            nextPage.addEventListener('click', () => {
+                window.location.href = 'catalog.html?page=' + (parseInt(page) + 1);
+            });
         </script>
     </footer>
 

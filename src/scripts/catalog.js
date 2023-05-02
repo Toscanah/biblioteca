@@ -18,13 +18,22 @@ fetch('../php/catalog.php', {
     .then((response) => response.json())
     .then((products) => {
         let currentRow = null;
-        console.log(products);
 
-        const pageNumber = document.getElementById('page').value;
+        const pageNumber = document.querySelector('.index.selected').querySelector('p').textContent - 1;
         const productsPerPage = 10;
         const startIndex = pageNumber * productsPerPage;
         const endIndex = startIndex + productsPerPage;
         const currentProducts = products.slice(startIndex, endIndex);
+
+        console.log(currentProducts);
+        if (currentProducts.length === 0) {
+            currentRow = document.createElement('div');
+            currentRow.classList.add('no-products');
+            currentRow.innerHTML = `
+            <h1 style="font-size: 5em;">Nessun prodotto!</h1>
+            <p style="font-size: 1.8em;">prova ad utilizzare un filtro diverso.</p>`;
+            catalog.appendChild(currentRow);
+        }
 
         for (let i = 0; i < currentProducts.length; i++) {
             let singleProduct = currentProducts[i];
