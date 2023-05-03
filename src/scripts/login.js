@@ -19,7 +19,6 @@ loginForm.addEventListener('submit', (e) => {
         .then((response) => response.json())
         .then((check) => {
             if (check.user === 'found') {
-                console.log("YOTOOO");
                 if (remindCheck.checked) {
                     const user = check.info + check.id;
                     let currentDate = new Date();
@@ -27,7 +26,7 @@ loginForm.addEventListener('submit', (e) => {
                     let expires = "expires=" + currentDate.toUTCString();
                     document.cookie = `user=${user};expires=${expires.toString()};path=/`;
                 }
-                window.location.href = 'catalog.html';
+                window.location.href = 'catalog.html?page=1';
             } else {
                 const existingErrorMessage = document.querySelector('.error-message');
                 if (existingErrorMessage) {
@@ -59,3 +58,5 @@ togglePsw.addEventListener('click', () => {
         togglePsw.innerHTML = 'visibility';
     }
 });
+
+document.getElementById('register-btn').addEventListener('click', () => window.location.href = 'register.html');

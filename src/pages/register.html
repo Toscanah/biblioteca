@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>boocek. - Registrazione</title>
+
+    <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link rel="stylesheet" type="text/css" href="../css/register.css">
+</head>
+
+<body>
+    <header>
+        <a class="header" href="catalog.html">
+            <h1>boocek.</h1>
+        </a>
+    </header>
+
+    <main class="main-container">
+        <div class="register">
+            <form id="register-form" method="POST">
+                <h1 class="register-title">
+                    Registrazione
+                </h1>
+
+                <label data-mdc-auto-init="MDCTextField" class="mdc-text-field mdc-text-field--filled">
+                    <span class="mdc-text-field__ripple"></span>
+                    <span class="mdc-floating-label">Nome</span>
+                    <input required type="text" class="mdc-text-field__input" id="name">
+                    <span class="mdc-line-ripple"></span>
+                </label>
+
+                <label data-mdc-auto-init="MDCTextField" class="mdc-text-field mdc-text-field--filled">
+                    <span class="mdc-text-field__ripple"></span>
+                    <span class="mdc-floating-label">Cognome</span>
+                    <input required type="text" class="mdc-text-field__input" id="surname">
+                    <span class="mdc-line-ripple"></span>
+                </label>
+
+                <label data-mdc-auto-init="MDCTextField" class="mdc-text-field mdc-text-field--filled">
+                    <span class="mdc-text-field__ripple"></span>
+                    <span class="mdc-floating-label">CF</span>
+                    <input required type="text" class="mdc-text-field__input" id="cf">
+                    <span class="mdc-line-ripple"></span>
+                </label>
+
+                <label data-mdc-auto-init="MDCTextField" class="mdc-text-field mdc-text-field--filled">
+                    <span class="mdc-text-field__ripple"></span>
+                    <span class="mdc-floating-label">Indirizzo mail</span>
+                    <input required type="email" class="mdc-text-field__input" id="email">
+                    <span class="mdc-line-ripple"></span>
+                </label>
+
+                <label data-mdc-auto-init="MDCTextField" class="mdc-text-field mdc-text-field--filled">
+                    <span class="mdc-text-field__ripple"></span>
+                    <span class="mdc-floating-label">Password</span>
+                    <input required type="password" class="mdc-text-field__input" id="password">
+                    <i class="material-icons mdc-button__icon" id="toggle-psw1">visibility</i>
+                    <span class="mdc-line-ripple"></span>
+                </label>
+
+                <label data-mdc-auto-init="MDCTextField" class="mdc-text-field mdc-text-field--filled">
+                    <span class="mdc-text-field__ripple"></span>
+                    <span class="mdc-floating-label">Conferma password</span>
+                    <input required type="password" class="mdc-text-field__input" id="password-confirm">
+                    <i class="material-icons mdc-button__icon" id="toggle-psw2">visibility</i>
+                    <span class="mdc-line-ripple"></span>
+                </label>
+
+                <button type="submit" class="mdc-button mdc-button--raised" id="register-btn">
+                    <span class="mdc-button__ripple"></span>
+                    <span class="mdc-button__focus-ring"></span>
+                    <span class="mdc-button__label">REGISTRATI</span>
+                </button>
+            </form>
+
+            <div class="vertical-divider">&nbsp;</div>
+
+            <div class="register-img">
+                <img src="../images/register.jpg">
+            </div>
+
+            <script src="../scripts/register.js"></script>
+        </div>
+    </main>
+</body>
+
+<script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+<script type="text/javascript">
+    window.mdc.autoInit(document.body);
+</script>
+
+</html>

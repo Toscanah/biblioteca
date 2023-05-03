@@ -87,7 +87,7 @@ fetch('../php/catalog.php', {
             })
             // TODO: manca il listener
             infoDiv.appendChild(button);
-
+            
             // animazioni (observer)
             setTimeout(() => {
                 observer.observe(product);
