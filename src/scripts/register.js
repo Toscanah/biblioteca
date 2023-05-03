@@ -11,28 +11,32 @@ registerForm.addEventListener('submit', (e) => {
     const passwordConfirm = document.getElementById('password-confirm');
 
     const registerData = {
-        name: name,
-        surname: surname,
-        cf: cf,
-        email: email,
-        password: password
+        name: name.value,
+        surname: surname.value,
+        cf: cf.value,
+        email: email.value,
+        password: password.value
     };
+    console.log(registerData);
 
     if (password.value == passwordConfirm.value) {
         fetch('../php/register.php', {
             method: 'POST',
             body: JSON.stringify(registerData)
         })
-            .fetch((response) => response.json())
-            .fetch((result) => {
+            .then((response) => response.json())
+            .then((result) => {
+                console.log(result);
                 if (result.type == 'already_registered') {
                     const existingErrorMessage = document.querySelector('.error-message');
+                    console.log(existingErrorMessage);
                     if (existingErrorMessage) {
+                        registerForm.style.height = registerForm.offsetHeight - 25 + 'px';
                         existingErrorMessage.remove();
                     }
 
                     const errorMessage = document.createElement('p');
-                    errorMessage.innerHTML = 'Account già esistente';
+                    errorMessage.innerHTML = 'Account gia\' esistente!';
                     errorMessage.classList.add('error-message');
                     registerForm.style.height = registerForm.offsetHeight + 25 + 'px';
                     registerForm.appendChild(errorMessage);
@@ -40,12 +44,24 @@ registerForm.addEventListener('submit', (e) => {
                     setTimeout(() => {
                         errorMessage.classList.add('show');
                     }, 0);
-                } {
+                } else {
                     window.location.href = 'login.html';
                 }
             });
     } else {
-
+        const existingErrorMessage = document.querySelector('.error-message');
+        if (existingErrorMessage) {
+            registerForm.style.height = registerForm.offsetHeight - 25 + 'px';
+            existingErrorMessage.remove();
+        }
+        const errorMessage = document.createElement('p');
+        errorMessage.innerHTML = 'Le password non corrispondono';
+        errorMessage.classList.add('error-message');
+        registerForm.style.height = registerForm.offsetHeight + 25 + 'px';
+        registerForm.appendChild(errorMessage);
+        setTimeout(() => {
+            errorMessage.classList.add('show');
+        }, 0);
     }
 });
 

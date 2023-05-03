@@ -5,18 +5,36 @@ ob_start();
 $request_body = file_get_contents("php://input");
 $data = json_decode($request_body, true);
 
+$result = array();
+
 $email = $data["email"];
 $password = $data["password"];
 
 $get_account = "SELECT * FROM tUtente WHERE email='$email' AND password='$password'";
 $get_account_res = mysqli_query($db, $get_account);
 
-$result = array();
-$result["user"] = mysqli_num_rows($get_account_res) !== 0 ? "found" : "not found"; 
-if ($result["user"] == "found") {
-    $info = mysqli_fetch_assoc($get_account_res);
-    $result["id"] = $info["id"];
-    $result["info"] = $info["nome"][0] . $info["cognome"][0];
+// qualcosa è stato trovato NEGLI UTENTI NORMALI
+if (mysqli_num_rows($get_account_res) !== 0) {
+    $user = mysqli_fetch_assoc($get_account_res);
+
+    $result["user"] = "found";
+    $result["type"] = "user";
+    $result["id"] = $user["id"];
+    $result["info"] = $user["nome"][0] . $user["cognome"][0];
+} else { // altrimenti prova a vedere lo staff
+    $get_staff = "SELECT * FROM tAddetto WHERE email='$email' AND password='$password'";
+    $get_staff_res = mysqli_query($db, $get_staff);
+
+    if (mysqli_num_rows($get_staff_res) !== 0) {
+        $staff = mysqli_fetch_assoc($get_staff_res);
+
+        $result["user"] = "found";
+        $result["type"] = "staff";
+        $result["id"] = $staff["id"];
+        $result["info"] = $staff["nome"][0] . $info["cognome"][0];
+    } else { // se anche nello staff non c'è niente allora nessun login trovato
+        $result["user"] = "not_found";
+    }
 }
 
 echo json_encode($result);

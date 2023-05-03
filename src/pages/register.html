@@ -14,7 +14,7 @@
 
 <body>
     <header>
-        <a class="header" href="catalog.html">
+        <a class="header" href="catalog.html?page=1">
             <h1>boocek.</h1>
         </a>
     </header>
@@ -76,15 +76,22 @@
                     <span class="mdc-button__label">REGISTRATI</span>
                 </button>
             </form>
-
-            <div class="vertical-divider">&nbsp;</div>
-
-            <div class="register-img">
-                <img src="../images/register.jpg">
-            </div>
-
-            <script src="../scripts/register.js"></script>
         </div>
+
+        <div class="vertical-divider">&nbsp;</div>
+        <script>
+            const inputs = document.getElementsByTagName('input');
+            for (let i = 0; i < inputs.length; i++) {
+                inputs[i].removeAttribute('required');
+            }
+        </script>
+
+        <div class="register-img">
+            <img src="../images/register.jpg">
+        </div>
+
+        <script src="../scripts/register.js"></script>
+
     </main>
 </body>
 

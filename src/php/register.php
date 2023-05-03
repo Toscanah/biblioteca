@@ -11,19 +11,19 @@ $cf = $data["cf"];
 $email = $data["email"];
 $password = $data["password"];
 
-$get_account = "SELECT * FROM tUtenti WHERE email='$email' AND password='$password'";
+$get_account = "SELECT * FROM tUtente WHERE email='$email' AND password='$password'";
 $get_account_res = mysqli_query($db, $get_account);
 
 $result = array();
 
 if (mysqli_num_rows($get_account_res) == 0) {
-    $result["type"] = "already_registered";
-} else {
-    $add_account = "INSERT INTO tUtenti 
+    $add_account = "INSERT INTO tUtente 
                     (nome, cognome, cf, email, password)
                     VALUES ('$name', '$surname', '$cf', '$email', '$password')";
     mysqli_query($db, $add_account);
-    $result["type"] = "account_adedd";
+    $result["type"] = "account_added";
+} else {
+    $result["type"] = "already_registered";
 }
 
 echo json_encode($result);

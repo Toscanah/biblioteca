@@ -87,7 +87,7 @@ fetch('../php/catalog.php', {
             })
             // TODO: manca il listener
             infoDiv.appendChild(button);
-            
+
             // animazioni (observer)
             setTimeout(() => {
                 observer.observe(product);
@@ -110,15 +110,23 @@ function getCookie(name) {
     return null;
 }
 
-const user = getCookie('user');
 const login = document.getElementById('login');
+
+let user, isStaff;
+if (getCookie('user')) {
+    user = getCookie('user');
+} else if (getCookie('staff')) {
+    user = getCookie('staff');
+    isStaff = true;
+}
 
 if (user) {
     const info = user.slice(0, 2).toUpperCase();
     const initials = document.createElement('h1');
     initials.textContent = info;
-    initials.title = "Area personale";
-    login.href = '../pages/user.html';
+    initials.title = isStaff ? "Admin" : "Area personale";
+    const loginUrl = isStaff ? '../pages/admin/to_be_named.html' : '../pages/user.html';
+    login.href = loginUrl;
     login.appendChild(initials);
 } else {
     const loginIcon = document.createElement('img');

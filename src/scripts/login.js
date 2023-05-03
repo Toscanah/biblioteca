@@ -17,19 +17,21 @@ loginForm.addEventListener('submit', (e) => {
         body: JSON.stringify(loginData),
     })
         .then((response) => response.json())
-        .then((check) => {
-            if (check.user === 'found') {
+        .then((login) => {
+            if (login.user === 'found') {
+                const coockieName = login.type === 'user' ? 'user' : 'staff';
                 if (remindCheck.checked) {
-                    const user = check.info + check.id;
+                    const user = login.info + login.id;
                     let currentDate = new Date();
                     currentDate.setTime(currentDate.getTime() + 30 * 60 * 1000); // 30 minutes in milliseconds
                     let expires = "expires=" + currentDate.toUTCString();
-                    document.cookie = `user=${user};expires=${expires.toString()};path=/`;
+                    document.cookie = `${coockieName}=${user};expires=${expires.toString()};path=/`;
                 }
                 window.location.href = 'catalog.html?page=1';
-            } else {
+            } else if (login.user === 'not_found') {
                 const existingErrorMessage = document.querySelector('.error-message');
                 if (existingErrorMessage) {
+                    loginForm.style.height = loginForm.offsetHeight - 25 + 'px';
                     existingErrorMessage.remove();
                 }
 
