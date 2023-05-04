@@ -4,6 +4,11 @@ ob_start();
 
 $products = array();
 
+// TODO: cambiare assolutamente questo
+// creare tabella "tElemento" che contiene isbn e tipo (libro, volume ecc)
+// e nelle 3 tabelle mettere idElemento
+// e fixxare le query
+
 $get_books =
     "SELECT 
         isbn, titolo, descrizione, annoPubblicazione, stato, foto, 

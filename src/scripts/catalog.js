@@ -26,7 +26,7 @@ fetch('../php/catalog.php', {
         const currentProducts = products.slice(startIndex, endIndex);
 
         console.log(currentProducts);
-        if (currentProducts.length === 0) {
+        if (response.length === 0) {
             currentRow = document.createElement('div');
             currentRow.classList.add('no-products');
             currentRow.innerHTML = `
@@ -74,6 +74,7 @@ fetch('../php/catalog.php', {
 
             // bottone prenota
             const button = document.createElement('button');
+            const isbn = singleProduct.isbn;
             button.type = 'submit';
             button.classList.add('mdc-button', 'mdc-button--raised');
             button.innerHTML = `
@@ -81,11 +82,10 @@ fetch('../php/catalog.php', {
                 <span class="mdc-button__focus-ring"></span>
                 <span class="mdc-button__label">PRENOTA</span>`;
             button.setAttribute('id', 'book');
-
             button.addEventListener('click', (e) => {
-                // manda alla pagina di prenotazione
+                window.location.href = 'book.html?isbn=' + isbn;
             })
-            // TODO: manca il listener
+
             infoDiv.appendChild(button);
 
             // animazioni (observer)
