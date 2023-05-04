@@ -23,7 +23,7 @@ header {
 
 #register-form {
     height: 700px;
-    width: 320px;
+    width: 500px;
     display: flex;
     justify-content: space-around;
     flex-direction: column;
@@ -38,13 +38,17 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 1000px;
-    height: 500px;
 }
 
 .register-img img {
     transform: scale(0.5);
     box-shadow: 0px 0px 35px rgb(0, 0, 0);
+}
+
+.register-row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
 }
 
 .vertical-divider {
@@ -68,10 +72,12 @@ label.mdc-text-field {
     opacity: 1;
 }
 
-#toggle-psw1:hover, #toggle-psw2:hover {
+#toggle-psw1:hover,
+#toggle-psw2:hover {
     cursor: pointer
 }
 
-button {
+#register-btn {
     width: 100%;
+    border: 2px solid black;
 }

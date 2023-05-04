@@ -26,7 +26,7 @@ fetch('../php/catalog.php', {
         const currentProducts = products.slice(startIndex, endIndex);
 
         console.log(currentProducts);
-        if (response.length === 0) {
+        if (currentProducts.length === 0) {
             currentRow = document.createElement('div');
             currentRow.classList.add('no-products');
             currentRow.innerHTML = `

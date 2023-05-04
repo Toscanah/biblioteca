@@ -3,71 +3,27 @@ require_once("connection.php");
 ob_start();
 
 $products = array();
-
-// TODO: cambiare assolutamente questo
-// creare tabella "tElemento" che contiene isbn e tipo (libro, volume ecc)
-// e nelle 3 tabelle mettere idElemento
-// e fixxare le query
-
-$get_books =
-    "SELECT 
-        isbn, titolo, descrizione, annoPubblicazione, stato, foto, 
-        tBiblioteca.nome AS nomeBiblioteca, 'Libro' AS type,
-        GROUP_CONCAT(CONCAT(tAutore.nome, ' ', tAutore.cognome) SEPARATOR ' - ') AS autori
-    FROM tLibro
-        INNER JOIN tFoto ON tFoto.id = tLibro.idFoto
-        INNER JOIN tScaffale ON tScaffale.id = tLibro.idScaffale
-        INNER JOIN tArmadio ON tArmadio.id = tScaffale.idArmadio
-        INNER JOIN tStanza ON tStanza.id = tArmadio.idStanza
-        INNER JOIN tBiblioteca ON tBiblioteca.id = tStanza.idBiblioteca
-        LEFT JOIN tProduzione ON tProduzione.isbnOperato = tLibro.isbn
-        LEFT JOIN tAutore ON tAutore.id = tProduzione.idAutore
-    GROUP BY isbn";
-
-$get_books_res = mysqli_query($db, $get_books);
-while ($book = mysqli_fetch_assoc($get_books_res)) {
-    $book['type'] = 'Libro';
-    $products[] = $book;
-}
-
-$get_volumes =
-    "SELECT 
-        isbn, titolo, descrizione, annoPubblicazione, stato, foto, volume,
-        tBiblioteca.nome AS nomeBiblioteca, 'Volume enciclopedia' AS type,
-        GROUP_CONCAT(CONCAT(tAutore.nome, ' ', tAutore.cognome) SEPARATOR ' - ') AS autori
-    FROM tVolume
-        INNER JOIN tFoto ON tFoto.id = tVolume.idFoto
-        INNER JOIN tScaffale ON tScaffale.id = tVolume.idScaffale
-        INNER JOIN tArmadio ON tArmadio.id = tScaffale.idArmadio
-        INNER JOIN tStanza ON tStanza.id = tArmadio.idStanza
-        INNER JOIN tBiblioteca ON tBiblioteca.id = tStanza.idBiblioteca
-        LEFT JOIN tProduzione ON tProduzione.isbnOperato = tVolume.isbn
-        LEFT JOIN tAutore ON tAutore.id = tProduzione.idAutore
-    GROUP BY isbn, volume";
-$get_volumes_res = mysqli_query($db, $get_volumes);
-while ($volume = mysqli_fetch_assoc($get_volumes_res)) {
-    $volume['type'] = 'Volume enciclopedia';
-    $products[] = $volume;
-}
-
-$get_map = 
-    "SELECT 
-        isbn, titolo, descrizione, annoPubblicazione, stato, foto,
-        tBiblioteca.nome AS nomeBiblioteca, 'Carta geopolitica' AS type,
-        GROUP_CONCAT(CONCAT(tAutore.nome, ' ', tAutore.cognome) SEPARATOR ' - ') AS autori
-    FROM tCartaGeopolitica
-        INNER JOIN tFoto ON tFoto.id = tCartaGeopolitica.idFoto
-        INNER JOIN tScaffale ON tScaffale.id = tCartaGeopolitica.idScaffale
-        INNER JOIN tArmadio ON tArmadio.id = tScaffale.idArmadio
-        INNER JOIN tStanza ON tStanza.id = tArmadio.idStanza
-        INNER JOIN tBiblioteca ON tBiblioteca.id = tStanza.idBiblioteca
-        LEFT JOIN tProduzione ON tProduzione.isbnOperato = tCartaGeopolitica.isbn
-        LEFT JOIN tAutore ON tAutore.id = tProduzione.idAutore
-    GROUP BY isbn";
-$get_map_res = mysqli_query($db, $get_map);
-while ($map = mysqli_fetch_array($get_map_res)) {
-    $map['type'] = 'Carta geopolitica';
-    $products[] = $map;
+$tables = array("tLibro", "tVolume", "tCartaGeopolitica");
+foreach ($tables as $table) {
+    $get_element =
+        "SELECT 
+            tElemento.*, {$table}.*, 
+            foto, tBiblioteca.nome AS nomeBiblioteca,
+            GROUP_CONCAT(CONCAT(tAutore.nome, ' ', tAutore.cognome) SEPARATOR ' - ') AS autori
+        FROM tElemento
+            INNER JOIN {$table} ON {$table}.idElemento = tElemento.id
+            INNER JOIN tFoto ON tFoto.id = {$table}.idFoto
+            INNER JOIN tScaffale ON tScaffale.id = {$table}.idScaffale
+            INNER JOIN tArmadio ON tArmadio.id = tScaffale.idArmadio
+            INNER JOIN tStanza ON tStanza.id = tArmadio.idStanza
+            INNER JOIN tBiblioteca ON tBiblioteca.id = tStanza.idBiblioteca
+            INNER JOIN tProduzione ON tProduzione.idElemento = tElemento.id
+            INNER JOIN tAutore ON tAutore.id = tProduzione.idAutore
+        GROUP BY tElemento.isbn";
+    $get_element_res = mysqli_query($db, $get_element);
+    while ($row = mysqli_fetch_assoc($get_element_res)) {
+        $products[] = $row;
+    }
 }
 
 echo json_encode($products);
