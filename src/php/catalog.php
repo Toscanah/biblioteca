@@ -21,9 +21,7 @@ foreach ($tables as $table) {
             INNER JOIN tAutore ON tAutore.id = tProduzione.idAutore
         GROUP BY tElemento.isbn";
     $get_element_res = mysqli_query($db, $get_element);
-    while ($row = mysqli_fetch_assoc($get_element_res)) {
-        $products[] = $row;
-    }
+    $products = array_merge($products, mysqli_fetch_all($get_element_res, MYSQLI_ASSOC));
 }
 
 echo json_encode($products);

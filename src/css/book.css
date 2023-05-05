@@ -1,3 +1,10 @@
+.booking-title {
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 260px;
+    font-size: 1.5em;
+}
+
 .main-container {
     width: 100%;
     display: flex;
@@ -5,7 +12,108 @@
 }
 
 .booking-container {
-    width: 80%;
+    padding: 40px;
+    width: 75%;
+    display: flex;
+    justify-content: flex-start;
+    height: 625px;
+}
+
+.booking-container img {
+    max-width: 100%;
+    max-height: 100%;
+
+    --s: 10px;
+    padding: var(--s);
+    border: calc(2*var(--s)) solid #0000;
+    outline: 1px solid #000;
+    outline-offset: calc(-1*var(--s));
+    background: conic-gradient(from 90deg at 1px 1px, #0000 25%, #000 0);
+    transition: transform 0.5s ease-in-out;
+}
+
+.booking-container img:hover {
+    transform: scale(1.1);
+}
+
+.info-div {
+    display: flex;
+    flex-direction: column;
+    width: 800px;
+    height: auto;
+    margin-left: 50px;
+}
+
+h1.title {
+    font-size: 7em;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.autor {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+p.autor {
+    font-size: 30px;
+}
+
+.autor b {
+    font-size: 40px;
+}
+
+p.desc {
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#book {
+    color: black;
+    font-weight: bold;
+    width: 100px;
+    margin-top: 20px;
+}
+
+dialog[open] {
+    z-index: 10;
     display: flex;
     justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+    height: 300px;
+    width: 20%;
+    animation: show 1s ease-in-out;
+    border: 3px solid black
+}
+
+@keyframes show {
+    from {
+        transform: translateY(-1000px);
+    }
+
+    to {
+        transform: translateY(0%);
+    }
+}
+
+dialog::backdrop {
+    backdrop-filter: blur(10px);
+}
+
+.close-dialog {
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    transform-origin: center;
+    transform: scale(1);
+    transition: transform .3s ease-in-out;
+}
+
+.close-dialog:hover {
+    cursor: pointer;
+    transform: scale(1.4);
 }

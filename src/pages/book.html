@@ -10,22 +10,61 @@
 
     <link rel="stylesheet" type="text/css" href="../css/style.css">
     <link rel="stylesheet" type="text/css" href="../css/book.css">
+
 </head>
 
 <body>
     <header>
-        <a class="header" href="catalog.html">
+        <a class="header" href="catalog.html?page=1">
             <h1>boocek.</h1>
         </a>
     </header>
 
+    <div class="divider-container" style="margin-bottom: 20px;">
+        <div class="section-divider">&nbsp;</div>
+    </div>
+
+    <div class="booking-title">
+        <h1>Stai per prenotare:</h1>
+    </div>
+
     <main class="main-container">
         <div class="booking-container" id="booking">
-
         </div>
     </main>
 
-    <script type="text/javascript" src="../scripts/book.js"></script>
+    <dialog>
+        <img src="../images/close_dialog.svg" class="close-dialog" id="close-btn">
+        <h1>Dati</h1>
+        <div>
+            <label data-mdc-auto-init="MDCTextField" class="mdc-text-field mdc-text-field--filled">
+                <span class="mdc-text-field__ripple"></span>
+                <span class="mdc-floating-label">Il tuo CF</span>
+                <input type="text" class="mdc-text-field__input" id="cf">
+                <span class="mdc-line-ripple"></span>
+            </label>
+        </div>
+
+        <div>
+            <label data-mdc-auto-init="MDCTextField" class="mdc-text-field mdc-text-field--filled">
+                <span class="mdc-text-field__ripple"></span>
+                <span class="mdc-floating-label">Conferma CF</span>
+                <input required type="text" class="mdc-text-field__input" id="cf-confirm">
+                <span class="mdc-line-ripple"></span>
+            </label>
+        </div>
+
+        <button type="submit" class="mdc-button mdc-button--raised" id="book-btn">
+            <span class="mdc-button__ripple"></span>
+            <span class="mdc-button__focus-ring"></span>
+            <span class="mdc-button__label">PRENOTA</span>
+        </button>
+    </dialog>
+
+    <script type="text/javascript" src="../javascript/book.js"></script>
+    <script type="text/javascript">
+        window.mdc.autoInit(document.body);
+    </script>
 </body>
 
 </html>

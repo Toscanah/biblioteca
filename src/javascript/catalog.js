@@ -1,3 +1,5 @@
+import { CatalogItem } from "./components/CatalogItem.js";
+
 const catalog = document.getElementById('catalog');
 
 // TODO: ordinamento e ricerca?
@@ -25,18 +27,17 @@ fetch('../php/catalog.php', {
         const endIndex = startIndex + productsPerPage;
         const currentProducts = products.slice(startIndex, endIndex);
 
-        console.log(currentProducts);
         if (currentProducts.length === 0) {
             currentRow = document.createElement('div');
             currentRow.classList.add('no-products');
             currentRow.innerHTML = `
-            <h1 style="font-size: 5em;">Nessun prodotto!</h1>
-            <p style="font-size: 1.8em;">prova ad utilizzare un filtro diverso.</p>`;
+                <h1 style="font-size: 5em;">Nessun prodotto!</h1>
+                <p style="font-size: 1.8em;">prova ad utilizzare un filtro diverso.</p>`;
             catalog.appendChild(currentRow);
         }
 
         for (let i = 0; i < currentProducts.length; i++) {
-            let singleProduct = currentProducts[i];
+            let product = currentProducts[i];
 
             if (i % 2 === 0) {
                 currentRow = document.createElement('div');
@@ -44,63 +45,13 @@ fetch('../php/catalog.php', {
                 catalog.appendChild(currentRow);
             }
 
-            const product = document.createElement('div');
-            product.classList.add('catalog-item', 'observer-element');
+            const item = new CatalogItem(currentRow, product);
+            item.createItem();
 
-            // immagine
-            const image = document.createElement('img');
-            image.src = '../images/products/' + singleProduct.foto;
-            product.appendChild(image);
-
-            // div informazioni
-            const infoDiv = document.createElement('div');
-            infoDiv.classList.add('item-info');
-            product.appendChild(infoDiv);
-
-            // titolo
-            const title = document.createElement('h1');
-            title.textContent = singleProduct.titolo + ' (' + singleProduct.autori + ')';
-            infoDiv.appendChild(title);
-
-            // biblioteca
-            const library = document.createElement('h3');
-            library.textContent = '- ' + singleProduct.nomeBiblioteca;
-            infoDiv.appendChild(library);
-
-            // descrizione
-            const desc = document.createElement('p');
-            desc.textContent = singleProduct.descrizione + 'TODO: da fare meglio le info';
-            infoDiv.appendChild(desc);
-
-            // bottone prenota
-            const button = document.createElement('button');
-            const isbn = singleProduct.isbn;
-            button.type = 'submit';
-            button.classList.add('mdc-button', 'mdc-button--raised');
-            button.innerHTML = `
-                <span class="mdc-button__ripple"></span>
-                <span class="mdc-button__focus-ring"></span>
-                <span class="mdc-button__label">PRENOTA</span>`;
-            button.setAttribute('id', 'book');
-
-            if (singleProduct.stato === 'disponibile') {
-                button.addEventListener('click', (e) => {
-                    window.location.href = 'book.html?isbn=' + isbn;
-                });
-            } else if (singleProduct.stato === 'in prestito') {
-                button.setAttribute('disabled', true);
-                button.querySelector('.mdc-button__label').textContent = 'GIA\' PRENOTATO';
-            }
-            infoDiv.appendChild(button);
-
-            // animazioni (observer)
             setTimeout(() => {
-                observer.observe(product);
+                observer.observe(item.getContainer());
             }, 100 * i);
-
-            currentRow.appendChild(product);
         }
-
     })
     .catch((error) => console.log(error));
 
