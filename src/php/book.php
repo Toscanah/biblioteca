@@ -6,13 +6,41 @@ $request_body = file_get_contents("php://input");
 $data = json_decode($request_body, true);
 $isbn = $data["isbn"];
 
-// info generali
-$get_element =
-    "SELECT id FROM tElemento 
-    INNER JOIN tLibro ON tLibro.idElemento = tElemento.id
-    INNER JOIN tVolume ON tVolume.idElemento = tElemento.id
-    INNER JOIN tCartaGeopolitica ON tCartaGeopolitica.idElemento = tElemento.id
-    WHERE isbn = '$isbn'";
+$get_element = "SELECT tipo FROM tElemento WHERE isbn={$isbn}";
 $get_element_res = mysqli_query($db, $get_element);
+$element = mysqli_fetch_assoc($get_element_res);
 
-echo json_encode($result);
+$type = $element["tipo"];
+$id = $element["id"];
+
+if 
+
+$table = "";
+switch ($type) {
+    case "libro":
+        $table = "tLbro";
+        break;
+    case "enciclopedia":
+        $table = "tVolume";
+        break;
+    case "carta geopolitica":
+        $table = "tCartaGeopolitica";
+        break;
+}
+
+$get_info =
+    "SELECT
+         foto, tBiblioteca.nome AS nomeBiblioteca,
+         GROUP_CONCAT(CONCAT(tAutore.nome, ' ', tAutore.cognome) SEPARATOR ' - ') AS autori
+    FROM {$table}
+        INNER JOIN tFoto ON tFoto.id = {$table}.idFoto
+        INNER JOIN tScaffale ON tScaffale.id = {$table}.idScaffale
+        INNER JOIN tArmadio ON tArmadio.id = tScaffale.idArmadio
+        INNER JOIN tStanza ON tStanza.id = tArmadio.idStanza
+        INNER JOIN tBiblioteca ON tBiblioteca.id = tStanza.idBiblioteca
+        INNER JOIN tProduzione ON tProduzione.idElemento = tElemento.id
+        INNER JOIN tAutore ON tAutore.id = tProduzione.idAutore
+    WHERE idElemento = {$id}";
+$get_info_res = mysqli_query($db, $get_info);
+
+echo json_encode(mysqli_fetch_assoc($get_info_res));

@@ -82,10 +82,15 @@ fetch('../php/catalog.php', {
                 <span class="mdc-button__focus-ring"></span>
                 <span class="mdc-button__label">PRENOTA</span>`;
             button.setAttribute('id', 'book');
-            button.addEventListener('click', (e) => {
-                window.location.href = 'book.html?isbn=' + isbn;
-            })
 
+            if (singleProduct.stato === 'disponibile') {
+                button.addEventListener('click', (e) => {
+                    window.location.href = 'book.html?isbn=' + isbn;
+                });
+            } else if (singleProduct.stato === 'in prestito') {
+                button.setAttribute('disabled', true);
+                button.querySelector('.mdc-button__label').textContent = 'GIA\' PRENOTATO';
+            }
             infoDiv.appendChild(button);
 
             // animazioni (observer)
