@@ -81,13 +81,13 @@ if (user) {
     const initials = document.createElement('h1');
     initials.textContent = info;
     initials.title = isStaff ? "Admin" : "Area personale";
-    const loginUrl = isStaff ? '../pages/admin/to_be_named.html' : '../pages/user.html';
+    const loginUrl = isStaff ? '../routes/admin/to_be_named.html' : '../routes/user.html';
     login.href = loginUrl;
     login.appendChild(initials);
 } else {
     const loginIcon = document.createElement('img');
     loginIcon.src = '../images/login_icon.svg';
     loginIcon.title = "Login";
-    login.href = '../pages/login.html';
+    login.href = '../routes/login-page.html';
     login.appendChild(loginIcon);
 }

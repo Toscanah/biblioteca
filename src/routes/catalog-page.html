@@ -66,18 +66,18 @@
 
                 element.addEventListener('click', () => {
                     const index = element.querySelector('p').textContent;
-                    window.location.href = 'catalog.html?page=' + index;
+                    window.location.href = 'catalog-page.html?page=' + index;
                 })
             });
 
             const previousPage = document.getElementById('left');
             previousPage.addEventListener('click', () => {
-                window.location.href = 'catalog.html?page=' + (parseInt(page) - 1 !== 0 ? parseInt(page) - 1 : 1);
+                window.location.href = 'catalog-page.html?page=' + (parseInt(page) - 1 !== 0 ? parseInt(page) - 1 : 1);
             });
 
             const nextPage = document.getElementById('right');
             nextPage.addEventListener('click', () => {
-                window.location.href = 'catalog.html?page=' + (parseInt(page) + 1);
+                window.location.href = 'catalog-page.html?page=' + (parseInt(page) + 1);
             });
         </script>
     </footer>

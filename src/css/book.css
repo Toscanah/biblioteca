@@ -117,3 +117,7 @@ dialog::backdrop {
     cursor: pointer;
     transform: scale(1.4);
 }
+
+button.mdc-button {
+    border: 2px solid black;
+}

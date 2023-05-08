@@ -15,6 +15,7 @@ $get_account_res = mysqli_query($db, $get_account);
 
 // qualcosa è stato trovato NEGLI UTENTI NORMALI
 if (mysqli_num_rows($get_account_res) !== 0) {
+    $_SESSION["logged"] = true;
     $user = mysqli_fetch_assoc($get_account_res);
 
     $result["user"] = "found";
@@ -26,6 +27,7 @@ if (mysqli_num_rows($get_account_res) !== 0) {
     $get_staff_res = mysqli_query($db, $get_staff);
 
     if (mysqli_num_rows($get_staff_res) !== 0) {
+        $_SESSION["logged"] = true;
         $staff = mysqli_fetch_assoc($get_staff_res);
 
         $result["user"] = "found";

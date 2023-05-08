@@ -65,7 +65,7 @@ h5 {
     background-color: #18272F;
     bottom: 0;
     left: 0;
-    transform-origin: center;
+    transform-origin: right;
     transform: scale(0);
     transition: transform .4s ease-in-out;
 }

@@ -45,7 +45,7 @@ registerForm.addEventListener('submit', (e) => {
                         errorMessage.classList.add('show');
                     }, 0);
                 } else {
-                    window.location.href = 'login.html';
+                    window.location.href = 'login-page.html';
                 }
             });
     } else {

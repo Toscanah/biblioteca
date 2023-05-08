@@ -28,7 +28,7 @@ switch ($type) {
 
 $get_info =
     "SELECT
-         {$table}.*,
+         {$table}.*, tScaffale.scaffale, tArmadio.armadio, tStanza.stanza,
          tipo, via, citta, civico, cap, foto, tBiblioteca.nome AS nomeBiblioteca,
          GROUP_CONCAT(CONCAT(tAutore.nome, ' ', tAutore.cognome) SEPARATOR ' - ') AS autori
     FROM {$table}

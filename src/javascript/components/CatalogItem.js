@@ -35,36 +35,39 @@ export class CatalogItem {
         desc.textContent = this.product.descrizione + 'TODO: da fare meglio le info';
         infoDiv.appendChild(desc);*/
 
-        // TODO: bottoni
-        const button = document.createElement('button');
         const isbn = this.product.isbn;
-        button.type = 'submit';
+
+        const button = document.createElement('button');
         button.classList.add('mdc-button', 'mdc-button--raised');
         button.innerHTML = `
                 <span class="mdc-button__ripple"></span>
-                <span class="mdc-button__focus-ring"></span>
-                <span class="mdc-button__label">PRENOTA</span>`;
+                <span class="mdc-button__focus-ring"></span>`;
         button.setAttribute('id', 'book');
 
+        // TODO: aggiungere funzionalità staff
+        // chainare le isbn + titolo per risparmiare un fetch
+        // window.location.href = 'admin/reservations.html?isbn=' + isbn
+        // window.location.href = 'admin/reservations.html?titolo=' + titolo
+
         if (this.product.stato === 'disponibile') {
+            button.innerHTML += '<span class="mdc-button__label">PRENOTA</span>';
             button.addEventListener('click', (e) => {
-                // TODO: checckare se l'utente (o staff) è loggato
-                // se si, allora OK pagina prenotazione
-                // else pagina login
-
-                /** (aggiungere una variabile di sessione in php quando si fa il login)
-                 * var variableValue = sessionStorage.getItem('is Logged1');*/
-
-                window.location.href = 'book.html?isbn=' + isbn;
+                var logged = sessionStorage.getItem('logged');
+                if (!logged) {
+                    window.location.href = 'login-page.html';
+                }
+                window.location.href = 'book-product-page.html?isbn=' + isbn;
             });
         } else if (this.product.stato === 'prenotato') {
-            // TODO: spawnare il bottone "mettiti in coda"
-            button.setAttribute('disabled', true);
-            button.querySelector('.mdc-button__label').textContent = 'GIA\' PRENOTATO';
+            const bookedMsg = document.createElement('div');
+            bookedMsg.innerHTML = `
+                <p>Questo prodotto è gia' stato acquistato!</p>
+                <p>TODO: messaggio "mettiti in coda"</p>`;
+            infoDiv.appendChild(bookedMsg);
+            button.innerHTML += '<span class="mdc-button__label">INCODATI</span>';
         }
+
         infoDiv.appendChild(button);
-
-
         this.parentContainer.appendChild(container);
     }
 

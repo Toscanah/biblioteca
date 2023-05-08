@@ -105,7 +105,7 @@ window.addEventListener('load', function () {
                     position: coordinates,
                     map: map,
                     icon: markerImage,
-                    url: 'src/pages/library.html?id=' + site.id
+                    url: 'src/routes/library-info-page.html?id=' + site.id
                 });
 
                 google.maps.event.addListener(marker, 'click', function () {

@@ -18,17 +18,6 @@ function getCookie(name) {
 const bookElement = () => {
     const modal = document.querySelector('dialog');
     modal.showModal();
-    modal.addEventListener("click", (e) => {
-        const dialogDimensions = modal.getBoundingClientRect()
-        if (
-            e.clientX < dialogDimensions.left ||
-            e.clientX > dialogDimensions.right ||
-            e.clientY < dialogDimensions.top ||
-            e.clientY > dialogDimensions.bottom
-        ) {
-            modal.close()
-        }
-    })
 
     const closeBtn = document.getElementById('close-btn');
     closeBtn.onclick = () => modal.close();
@@ -55,7 +44,11 @@ const bookElement = () => {
                     userId: userId,
                     isbn: isbn
                 })
-            }).then(modal.close());
+            }).then((reponse) => {
+                modal.close();
+                window.location.href = '../index.html';
+            });
+
         } else {
             // CF non combaciano
         }

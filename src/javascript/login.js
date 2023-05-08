@@ -27,7 +27,7 @@ loginForm.addEventListener('submit', (e) => {
                     let expires = "expires=" + currentDate.toUTCString();
                     document.cookie = `${coockieName}=${user};expires=${expires.toString()};path=/`;
                 }
-                window.location.href = 'catalog.html?page=1';
+                window.location.href = 'catalog-page.html?page=1';
             } else if (login.user === 'not_found') {
                 const existingErrorMessage = document.querySelector('.error-message');
                 if (existingErrorMessage) {
@@ -61,4 +61,4 @@ togglePsw.addEventListener('click', () => {
     }
 });
 
-document.getElementById('register-btn').addEventListener('click', () => window.location.href = 'register.html');
+document.getElementById('register-btn').addEventListener('click', () => window.location.href = 'register-page.html');
