@@ -20,10 +20,10 @@ registerForm.addEventListener('submit', (e) => {
     console.log(registerData);
 
     if (password.value == passwordConfirm.value) {
-        fetch('../php/register.php', {
-            method: 'POST',
-            body: JSON.stringify(registerData)
-        })
+        fetch('../php/addAccount.php', {
+                method: 'POST',
+                body: JSON.stringify(registerData)
+            })
             .then((response) => response.json())
             .then((result) => {
                 console.log(result);

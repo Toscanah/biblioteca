@@ -1,3 +1,8 @@
 <?php
 session_start();
-$db = mysqli_connect("localhost", "root", "", "bibliotecacecchini");
+
+$servername = "localhost";
+$username = "username";
+$password = "";
+$dbname = "bibliotecacecchini";
+$db = new mysqli($servername, $username, $password, $dbname);

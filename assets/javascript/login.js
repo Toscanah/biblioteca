@@ -12,10 +12,10 @@ loginForm.addEventListener('submit', (e) => {
         password: password.value,
     }
 
-    fetch('../php/login.php', {
-        method: 'POST',
-        body: JSON.stringify(loginData),
-    })
+    fetch('../php/checkUser.php', {
+            method: 'POST',
+            body: JSON.stringify(loginData),
+        })
         .then((response) => response.json())
         .then((login) => {
             if (login.user === 'found') {

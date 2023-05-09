@@ -14,9 +14,9 @@ const observer = new IntersectionObserver((entries, observer) => {
     });
 });
 
-fetch('../php/catalog.php', {
-    method: 'POST'
-})
+fetch('../php/getElements.php', {
+        method: 'POST'
+    })
     .then((response) => response.json())
     .then((products) => {
         let currentRow = null;

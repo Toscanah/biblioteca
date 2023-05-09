@@ -4,14 +4,12 @@
 <head>
     <title>boocek</title>
 
-    <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
     <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0RLgPIM87iDhK6rJww_Wb6VuIMXnjS_U"></script>
+    <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
-    <script type="text/javascript"
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0RLgPIM87iDhK6rJww_Wb6VuIMXnjS_U"></script>
-    <link rel="stylesheet" type="text/css" href="src/css/style.css">
-    <link rel="stylesheet" type="text/css" href="src/css/index.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/index.css">
 </head>
 
 <body>
@@ -20,7 +18,7 @@
             <p class="title">boocek.</p>
             <p class="desc">books By cecchini</p>
             <div class="title-divider">&nbsp;</div>
-            <img id="arrow-down" src="src/images/arrow_down.svg">
+            <img id="arrow-down" src="assets/images/arrow_down.svg">
         </div>
 
         <div class="info-container">
@@ -62,17 +60,11 @@
     <footer class="observer-element map-container">
         <div class="map-info">
             <h1>Le nostre sedi.</h1>
-            <p>boocek ti accompagna per tutt'Italia!<br>
-                Per sapere di piu' su una sede, clicca l'icona e
-                verrai reindirizzato alla sua pagina<br>
-                Buona lettura!<br>
-                // TODO: TESTO MIGLIORE
+            <p>boocek ti accompagna per tutt'Italia!<br> Per sapere di piu' su una sede, clicca l'icona e verrai reindirizzato alla sua pagina<br> Buona lettura!<br> // TODO: TESTO MIGLIORE
             </p>
         </div>
         <div id="map"></div>
     </footer>
-
-    <!--<h1>boocek.</h1>-->
 
     // TODO: fare il bottome come iconcina con la freccia in su
     <button type="submit" class="mdc-button mdc-button--raised" id="up">
@@ -84,8 +76,7 @@
     <script type="text/javascript">
         window.mdc.autoInit(document.body);
     </script>
-
-    <script src="src/javascript/index.js"></script>
+    <script src="assets/javascript/index.js"></script>
 </body>
 
 </html>
