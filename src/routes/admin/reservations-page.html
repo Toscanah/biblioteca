@@ -5,21 +5,19 @@
     <title>boocek. - Admin</title>
 
     <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
-    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-    <link rel="stylesheet" type="text/css" href="../../css/style.css">
-    <link rel="stylesheet" type="text/css" href="../../css/reservations.css">
+    <link rel="stylesheet" type="text/css" href="../../../assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../../../assets/css/reservations.css">
 </head>
 
 <body>
     <header>
-        <a class="header" href="catalog-page.html?page=1">
+        <a class="header" href="../catalog-page.html?page=1">
             <h1>boocek.</h1>
         </a>
     </header>
 
-    <div class="divider-container" style="margin-bottom: 20px;">
+    <div class="divider-container">
         <div class="section-divider">&nbsp;</div>
     </div>
 
@@ -27,7 +25,7 @@
         <h1 class="title" id="title"></h1>
         <div class="product-container" id="product"></div>
 
-        <div class="divider-container" style="margin-bottom: 20px;">
+        <div class="divider-container">
             <div class="section-divider">&nbsp;</div>
         </div>
 
@@ -40,7 +38,7 @@
                         <th>Cognome</th>
                         <th>CF</th>
                         <th>Data</th>
-                        <th>Azione</th>
+                        <th>&nbsp;</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -49,7 +47,7 @@
     </main>
 
     <dialog>
-        <img src="../images/close_dialog.svg" class="close-dialog" id="close-btn">
+        <img src="../../../assets/images/close_dialog.svg" class="close-dialog" id="close-btn">
 
         <h1>Confermi?</h1>
         <p id="confirm"></p>
@@ -61,7 +59,7 @@
         </button>
     </dialog>
 
-    <script src="../../javascript/reservations.js"></script>
+    <script src="../../../assets/javascript/reservations.js"></script>
 </body>
 
 </html>

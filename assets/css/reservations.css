@@ -1,8 +1,7 @@
 .main-container {
     width: 100%;
     display: flex;
-    height: 1000px;
-    justify-content: space-between;
+    height: 1500px;
     flex-direction: column;
     align-items: center;
 }
@@ -23,4 +22,41 @@ h1.title {
     max-height: 100%;
 }
 
-.reservations-container {}
+.bookings-container {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+
+table {
+    table-layout: fixed;
+    width: 100%;
+    font-size: 30px;
+    border-collapse: collapse;
+}
+
+thead {
+    margin-bottom: 50px;
+}
+
+td {
+    text-align: center;
+}
+
+thead th {
+    background-color: white;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+tbody td {
+    padding: 20px;
+}
+
+button {
+    z-index: 1;
+}

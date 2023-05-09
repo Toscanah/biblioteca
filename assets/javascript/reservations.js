@@ -19,7 +19,7 @@ fetch('../../php/admin/getElement.php', {
     .then(response => response.json())
     .then(element => {
         const image = document.createElement('img');
-        image.src = '../../images/products/' + element.foto;
+        image.src = '../../../assets/images/products/' + element.foto;
         product.appendChild(image);
 
         const infoDiv = document.createElement('div');
@@ -68,8 +68,10 @@ fetch('../../php/admin/getElement.php', {
         })
             .then(response => response.json())
             .then(bookings => {
+                console.log(bookings);
                 for (let i = 0; i < bookings.length; i++) {
                     let booking = bookings[i];
+
                     let row = tableBody.insertRow(i);
                     let nCell = row.insertCell(0);
                     let nameCell = row.insertCell(1);
@@ -102,11 +104,8 @@ fetch('../../php/admin/getElement.php', {
                                     id: booking.idPrenotazione
                                 })
                             })
-                        
-
-
                             confirmationDialog.close();
-                            window.location.href = '../../php/admin/confirmBooking.php';
+                            window.location.href = '../catalog-page.html?page=1';
                         });
                     });
 

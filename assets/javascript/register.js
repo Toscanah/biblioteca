@@ -27,7 +27,7 @@ registerForm.addEventListener('submit', (e) => {
             .then((response) => response.json())
             .then((result) => {
                 console.log(result);
-                if (result.type == 'already_registered') {
+                if (result.type === 'already_registered') {
                     const existingErrorMessage = document.querySelector('.error-message');
                     console.log(existingErrorMessage);
                     if (existingErrorMessage) {
