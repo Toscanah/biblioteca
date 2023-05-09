@@ -1,11 +1,14 @@
 const product = document.getElementById('product');
 const urlSearchParams = new URLSearchParams(window.location.search);
 const isbn = urlSearchParams.get('isbn');
+const title = urlSearchParams.get('titolo');
 
 const table = document.getElementById('bookings-table');
 const tableBody = table.getElementsByTagName("tbody")[0];
 
-document.getElementById('title').textContent = 'Prenotazioni per "' + urlSearchParams.get('titolo') + '"';
+const confirmationDialog = document.getElementById('confirmation-dialog');
+
+document.getElementById('title').textContent = 'Prenotazioni per "' + title + '"';
 
 fetch('../../php/admin/getElement.php', {
     method: 'POST',
@@ -65,24 +68,49 @@ fetch('../../php/admin/getElement.php', {
         })
             .then(response => response.json())
             .then(bookings => {
-                console.log(bookings);
-
                 for (let i = 0; i < bookings.length; i++) {
-
                     let booking = bookings[i];
-
                     let row = tableBody.insertRow(i);
                     let nCell = row.insertCell(0);
                     let nameCell = row.insertCell(1);
                     let surnameCell = row.insertCell(2);
                     let cfCell = row.insertCell(3);
                     let dateCell = row.insertCell(4);
+                    let actionCell = row.insertCell(5);
 
                     nCell.innerHTML = (i + 1);
                     nameCell.innerHTML = booking.nome;
                     surnameCell.innerHTML = booking.cognome;
                     cfCell.innerHTML = booking.cf;
                     dateCell.innerHTML = booking.data;
+
+                    const button = document.createElement('button');
+                    button.className = 'mdc-button mdc-button--raised';
+                    button.innerHTML = `
+                        <span class="mdc-button__ripple"></span>
+                        <span class="mdc-button__focus-ring"></span>
+                        <span class="mdc-button__label">CONFERMA</span>`;
+                    button.addEventListener('click', () => {
+                        confirmationDialog.showModal();
+                        confirmationDialog.getElementById('confirm').innerHTML = `
+                            Stai confermando la prenotazione di <b>${booking.nomeUtente} ${booking.cognomeUtente}</b>
+                            per <b>${title}</b>`;
+                        confirmationDialog.querySelector('button').addEventListener('click', () => {
+                            fetch('../../php/admin/confirmBooking.php', {
+                                method: 'POST',
+                                body: JSON.stringify({
+                                    id: booking.idPrenotazione
+                                })
+                            })
+                        
+
+
+                            confirmationDialog.close();
+                            window.location.href = '../../php/admin/confirmBooking.php';
+                        });
+                    });
+
+                    actionCell.appendChild(button);
                 }
             });
     });

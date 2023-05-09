@@ -40,14 +40,26 @@
                         <th>Cognome</th>
                         <th>CF</th>
                         <th>Data</th>
+                        <th>Azione</th>
                     </tr>
                 </thead>
-                <tbody>
-                    
-                </tbody>
+                <tbody></tbody>
             </table>
         </div>
     </main>
+
+    <dialog>
+        <img src="../images/close_dialog.svg" class="close-dialog" id="close-btn">
+
+        <h1>Confermi?</h1>
+        <p id="confirm"></p>
+
+        <button type="submit" class="mdc-button mdc-button--raised" id="confirm-btn">
+            <span class="mdc-button__ripple"></span>
+            <span class="mdc-button__focus-ring"></span>
+            <span class="mdc-button__label">CONFERMA</span>
+        </button>
+    </dialog>
 
     <script src="../../javascript/reservations.js"></script>
 </body>
