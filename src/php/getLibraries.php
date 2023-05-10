@@ -6,8 +6,4 @@ $get_sites = "SELECT * FROM tbiblioteca";
 $get_sites_res = mysqli_query($db, $get_sites);
 $sites = array();
 
-while ($row = mysqli_fetch_array($get_sites_res)) {
-    $sites[] = $row;
-}
-
-echo json_encode($sites);
+echo json_encode(mysqli_fetch_all($get_sites_res, MYSQLI_ASSOC));
