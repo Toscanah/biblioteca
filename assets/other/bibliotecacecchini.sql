@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 10, 2023 at 11:47 PM
+-- Generation Time: May 11, 2023 at 11:21 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -73,7 +73,7 @@ CREATE TABLE `tautore` (
 --
 
 INSERT INTO `tautore` (`id`, `nome`, `cognome`) VALUES
-(1, 'J.R.R.', 'Tolkien'),
+(1, 'Christopher', 'Paolini'),
 (2, 'Emile', 'Zola');
 
 -- --------------------------------------------------------
@@ -162,29 +162,30 @@ CREATE TABLE `telemento` (
   `id` int(11) NOT NULL,
   `isbn` text NOT NULL,
   `tipo` enum('libro','enciclopedia','carta geopolitica') NOT NULL,
-  `stato` enum('disponibile','prenotato','prestato') NOT NULL
+  `stato` enum('disponibile','prenotato','prestato') NOT NULL,
+  `rating` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `telemento`
 --
 
-INSERT INTO `telemento` (`id`, `isbn`, `tipo`, `stato`) VALUES
-(1, '9788806220703', 'libro', 'prenotato'),
-(2, '9788806237534', 'libro', 'disponibile'),
-(3, '9788817106104', 'libro', 'disponibile'),
-(4, '9788815240115', 'libro', 'disponibile'),
-(5, '9788817106128', 'libro', 'disponibile'),
-(6, '9788861905365', 'enciclopedia', 'disponibile'),
-(7, '9788861905389', 'enciclopedia', 'disponibile'),
-(8, '9788817100096', 'enciclopedia', 'disponibile'),
-(9, '9788817100126', 'enciclopedia', 'disponibile'),
-(10, '9788828200419', 'enciclopedia', 'disponibile'),
-(11, '9788836542422', 'carta geopolitica', 'disponibile'),
-(12, '9788898436064', 'carta geopolitica', 'disponibile'),
-(13, '9788879143811', 'carta geopolitica', 'disponibile'),
-(14, '9788839208265', 'carta geopolitica', 'disponibile'),
-(15, '9788898436033', 'carta geopolitica', 'disponibile');
+INSERT INTO `telemento` (`id`, `isbn`, `tipo`, `stato`, `rating`) VALUES
+(1, '9788806220703', 'libro', 'prenotato', '5'),
+(2, '9788806237534', 'libro', 'disponibile', '5'),
+(3, '9788817106104', 'libro', 'disponibile', '5'),
+(4, '9788815240115', 'libro', 'disponibile', '4'),
+(5, '9788817106128', 'libro', 'disponibile', '5'),
+(6, '9788861905365', 'enciclopedia', 'disponibile', '3'),
+(7, '9788861905389', 'enciclopedia', 'disponibile', '3'),
+(8, '9788817100096', 'enciclopedia', 'disponibile', '2'),
+(9, '9788817100126', 'enciclopedia', 'disponibile', '1'),
+(10, '9788828200419', 'enciclopedia', 'disponibile', '4'),
+(11, '9788836542422', 'carta geopolitica', 'disponibile', '5'),
+(12, '9788898436064', 'carta geopolitica', 'disponibile', '5'),
+(13, '9788879143811', 'carta geopolitica', 'disponibile', '3'),
+(14, '9788839208265', 'carta geopolitica', 'disponibile', '5'),
+(15, '9788898436033', 'carta geopolitica', 'disponibile', '5');
 
 -- --------------------------------------------------------
 
@@ -304,7 +305,6 @@ CREATE TABLE `tproduzione` (
 
 INSERT INTO `tproduzione` (`id`, `idAutore`, `idElemento`) VALUES
 (1, 1, 1),
-(2, 2, 1),
 (3, 1, 2),
 (4, 1, 3),
 (5, 1, 4),
