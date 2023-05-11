@@ -30,7 +30,7 @@ upBtn.addEventListener('click', () => {
     const targetPosition = 0;
     const startPosition = window.pageYOffset;
     const distance = targetPosition - startPosition;
-    const duration = 2500;
+    const duration = 2000;
 
     let start = null;
 
@@ -49,6 +49,17 @@ upBtn.addEventListener('click', () => {
     }
 
     requestAnimationFrame(step);
+});
+
+if (window.scrollY > 1500) {
+    upBtn.classList.add('visible');
+} 
+window.addEventListener('scroll', function () {
+    if (window.scrollY > 1500) {
+        upBtn.classList.add('visible');
+    } else {
+        upBtn.classList.remove('visible');
+    }
 });
 
 const goDownArrow = document.getElementById('arrow-down');
@@ -77,7 +88,7 @@ goDownArrow.addEventListener('click', () => {
     requestAnimationFrame(step);
 });
 
-window.addEventListener('load', function() {
+window.addEventListener('load', function () {
     const latitude = 45.6499974;
     const longitude = 13.767330264;
 
@@ -91,8 +102,8 @@ window.addEventListener('load', function() {
     const markerImage = 'src/images/book64.svg';
 
     fetch('src/php/getLibraries.php', {
-            method: 'POST'
-        })
+        method: 'POST'
+    })
         .then(response => response.json())
         .then((sites) => {
             for (let i = 0; i < sites.length; i++) {
@@ -108,7 +119,7 @@ window.addEventListener('load', function() {
                     url: 'src/routes/library-info-page.html?id=' + site.id
                 });
 
-                google.maps.event.addListener(marker, 'click', function() {
+                google.maps.event.addListener(marker, 'click', function () {
                     window.location.href = this.url;
                 });
             }

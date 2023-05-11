@@ -9,7 +9,7 @@ foreach ($tables as $table) {
         "SELECT 
             tElemento.*, {$table}.*, 
             foto, tBiblioteca.nome AS nomeBiblioteca,
-            GROUP_CONCAT(CONCAT(tAutore.nome, ' ', tAutore.cognome) SEPARATOR ' - ') AS autori
+            GROUP_CONCAT(CONCAT(tAutore.nome, ' ', tAutore.cognome) SEPARATOR ' & ') AS autori
         FROM tElemento
             INNER JOIN {$table} ON {$table}.idElemento = tElemento.id
             INNER JOIN tFoto ON tFoto.id = {$table}.idFoto

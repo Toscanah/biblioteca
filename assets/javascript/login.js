@@ -44,6 +44,15 @@ loginForm.addEventListener('submit', (e) => {
                 setTimeout(() => {
                     errorMessage.classList.add('show');
                 }, 0);
+
+                setTimeout(() => {
+                    errorMessage.classList.remove('show');
+                    
+                }, 3000);
+
+                setTimeout(() => {
+                    loginForm.removeChild(errorMessage);
+                }, 3600);
             }
         })
         .catch((error) => console.error(error));

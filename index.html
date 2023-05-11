@@ -4,7 +4,8 @@
 <head>
     <title>boocek</title>
 
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0RLgPIM87iDhK6rJww_Wb6VuIMXnjS_U"></script>
+    <script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0RLgPIM87iDhK6rJww_Wb6VuIMXnjS_U"></script>
     <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
@@ -39,7 +40,7 @@
             <div class="background"></div>
             <div class="go">
                 <h1>Sei pronto?</h1>
-                <h4>inizia a leggere</h4>
+                <h4>inizia a leggere.</h4>
                 <form method="GET" action="src/routes/catalog-page.html" id="go">
                     <button type="submit" class="mdc-button mdc-button--raised" id="catalog">
                         <span class="mdc-button__ripple"></span>
@@ -59,18 +60,14 @@
     <footer class="observer-element map-container">
         <div class="map-info">
             <h1>Le nostre sedi.</h1>
-            <p>boocek ti accompagna per tutt'Italia!<br> Per sapere di piu' su una sede, clicca l'icona e verrai reindirizzato alla sua pagina<br> Buona lettura!<br> // TODO: TESTO MIGLIORE
+            <p>boocek ti accompagna per tutt'Italia!<br> Per sapere di piu' su una sede, clicca l'icona e verrai
+                reindirizzato alla sua pagina<br> Buona lettura!<br> // TODO: TESTO MIGLIORE
             </p>
         </div>
         <div id="map"></div>
     </footer>
 
-    // TODO: fare il bottome come iconcina con la freccia in su
-    <button type="submit" class="mdc-button mdc-button--raised" id="up">
-        <span class="mdc-button__ripple"></span>
-        <span class="mdc-button__focus-ring"></span>
-        <span class="mdc-button__label">TORNA SU</span>
-    </button>
+    <img src="assets/images/back_start.svg" class="up" id="up"/>
 
     <script src="assets/javascript/index.js"></script>
 </body>

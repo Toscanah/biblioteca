@@ -27,8 +27,8 @@ h5 {
 }
 
 :root {
-    --mdc-theme-primary: #ff8400;
-    --mdc-theme-secondary: #f2a156;
+    --mdc-theme-primary: #ef9825;
+    --mdc-theme-secondary: #ffbc50;
     --mdc-theme-background: #fff;
     --mdc-theme-surface: #fff;
     --mdc-theme-error: #b00020;
@@ -36,6 +36,12 @@ h5 {
     --mdc-theme-on-secondary: #fff;
     --mdc-theme-on-surface: #000;
     --mdc-theme-on-error: #fff;
+}
+
+button.mdc-button.mdc-button--raised {
+    /*background-color: rgb(255, 255, 255);*/
+    color: black;
+    border: 1px solid black;
 }
 
 .header:visited,
@@ -100,3 +106,4 @@ header {
     align-items: center;
     justify-content: space-between;
 }
+

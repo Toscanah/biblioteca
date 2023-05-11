@@ -1,6 +1,3 @@
-html {
-    height: 4000px;
-}
 
 .intro {
     width: 100%;
@@ -96,8 +93,7 @@ html {
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    margin-left: 80px;
-    margin-right: 80px;
+    
 }
 
 .background {
@@ -112,7 +108,7 @@ html {
     background-position: center center;
     filter: blur(4px);
     z-index: -1;
-    transform: scale(1.04);
+    transform: scale(1);
 }
 
 .go {
@@ -128,9 +124,7 @@ html {
 
 #catalog {
     margin-top: 20px;
-    color: black;
     font-weight: bold;
-    border: 1px solid black;
 }
 
 .divider-container {
@@ -149,9 +143,12 @@ html {
 }
 
 #map {
-    padding: 20px;
     width: 60%;
     height: 500px;
+
+    box-shadow:
+        -50px -50px 0 -46px black,
+        50px 50px 0 -46px black;
 }
 
 .map-container {
@@ -177,8 +174,23 @@ html {
 
 .up {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 25px;
+    left: 25px;
+    height: 50px;
+    width: 50px;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    border: 2px solid black;
+    border-radius: 50px;
+    background-color: rgba(226, 222, 222, 0.656)
+}
+
+#up:hover {
+    cursor: pointer;
+}
+
+.visible {
+    opacity: 1;
 }
 
 .go h1,

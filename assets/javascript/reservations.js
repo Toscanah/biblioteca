@@ -1,14 +1,14 @@
 const product = document.getElementById('product');
 const urlSearchParams = new URLSearchParams(window.location.search);
 const isbn = urlSearchParams.get('isbn');
-const title = urlSearchParams.get('titolo');
+//const title = urlSearchParams.get('titolo');
 
 const table = document.getElementById('bookings-table');
 const tableBody = table.getElementsByTagName("tbody")[0];
 
 const confirmationDialog = document.getElementById('confirmation-dialog');
 
-document.getElementById('title').textContent = 'Prenotazioni per "' + title + '"';
+//document.getElementById('title').textContent = 'Prenotazioni per "' + title + '"';
 
 fetch('../../php/admin/getElement.php', {
     method: 'POST',

@@ -7,6 +7,7 @@ header {
 }
 
 .main-container {
+    margin-top: 50px;
     width: 100%;
     display: flex;
     justify-content: space-evenly;
@@ -14,7 +15,7 @@ header {
 }
 
 .login {
-    width: 30%;
+    width: 20%;
     display: flex;
     justify-content: space-around;
     flex-direction: column;
@@ -42,17 +43,18 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 1000px;
-    height: 500px;
+    width: 600px;
+    height: 600px;
 }
 
 .login-img img {
-    transform: scale(0.5);
+    max-width: 100%;
+    max-width: 100%;
     box-shadow: 0px 0px 35px rgb(0, 0, 0);
 }
 
 .vertical-divider {
-    height: 800px;
+    height: 500px;
     width: 2px;
     background-image: linear-gradient(0deg, white, black, white);
 }
@@ -64,7 +66,7 @@ header {
 }
 
 #login-btn {
-    border: 2px solid black;    
+    border: 1px solid black;
 }
 
 #login-btn,
@@ -97,7 +99,7 @@ hr {
     color: red;
     font-weight: bold;
     opacity: 0;
-    transition: opacity 0.5s;
+    transition: opacity 0.5s ease-in-out;
 }
 
 .error-message.show {
@@ -106,4 +108,8 @@ hr {
 
 #toggle-psw:hover {
     cursor: pointer;
+}
+
+p {
+    text-align: center;
 }
