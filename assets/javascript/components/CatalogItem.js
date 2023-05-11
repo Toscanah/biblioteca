@@ -5,8 +5,15 @@ export class CatalogItem {
         this.container = null;
     }
 
+    isLogged() {
+        const loggedInCookie = document.cookie
+            .split('; ')
+            .find(cookie => cookie.startsWith('logged='));
+        return loggedInCookie !== undefined;
+    }
+
     createItem() {
-        const container = this.createContainer();
+        this.createContainer();
         const image = this.createImage();
         const infoDiv = this.createInfoDiv();
         const title = this.createTitle();
@@ -23,24 +30,23 @@ export class CatalogItem {
         // window.location.href = 'admin/reservations.html?isbn=' + isbn
         // window.location.href = 'admin/reservations.html?titolo=' + titolo
 
-        container.appendChild(image);
-        container.appendChild(infoDiv);
+        this.container.appendChild(image);
+        this.container.appendChild(infoDiv);
         infoDiv.appendChild(title);
         infoDiv.appendChild(library);
         infoDiv.appendChild(button);
 
-        this.parentContainer.appendChild(container);
+        this.parentContainer.appendChild(this.container);
     }
 
     createContainer() {
-        const container = document.createElement('div');
-        container.classList.add('catalog-item', 'observer-element');
-        return container;
+        this.container = document.createElement('div');
+        this.container.classList.add('catalog-item', 'observer-element');
     }
 
     createImage() {
         const image = document.createElement('img');
-        image.src = '../images/products/' + this.product.foto;
+        image.src = '../../assets/images/products/' + this.product.foto;
         return image;
     }
 
@@ -74,7 +80,9 @@ export class CatalogItem {
             </span>`;
 
         button.addEventListener('click', (e) => {
-            var logged = sessionStorage.getItem('logged');
+            var logged = this.isLogged();
+            console.log(logged);
+
             window.location.href = !logged ?
                 'login-page.html' :
                 `book-product-page.html?isbn=${isbn}`;

@@ -19,6 +19,7 @@ fetch('../php/getElements.php', {
     })
     .then((response) => response.json())
     .then((products) => {
+        console.log(products);
         let currentRow = null;
 
         const pageNumber = document.querySelector('.index.selected').querySelector('p').textContent - 1;
@@ -81,13 +82,13 @@ if (user) {
     const initials = document.createElement('h1');
     initials.textContent = info;
     initials.title = isStaff ? "Admin" : "Area personale";
-    const loginUrl = isStaff ? '../routes/admin/to_be_named.html' : '../routes/user.html';
+    const loginUrl = isStaff ? 'admin/to_be_named.html' : 'user.html';
     login.href = loginUrl;
     login.appendChild(initials);
 } else {
     const loginIcon = document.createElement('img');
-    loginIcon.src = '../images/login_icon.svg';
+    loginIcon.src = '../../assets/images/login_icon.svg';
     loginIcon.title = "Login";
-    login.href = '../routes/login-page.html';
+    login.href = 'login-page.html';
     login.appendChild(loginIcon);
 }

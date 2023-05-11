@@ -65,7 +65,7 @@ fetch('../php/booking/getElement.php', {
 
         // immagine
         const image = document.createElement('img');
-        image.src = '../images/products/' + element.foto;
+        image.src = '../../assets/images/products/' + element.foto;
         booking.appendChild(image);
 
         // div informazioni
@@ -73,9 +73,15 @@ fetch('../php/booking/getElement.php', {
         infoDiv.classList.add('info-div');
         booking.appendChild(infoDiv);
 
+        // label
+        const label = document.createElement('p');
+        label.textContent = "stai per prenotare";
+        label.style.fontSize = "30px";
+        infoDiv.append(label);
+
         // titolo
         const title = document.createElement('h1');
-        title.textContent = element.titolo;
+        title.innerHTML = element.titolo;
         title.classList.add('title');
         infoDiv.append(title);
 
