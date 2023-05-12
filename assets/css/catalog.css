@@ -207,7 +207,6 @@ footer {
     align-items: center;
     margin-top: 5px;
     margin-bottom: 5px;
-
 }
 
 .info-item img {
@@ -252,4 +251,53 @@ footer {
 .a {
     display: flex;
     align-items: center;
+}
+
+.filters-container {
+    display: flex;
+    justify-content: center;
+}
+
+.filters {
+    display: flex;
+
+
+    align-items: center;
+    justify-content: space-evenly;
+    width: 450px;
+}
+
+.filter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 30px;
+    border: 1px solid black;
+    background-color: rgb(241, 241, 241);
+    user-select: none;
+}
+
+.filter:hover {
+    cursor: pointer;
+}
+
+.filter-books {
+    border-top-left-radius: 16px;
+    border-bottom-left-radius: 16px;
+
+}
+
+.filter-encyclopedia {
+    border-right: 0;
+    border-left: 0;
+}
+
+.filter-maps {
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+}
+
+.active-filter {
+    background-color: var(--mdc-theme-primary);
 }

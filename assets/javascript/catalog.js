@@ -2,7 +2,28 @@ import { CatalogItem } from "./components/CatalogItem.js";
 
 const catalog = document.getElementById('catalog');
 
-// TODO: ordinamento e ricerca?
+getElements();
+
+let search;
+let filter;
+
+// TODO: filtri e ricerca?
+
+document.querySelectorAll('.filter').forEach(element => {
+    element.addEventListener('click', () => {
+        element.classList.toggle('active-filter');
+
+        if (element.classList.contains('active-filter')) {
+            element.innerHTML = `
+                <img src="../../assets/images/select.svg"/> 
+                ${element.textContent.trim()}`;
+        } else {
+            element.innerHTML = `${element.textContent.trim()}`;
+        }
+
+        getElements();
+    });
+});
 
 const observer = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
@@ -14,47 +35,60 @@ const observer = new IntersectionObserver((entries, observer) => {
     });
 });
 
-fetch('../php/getElements.php', {
-        method: 'POST'
+
+function getElements() {
+    while (catalog.firstChild) {
+        catalog.removeChild(catalog.firstChild);
+    }
+
+    fetch('../php/getElements.php', {
+        method: 'POST',
+        body: JSON.stringify(
+            Array.from(document.getElementsByClassName('active-filter'))
+                .map(filter => filter.textContent.trim())
+        )
     })
-    .then((response) => response.json())
-    .then((products) => {
-        console.log(products);
-        let currentRow = null;
+        .then((response) => response.json())
+        .then((products) => {
+            console.log(products);
+            let currentRow = null;
 
-        const pageNumber = document.querySelector('.index.selected').querySelector('p').textContent - 1;
-        const productsPerPage = 10;
-        const startIndex = pageNumber * productsPerPage;
-        const endIndex = startIndex + productsPerPage;
-        const currentProducts = products.slice(startIndex, endIndex);
+            const pageNumber = document.querySelector('.index.selected').querySelector('p').textContent - 1;
+            const productsPerPage = 10;
+            const startIndex = pageNumber * productsPerPage;
+            const endIndex = startIndex + productsPerPage;
+            const currentProducts = products.slice(startIndex, endIndex);
 
-        if (currentProducts.length === 0) {
-            currentRow = document.createElement('div');
-            currentRow.classList.add('no-products');
-            currentRow.innerHTML = `
-                <h1 style="font-size: 5em;">Nessun prodotto!</h1>
-                <p style="font-size: 1.8em;">prova ad utilizzare un filtro diverso.</p>`;
-            catalog.appendChild(currentRow);
-        }
-
-        for (let i = 0; i < currentProducts.length; i++) {
-            let product = currentProducts[i];
-
-            if (i % 2 === 0) {
+            if (currentProducts.length === 0) {
                 currentRow = document.createElement('div');
-                currentRow.classList.add('catalog-row');
+                currentRow.classList.add('no-products');
+                currentRow.innerHTML = `
+                    <h1 style="font-size: 5em;">Nessun prodotto!</h1>
+                    <p style="font-size: 1.8em;">prova ad utilizzare un filtro diverso.</p>`;
                 catalog.appendChild(currentRow);
             }
 
-            const item = new CatalogItem(currentRow, product);
-            item.createItem();
+            for (let i = 0; i < currentProducts.length; i++) {
+                let product = currentProducts[i];
 
-            setTimeout(() => {
-                observer.observe(item.getContainer());
-            }, 100 * i);
-        }
-    })
-    .catch((error) => console.log(error));
+                if (i % 2 === 0) {
+                    currentRow = document.createElement('div');
+                    currentRow.classList.add('catalog-row');
+                    catalog.appendChild(currentRow);
+                }
+
+
+
+                const item = new CatalogItem(currentRow, product);
+                item.createItem();
+
+                setTimeout(() => {
+                    observer.observe(item.getContainer());
+                }, 100 * i);
+            }
+        })
+        .catch((error) => console.log(error));
+}
 
 function getCookie(name) {
     const cookies = document.cookie.split('; ');
