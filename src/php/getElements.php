@@ -9,7 +9,7 @@ $tables = array();
 
 if ($data === null) {
     // if no filters were specified, then retrieve data from all tables
-    $tables = array("tLibro", "tVolume", "tCartaGeopolitica");
+    $tables = array("tLibro", "tVolume", "tCartina");
 } else {
     // otherwise retrieve data from specific tables
     if (in_array("Libri", $data)) {
@@ -19,7 +19,7 @@ if ($data === null) {
         $tables[] = "tVolume";
     }
     if (in_array("Cartine", $data)) {
-        $tables[] = "tCartaGeopolitica";
+        $tables[] = "tCartina";
     }
 }
 

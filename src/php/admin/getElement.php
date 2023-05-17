@@ -22,7 +22,7 @@ switch ($type) {
         $table = "tVolume";
         break;
     case "carta geopolitica":
-        $table = "tCartaGeopolitica";
+        $table = "litica";
         break;
 }
 
