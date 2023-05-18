@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 11, 2023 at 11:21 PM
+-- Generation Time: May 18, 2023 at 10:45 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -36,6 +36,13 @@ CREATE TABLE `taddetto` (
   `password` text DEFAULT NULL,
   `idBiblioteca` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `taddetto`
+--
+
+INSERT INTO `taddetto` (`id`, `nome`, `cognome`, `cf`, `email`, `password`, `idBiblioteca`) VALUES
+(1, 'Roberto', 'Pizzignach', '3gbb34bh55hh342', 'b.b@b', '123', 1);
 
 -- --------------------------------------------------------
 
@@ -107,10 +114,10 @@ INSERT INTO `tbiblioteca` (`id`, `nome`, `via`, `citta`, `civico`, `cap`, `longi
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tcartageopolitica`
+-- Table structure for table `tcartina`
 --
 
-CREATE TABLE `tcartageopolitica` (
+CREATE TABLE `tcartina` (
   `id` int(11) NOT NULL,
   `titolo` text DEFAULT NULL,
   `descrizione` text DEFAULT NULL,
@@ -124,10 +131,10 @@ CREATE TABLE `tcartageopolitica` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tcartageopolitica`
+-- Dumping data for table `tcartina`
 --
 
-INSERT INTO `tcartageopolitica` (`id`, `titolo`, `descrizione`, `annoPubblicazione`, `annoRiferimento`, `idElemento`, `idFoto`, `idCasaEditrice`, `idScaffale`, `numeroScaffale`) VALUES
+INSERT INTO `tcartina` (`id`, `titolo`, `descrizione`, `annoPubblicazione`, `annoRiferimento`, `idElemento`, `idFoto`, `idCasaEditrice`, `idScaffale`, `numeroScaffale`) VALUES
 (1, 'Titolo 1', NULL, 2000, 1990, 11, 1, 1, 1, 11),
 (2, 'Titolo 2', NULL, 2005, 2000, 12, 1, 1, 1, 12),
 (3, 'Titolo 3', NULL, 2010, 2005, 13, 1, 1, 1, 13),
@@ -171,7 +178,7 @@ CREATE TABLE `telemento` (
 --
 
 INSERT INTO `telemento` (`id`, `isbn`, `tipo`, `stato`, `rating`) VALUES
-(1, '9788806220703', 'libro', 'prenotato', '5'),
+(1, '9788806220703', 'libro', 'prestato', '5'),
 (2, '9788806237534', 'libro', 'disponibile', '5'),
 (3, '9788817106104', 'libro', 'disponibile', '5'),
 (4, '9788815240115', 'libro', 'disponibile', '4'),
@@ -247,7 +254,7 @@ INSERT INTO `tlibro` (`id`, `titolo`, `descrizione`, `annoPubblicazione`, `idEle
 CREATE TABLE `tprenotazione` (
   `id` int(11) NOT NULL,
   `idElemento` int(11) DEFAULT NULL,
-  `dataPrenotazione` date DEFAULT NULL,
+  `dataPrenotazione` datetime DEFAULT NULL,
   `stato` enum('da confermare','in prestito','terminata') NOT NULL,
   `idUtente` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -257,22 +264,20 @@ CREATE TABLE `tprenotazione` (
 --
 
 INSERT INTO `tprenotazione` (`id`, `idElemento`, `dataPrenotazione`, `stato`, `idUtente`) VALUES
-(7, 11, '2023-05-08', 'da confermare', 1),
-(9, 11, '2023-05-08', 'da confermare', 1),
-(24, 11, '2023-05-08', 'da confermare', 1),
-(25, 11, '2023-05-08', 'da confermare', 1),
-(26, 11, '2023-05-08', 'da confermare', 1),
-(27, 11, '2023-05-08', 'da confermare', 1),
-(28, 11, '2023-05-08', 'da confermare', 1),
-(29, 11, '2023-05-08', 'da confermare', 1),
-(30, 11, '2023-05-08', 'da confermare', 1),
-(31, 11, '2023-05-08', 'da confermare', 1),
-(32, 11, '2023-05-08', 'da confermare', 1),
-(33, 11, '2023-05-08', 'da confermare', 1),
-(34, 11, '2023-05-08', 'da confermare', 1),
-(35, 11, '2023-05-08', 'da confermare', 1),
-(36, 11, '2023-05-08', 'da confermare', 1),
-(37, 11, '2023-05-08', 'da confermare', 1);
+(24, 1, '2023-05-08 00:00:00', 'in prestito', 1),
+(25, 1, '2023-05-08 00:00:00', 'da confermare', 1),
+(26, 1, '2023-05-08 00:00:00', 'da confermare', 1),
+(27, 1, '2023-05-08 00:00:00', 'da confermare', 1),
+(28, 1, '2023-05-08 00:00:00', 'da confermare', 1),
+(29, 1, '2023-05-08 00:00:00', 'da confermare', 1),
+(30, 1, '2023-05-08 00:00:00', 'da confermare', 1),
+(31, 1, '2023-05-08 00:00:00', 'da confermare', 1),
+(32, 1, '2023-05-08 00:00:00', 'da confermare', 1),
+(33, 1, '2023-05-08 00:00:00', 'da confermare', 1),
+(34, 1, '2023-05-08 00:00:00', 'da confermare', 1),
+(35, 1, '2023-05-08 00:00:00', 'da confermare', 1),
+(36, 1, '2023-05-08 00:00:00', 'da confermare', 1),
+(37, 1, '2023-05-08 00:00:00', 'da confermare', 1);
 
 -- --------------------------------------------------------
 
@@ -282,10 +287,17 @@ INSERT INTO `tprenotazione` (`id`, `idElemento`, `dataPrenotazione`, `stato`, `i
 
 CREATE TABLE `tprestito` (
   `id` int(11) NOT NULL,
-  `dataPrestito` date DEFAULT NULL,
+  `dataPrestito` datetime DEFAULT NULL,
   `idPrenotazione` int(11) DEFAULT NULL,
   `idAddetto` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tprestito`
+--
+
+INSERT INTO `tprestito` (`id`, `dataPrestito`, `idPrenotazione`, `idAddetto`) VALUES
+(3, '2023-05-18 22:37:03', 24, 1);
 
 -- --------------------------------------------------------
 
@@ -328,7 +340,7 @@ INSERT INTO `tproduzione` (`id`, `idAutore`, `idElemento`) VALUES
 
 CREATE TABLE `tritiro` (
   `id` int(11) NOT NULL,
-  `dataRitiro` date DEFAULT NULL,
+  `dataRitiro` datetime DEFAULT NULL,
   `idPrenotazione` int(11) DEFAULT NULL,
   `idAddetto` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -464,9 +476,9 @@ ALTER TABLE `tbiblioteca`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tcartageopolitica`
+-- Indexes for table `tcartina`
 --
-ALTER TABLE `tcartageopolitica`
+ALTER TABLE `tcartina`
   ADD PRIMARY KEY (`id`),
   ADD KEY `idCasaEditrice` (`idCasaEditrice`),
   ADD KEY `idScaffale` (`idScaffale`),
@@ -559,7 +571,7 @@ ALTER TABLE `tvolume`
 -- AUTO_INCREMENT for table `taddetto`
 --
 ALTER TABLE `taddetto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tarmadio`
@@ -580,9 +592,9 @@ ALTER TABLE `tbiblioteca`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `tcartageopolitica`
+-- AUTO_INCREMENT for table `tcartina`
 --
-ALTER TABLE `tcartageopolitica`
+ALTER TABLE `tcartina`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
@@ -613,13 +625,13 @@ ALTER TABLE `tlibro`
 -- AUTO_INCREMENT for table `tprenotazione`
 --
 ALTER TABLE `tprenotazione`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `tprestito`
 --
 ALTER TABLE `tprestito`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tproduzione`
@@ -655,7 +667,7 @@ ALTER TABLE `ttelefono`
 -- AUTO_INCREMENT for table `tutente`
 --
 ALTER TABLE `tutente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tvolume`
@@ -668,23 +680,23 @@ ALTER TABLE `tvolume`
 --
 
 --
--- Constraints for table `tcartageopolitica`
+-- Constraints for table `tcartina`
 --
-ALTER TABLE `tcartageopolitica`
-  ADD CONSTRAINT `tcartageopolitica_ibfk_1` FOREIGN KEY (`idCasaEditrice`) REFERENCES `tcasaeditrice` (`id`),
-  ADD CONSTRAINT `tcartageopolitica_ibfk_10` FOREIGN KEY (`idScaffale`) REFERENCES `tscaffale` (`id`),
-  ADD CONSTRAINT `tcartageopolitica_ibfk_11` FOREIGN KEY (`idCasaEditrice`) REFERENCES `tcasaeditrice` (`id`),
-  ADD CONSTRAINT `tcartageopolitica_ibfk_12` FOREIGN KEY (`idScaffale`) REFERENCES `tscaffale` (`id`),
-  ADD CONSTRAINT `tcartageopolitica_ibfk_13` FOREIGN KEY (`idCasaEditrice`) REFERENCES `tcasaeditrice` (`id`),
-  ADD CONSTRAINT `tcartageopolitica_ibfk_14` FOREIGN KEY (`idScaffale`) REFERENCES `tscaffale` (`id`),
-  ADD CONSTRAINT `tcartageopolitica_ibfk_2` FOREIGN KEY (`idScaffale`) REFERENCES `tscaffale` (`id`),
-  ADD CONSTRAINT `tcartageopolitica_ibfk_3` FOREIGN KEY (`idCasaEditrice`) REFERENCES `tcasaeditrice` (`id`),
-  ADD CONSTRAINT `tcartageopolitica_ibfk_4` FOREIGN KEY (`idScaffale`) REFERENCES `tscaffale` (`id`),
-  ADD CONSTRAINT `tcartageopolitica_ibfk_5` FOREIGN KEY (`idCasaEditrice`) REFERENCES `tcasaeditrice` (`id`),
-  ADD CONSTRAINT `tcartageopolitica_ibfk_6` FOREIGN KEY (`idScaffale`) REFERENCES `tscaffale` (`id`),
-  ADD CONSTRAINT `tcartageopolitica_ibfk_7` FOREIGN KEY (`idCasaEditrice`) REFERENCES `tcasaeditrice` (`id`),
-  ADD CONSTRAINT `tcartageopolitica_ibfk_8` FOREIGN KEY (`idScaffale`) REFERENCES `tscaffale` (`id`),
-  ADD CONSTRAINT `tcartageopolitica_ibfk_9` FOREIGN KEY (`idCasaEditrice`) REFERENCES `tcasaeditrice` (`id`);
+ALTER TABLE `tcartina`
+  ADD CONSTRAINT `tcartina_ibfk_1` FOREIGN KEY (`idCasaEditrice`) REFERENCES `tcasaeditrice` (`id`),
+  ADD CONSTRAINT `tcartina_ibfk_10` FOREIGN KEY (`idScaffale`) REFERENCES `tscaffale` (`id`),
+  ADD CONSTRAINT `tcartina_ibfk_11` FOREIGN KEY (`idCasaEditrice`) REFERENCES `tcasaeditrice` (`id`),
+  ADD CONSTRAINT `tcartina_ibfk_12` FOREIGN KEY (`idScaffale`) REFERENCES `tscaffale` (`id`),
+  ADD CONSTRAINT `tcartina_ibfk_13` FOREIGN KEY (`idCasaEditrice`) REFERENCES `tcasaeditrice` (`id`),
+  ADD CONSTRAINT `tcartina_ibfk_14` FOREIGN KEY (`idScaffale`) REFERENCES `tscaffale` (`id`),
+  ADD CONSTRAINT `tcartina_ibfk_2` FOREIGN KEY (`idScaffale`) REFERENCES `tscaffale` (`id`),
+  ADD CONSTRAINT `tcartina_ibfk_3` FOREIGN KEY (`idCasaEditrice`) REFERENCES `tcasaeditrice` (`id`),
+  ADD CONSTRAINT `tcartina_ibfk_4` FOREIGN KEY (`idScaffale`) REFERENCES `tscaffale` (`id`),
+  ADD CONSTRAINT `tcartina_ibfk_5` FOREIGN KEY (`idCasaEditrice`) REFERENCES `tcasaeditrice` (`id`),
+  ADD CONSTRAINT `tcartina_ibfk_6` FOREIGN KEY (`idScaffale`) REFERENCES `tscaffale` (`id`),
+  ADD CONSTRAINT `tcartina_ibfk_7` FOREIGN KEY (`idCasaEditrice`) REFERENCES `tcasaeditrice` (`id`),
+  ADD CONSTRAINT `tcartina_ibfk_8` FOREIGN KEY (`idScaffale`) REFERENCES `tscaffale` (`id`),
+  ADD CONSTRAINT `tcartina_ibfk_9` FOREIGN KEY (`idCasaEditrice`) REFERENCES `tcasaeditrice` (`id`);
 
 --
 -- Constraints for table `tlibro`
