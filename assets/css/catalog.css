@@ -76,9 +76,9 @@ header {
     opacity: 1;
 }
 
-#book {
+#book, #manage {
     font-weight: bold;
-    width: 200px;
+    width: 300px;
 }
 
 footer {

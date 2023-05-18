@@ -1,3 +1,6 @@
+const pages = document.querySelectorAll('.index');
+const urlSearchParams = new URLSearchParams(window.location.search);
+
 const loginForm = document.getElementById('login-form');
 
 loginForm.addEventListener('submit', (e) => {
@@ -12,22 +15,32 @@ loginForm.addEventListener('submit', (e) => {
         password: password.value,
     }
 
-    fetch('../php/checkUser.php', {
-            method: 'POST',
-            body: JSON.stringify(loginData),
-        })
+    fetch('../php/executeLogin.php', {
+        method: 'POST',
+        body: JSON.stringify(loginData),
+    })
         .then((response) => response.json())
         .then((login) => {
             if (login.user === 'found') {
-                const coockieName = login.type === 'user' ? 'user' : 'staff';
+                const cookieName = login.type === 'user' ? 'user' : 'staff';
+                console.log("yo");
+
                 if (remindCheck.checked) {
                     const user = login.info + login.id;
-                    let currentDate = new Date();
-                    currentDate.setTime(currentDate.getTime() + 30 * 60 * 1000); // 30 minutes in milliseconds
-                    let expires = "expires=" + currentDate.toUTCString();
-                    document.cookie = `${coockieName}=${user};expires=${expires.toString()};path=/`;
+                    const expirationTime = 30 * 60 * 1000; // 30 minutes in milliseconds
+                    const currentDate = new Date(Date.now() + expirationTime);
+                    const expires = "expires=" + currentDate.toUTCString();
+                    document.cookie = `${cookieName}=${user}; ${expires}; path=/`;
                 }
-                window.location.href = 'catalog-page.html?page=1';
+
+                const from = urlSearchParams.get('from');
+                if (from === 'catalog') {
+                    const isbn = urlSearchParams.get('isbn');
+                    const user = login.id;
+                    window.location.href = `book-product-page.html?isbn=${isbn}&user=${user}`;
+                } else {
+                    window.location.href = 'catalog-page.html?page=1';
+                }
             } else if (login.user === 'not_found') {
                 const existingErrorMessage = document.querySelector('.error-message');
                 if (existingErrorMessage) {
@@ -47,7 +60,6 @@ loginForm.addEventListener('submit', (e) => {
 
                 setTimeout(() => {
                     errorMessage.classList.remove('show');
-                    
                 }, 3000);
 
                 setTimeout(() => {
@@ -70,4 +82,6 @@ togglePsw.addEventListener('click', () => {
     }
 });
 
-document.getElementById('register-btn').addEventListener('click', () => window.location.href = 'register-page.html');
+document.getElementById('register-btn').addEventListener('click', () => {
+    window.location.href = 'register-page.html'
+});

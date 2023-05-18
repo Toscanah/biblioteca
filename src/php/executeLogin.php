@@ -33,7 +33,7 @@ if (mysqli_num_rows($get_account_res) !== 0) {
         $result["user"] = "found";
         $result["type"] = "staff";
         $result["id"] = $staff["id"];
-        $result["info"] = $staff["nome"][0] . $info["cognome"][0];
+        $result["info"] = $staff["nome"][0] . $staff["cognome"][0];
     } else { // se anche nello staff non c'è niente allora nessun login trovato
         $result["user"] = "not_found";
     }

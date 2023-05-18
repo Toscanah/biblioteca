@@ -1,7 +1,7 @@
 const product = document.getElementById('product');
 const urlSearchParams = new URLSearchParams(window.location.search);
 const isbn = urlSearchParams.get('isbn');
-//const title = urlSearchParams.get('titolo');
+let title2;
 
 const table = document.getElementById('bookings-table');
 const tableBody = table.getElementsByTagName("tbody")[0];
@@ -27,6 +27,7 @@ fetch('../../php/admin/getElement.php', {
         product.appendChild(infoDiv);
 
         const title = document.createElement('h1');
+        title2 = element.titolo;
         title.textContent = element.titolo;
         title.classList.add('product-title');
         infoDiv.append(title);
@@ -69,6 +70,32 @@ fetch('../../php/admin/getElement.php', {
             .then(response => response.json())
             .then(bookings => {
                 console.log(bookings);
+
+                let alreadyBookedflag = false;
+                for (const booking of bookings) {
+                    if (booking.stato === 'in prestito') {
+                        alreadyBookedflag = true;
+                        break;
+                    }
+                }
+
+                if (alreadyBookedflag) {
+                    const collect = document.getElementById('collect');
+
+                    const collectBtn = document.createElement('button');
+                    collectBtn.className = 'mdc-button mdc-button--raised';
+                    collectBtn.innerHTML = `
+                        <span class="mdc-button__ripple"></span>
+                        <span class="mdc-button__focus-ring"></span>
+                        <span class="mdc-button__label">RITIRA</span>`;
+                    collectBtn.addEventListener('click', () => {
+                        // TODO: Fetch and process the item collection logic
+                    });
+
+                    collect.textContent = 'Questo prodotto e\' gia\' in prestito.';
+                    collect.appendChild(collectBtn);
+                }
+
                 for (let i = 0; i < bookings.length; i++) {
                     let booking = bookings[i];
 
@@ -80,36 +107,44 @@ fetch('../../php/admin/getElement.php', {
                     let dateCell = row.insertCell(4);
                     let actionCell = row.insertCell(5);
 
-                    nCell.innerHTML = (i + 1);
-                    nameCell.innerHTML = booking.nome;
-                    surnameCell.innerHTML = booking.cognome;
-                    cfCell.innerHTML = booking.cf;
-                    dateCell.innerHTML = booking.data;
+                    if (booking.stato === 'da confermare') {
+                        nCell.innerHTML = (i + 1);
+                        nameCell.innerHTML = booking.nome;
+                        surnameCell.innerHTML = booking.cognome;
+                        cfCell.innerHTML = booking.cf;
+                        dateCell.innerHTML = booking.data;
 
-                    const button = document.createElement('button');
-                    button.className = 'mdc-button mdc-button--raised';
-                    button.innerHTML = `
-                        <span class="mdc-button__ripple"></span>
-                        <span class="mdc-button__focus-ring"></span>
-                        <span class="mdc-button__label">CONFERMA</span>`;
-                    button.addEventListener('click', () => {
-                        confirmationDialog.showModal();
-                        confirmationDialog.getElementById('confirm').innerHTML = `
-                            Stai confermando la prenotazione di <b>${booking.nomeUtente} ${booking.cognomeUtente}</b>
-                            per <b>${title}</b>`;
-                        confirmationDialog.querySelector('button').addEventListener('click', () => {
-                            fetch('../../php/admin/confirmBooking.php', {
-                                method: 'POST',
-                                body: JSON.stringify({
-                                    id: booking.idPrenotazione
+                        const button = document.createElement('button');
+                        button.className = 'mdc-button mdc-button--raised';
+                        button.innerHTML = `
+                            <span class="mdc-button__ripple"></span>
+                            <span class="mdc-button__focus-ring"></span>
+                            <span class="mdc-button__label">${alreadyBookedflag ? 'IN PRESTITO' : 'CONFERMA'}</span>`;
+
+                        if (alreadyBookedflag) {
+                            button.setAttribute('disabled', 'true');
+                        }
+
+                        button.addEventListener('click', () => {
+                            confirmationDialog.showModal();
+                            confirmationDialog.querySelector('#confirm').innerHTML = `
+                                Stai confermando la prenotazione di <b>${booking.nome} ${booking.cognome}</b>
+                                per <b>${title2}</b>`;
+                            confirmationDialog.querySelector('button').addEventListener('click', () => {
+                                fetch('../../php/admin/confirmBooking.php', {
+                                    method: 'POST',
+                                    body: JSON.stringify({
+                                        id: booking.idPrenotazione,
+                                        isbn: isbn
+                                    })
                                 })
-                            })
-                            confirmationDialog.close();
-                            window.location.href = '../catalog-page.html?page=1';
+                                confirmationDialog.close();
+                                //window.location.href = '../catalog-page.html?page=1';
+                            });
                         });
-                    });
 
-                    actionCell.appendChild(button);
+                        actionCell.appendChild(button);
+                    }
                 }
             });
     });

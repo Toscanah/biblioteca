@@ -80,3 +80,11 @@ tbody td {
 button {
     z-index: 1;
 }
+
+.bookings {
+    display: flex;
+    justify-content: flex-start;
+    width: 80%;
+    flex-direction: column;
+    
+}

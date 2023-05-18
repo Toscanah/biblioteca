@@ -24,7 +24,17 @@ const bookElement = () => {
 
     const cf = modal.querySelector('input#cf');
     const cfConfirm = modal.querySelector('input#cf-confirm');
-    const userId = getCookie('user').substring(2);
+    let userId = getCookie('user');
+    if (userId) {
+        userId = userId.substring(2);
+    }
+
+    // By default, it reads from cookies (if the user clicked "stay logged in")
+    // Otherwise, it tries to read from the URL parameter
+    if (!userId) {
+        userId = urlSearchParams.get('user');
+    }
+
     fetch('../php/booking/getUserCF.php', {
         method: 'POST',
         body: JSON.stringify({ userId: userId })
@@ -44,11 +54,10 @@ const bookElement = () => {
                     userId: userId,
                     isbn: isbn
                 })
-            }).then((reponse) => {
+            }).then((response) => {
                 modal.close();
-                window.location.href = '../index.html';
+                window.location.href = '../../index.html';
             });
-
         } else {
             // CF non combaciano
         }

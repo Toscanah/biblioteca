@@ -5,6 +5,17 @@ export class CatalogItem {
         this.container = null;
     }
 
+    getCookie(name) {
+        const cookies = document.cookie.split('; ');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i];
+            if (cookie.indexOf(name) === 0) {
+                return cookie.substring(name.length + 1);
+            }
+        }
+        return null;
+    }
+
     isLogged() {
         const loggedInCookie = document.cookie
             .split('; ')
@@ -101,7 +112,6 @@ export class CatalogItem {
         infoText.classList.add('info-text');
         infoText.textContent = 'Mostra informazioni';
 
-
         const toggleBtn = document.createElement('img');
         toggleBtn.src = '../../assets/images/arrow_down.svg';
         toggleBtn.classList.add('toggle-btn');
@@ -134,33 +144,45 @@ export class CatalogItem {
                 <p class="info-item"><img src="../../assets/images/search.svg"/> Anno riferimento: <b>${this.product.annoRiferimento}</b></p>`;
         }
 
-
         displayInfo.appendChild(content);
-
         return displayInfo;
     }
 
     createButton() {
         const isbn = this.product.isbn;
-        const button = document.createElement('button');
-        button.classList.add('mdc-button', 'mdc-button--raised');
-        button.setAttribute('id', 'book');
-        button.innerHTML = `
+        const userButton = document.createElement('button');
+        userButton.classList.add('mdc-button', 'mdc-button--raised');
+        userButton.setAttribute('id', 'book');
+        userButton.innerHTML = `
             <span class="mdc-button__ripple"></span>
             <span class="mdc-button__focus-ring"></span>
             <span class="mdc-button__label">
                 ${this.product.stato === 'disponibile' ? 'PRENOTA' : 'INCODATI'}
             </span>`;
-        button.addEventListener('click', (e) => {
+        userButton.addEventListener('click', (e) => {
             var logged = this.isLogged();
-            console.log(logged);
 
             window.location.href = !logged ?
-                `login-page.html` :
+                `login-page.html?from=catalog&isbn=${isbn}` :
                 `book-product-page.html?isbn=${isbn}`;
         });
 
-        if (this.product.stato === 'prenotato') {
+        if (this.getCookie('staff')) {
+            const adminButton = document.createElement('button');
+            adminButton.classList.add('mdc-button', 'mdc-button--raised');
+            adminButton.setAttribute('id', 'manage');
+            adminButton.innerHTML = `
+                <span class="mdc-button__ripple"></span>
+                <span class="mdc-button__focus-ring"></span>
+                <span class="mdc-button__label">GESTISCI PRENOTAZIONI</span>`;
+            adminButton.addEventListener('click', (e) => {
+                window.location.href = `admin/reservations-page.html?isbn=${isbn}`;
+            });
+
+            return adminButton;
+        }
+
+        if (this.product.stato === 'prenotato' || this.product.stato === 'prestato') {
             const div = document.createElement('div');
 
             div.innerHTML = `
@@ -171,7 +193,7 @@ export class CatalogItem {
             return div;
         }
 
-        return button;
+        return userButton;
     }
 
     getContainer() {

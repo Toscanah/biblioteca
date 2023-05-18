@@ -13,6 +13,7 @@ $get_bookings =
         tPrenotazione.stato, tUtente.*
     FROM tPrenotazione
         INNER JOIN tUtente ON tUtente.id = tPrenotazione.idUtente
+        INNER JOIN tElemento ON tElemento.id = tPrenotazione.idElemento
         WHERE idElemento={$id}
         ORDER BY tPrenotazione.dataPrenotazione ASC";
 $get_bookings_res = mysqli_query($db, $get_bookings);

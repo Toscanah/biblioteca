@@ -35,7 +35,6 @@ const observer = new IntersectionObserver((entries, observer) => {
     });
 });
 
-
 function getElements() {
     while (catalog.firstChild) {
         catalog.removeChild(catalog.firstChild);
