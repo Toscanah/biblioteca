@@ -9,6 +9,7 @@ $id = $data["id"];
 
 $get_bookings = 
     "SELECT 
+        tElemento.*, tPrenotazione.idElemento,
         tPrenotazione.id AS idPrenotazione, tPrenotazione.dataPrenotazione AS data,
         tPrenotazione.stato, tUtente.*
     FROM tPrenotazione

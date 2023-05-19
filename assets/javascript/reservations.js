@@ -70,12 +70,26 @@ fetch('../../php/admin/getElement.php', {
             .then(response => response.json())
             .then(bookings => {
                 console.log(bookings);
+                let loanedBookingId;
 
                 let alreadyBookedflag = false;
-                for (const booking of bookings) {
-                    if (booking.stato === 'in prestito') {
-                        alreadyBookedflag = true;
-                        break;
+                const alreadyBookedBooking = bookings.find(
+                    (booking) => booking.stato === 'in prestito');
+
+                if (alreadyBookedBooking) {
+                    alreadyBookedflag = true;
+                    loanedBookingId = alreadyBookedBooking.idPrenotazione;
+                }
+
+                const allBookingsTerminated = bookings.every(
+                    (booking) => booking.stato === 'terminata');
+
+                if (allBookingsTerminated) {
+                    const table = document.getElementById('bookings-table');
+                    if (table) {
+                        table.remove();
+                        const bookingsTitlte = document.getElementById('bookings-title');
+                        bookingsTitlte.textContent = 'Nessuna prenotazione!';
                     }
                 }
 
@@ -89,7 +103,16 @@ fetch('../../php/admin/getElement.php', {
                         <span class="mdc-button__focus-ring"></span>
                         <span class="mdc-button__label">RITIRA</span>`;
                     collectBtn.addEventListener('click', () => {
-                        // TODO: Fetch and process the item collection logic
+                        fetch('../../php/admin/collectItem.php', {
+                            method: 'POST',
+                            body: JSON.stringify({
+                                id: loanedBookingId,
+                                elementId: bookings[0].idElemento
+                            })
+                        })
+                            .then(() => {
+                                window.location.reload();
+                            });
                     });
 
                     collect.textContent = 'Questo prodotto e\' gia\' in prestito.';
