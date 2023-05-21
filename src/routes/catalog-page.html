@@ -25,13 +25,23 @@
     </div>
 
     <div class="filters-container">
-        <div class="search-nar">
-
+        <div class="search-bar">
+            <form action="catalog-page.html?page=1" id="search-form">
+                <label
+                    class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-leading-icon mdc-text-field--no-label"
+                    style="height: 40px; width: 450px;">
+                    <span class="mdc-notched-outline">
+                        <span class="mdc-notched-outline__leading"></span>
+                        <span class="mdc-notched-outline__trailing"></span>
+                    </span>
+                    <i class="material-icons mdc-text-field__icon mdc-text-field__icon--leading">search</i>
+                    <input class="mdc-text-field__input" placeholder="Cerca un libro..." name="search" type="text">
+                </label>
+            </form>
         </div>
         <div class="filter-elements">
             <div class="filters">
                 <div class="filter filter-books active-filter" id="filter-books">
-                    <img src="../../assets/images/select.svg" />
                     Libri
                 </div>
                 <div class="filter filter-encyclopedia" id="filter-encyclopedia">
@@ -70,6 +80,18 @@
             const pages = document.querySelectorAll('.index');
             const urlSearchParams = new URLSearchParams(window.location.search);
             const page = urlSearchParams.get('page');
+
+            if (urlSearchParams.get('filters')) {
+                const activeFilters = urlSearchParams.get('filters').split(' ');
+                console.log(activeFilters);
+
+                [...document.getElementsByClassName('filter')].forEach(filter => {
+                    if (activeFilters.includes(filter.textContent.trim())) {
+                        filter.classList.add('active-filter');
+                    }
+                });
+            }
+
             let counter = page == 1 ? 0 : -1;
 
             pages.forEach(element => {
@@ -84,23 +106,47 @@
 
                 element.addEventListener('click', () => {
                     const index = element.querySelector('p').textContent;
-                    window.location.href = 'catalog-page.html?page=' + index;
+
+                    let activeFilters = '';
+                    [...document.getElementsByClassName('filter')].forEach(filter => {
+                        if (filter.classList.contains('active-filter')) {
+                            activeFilters += filter.textContent.trim() + ' ';
+                        }
+                    })
+
+                    window.location.href = 'catalog-page.html?page=' + index + '&filters=' + activeFilters;
                 })
             });
 
             const previousPage = document.getElementById('left');
             previousPage.addEventListener('click', () => {
-                window.location.href = 'catalog-page.html?page=' + (parseInt(page) - 1 !== 0 ? parseInt(page) - 1 : 1);
+                let activeFilters = '';
+                [...document.getElementsByClassName('filter')].forEach(filter => {
+                    if (filter.classList.contains('active-filter')) {
+                        activeFilters += filter.textContent.trim() + ' ';
+                    }
+                })
+                window.location.href = 'catalog-page.html?page=' + (parseInt(page) - 1 !== 0 ? parseInt(page) - 1 : 1) + '&filters=' + activeFilters;
             });
 
             const nextPage = document.getElementById('right');
             nextPage.addEventListener('click', () => {
-                window.location.href = 'catalog-page.html?page=' + (parseInt(page) + 1);
+                let activeFilters = '';
+                [...document.getElementsByClassName('filter')].forEach(filter => {
+                    if (filter.classList.contains('active-filter')) {
+                        activeFilters += filter.textContent.trim() + ' ';
+                    }
+                })
+                window.location.href = 'catalog-page.html?page=' + (parseInt(page) + 1) + '&filters=' + activeFilters;
             });
         </script>
     </footer>
 </body>
 
+<script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+<script type="text/javascript">
+    window.mdc.autoInit(document.body);
+</script>
 <script type="module" src="../../assets/javascript/catalog.js"></script>
 
 </html>

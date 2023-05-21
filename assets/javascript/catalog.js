@@ -2,12 +2,20 @@ import { CatalogItem } from "./components/CatalogItem.js";
 
 const catalog = document.getElementById('catalog');
 
+let search = '';
 getElements();
 
-let search;
-let filter;
+const searchForm = document.getElementById('search-form');
+const searchInput = searchForm.querySelector('input');
 
-// TODO: filtri e ricerca?
+searchForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+  });
+
+searchInput.addEventListener('input', () => {
+    search = searchInput.value;
+    getElements();
+});
 
 document.querySelectorAll('.filter').forEach(element => {
     element.addEventListener('click', () => {
@@ -15,7 +23,7 @@ document.querySelectorAll('.filter').forEach(element => {
 
         if (element.classList.contains('active-filter')) {
             element.innerHTML = `
-                <img src="../../assets/images/select.svg"/> 
+                <!--<img src="../../assets/images/select.svg"/>-->
                 ${element.textContent.trim()}`;
         } else {
             element.innerHTML = `${element.textContent.trim()}`;
@@ -42,10 +50,11 @@ function getElements() {
 
     fetch('../php/getElements.php', {
         method: 'POST',
-        body: JSON.stringify(
-            Array.from(document.getElementsByClassName('active-filter'))
-                .map(filter => filter.textContent.trim())
-        )
+        body: JSON.stringify({
+            elementFilters: Array.from(document.getElementsByClassName('active-filter'))
+                .map(filter => filter.textContent.trim()),
+            searchFilters: search,
+        })
     })
         .then((response) => response.json())
         .then((products) => {
@@ -74,9 +83,7 @@ function getElements() {
                     currentRow = document.createElement('div');
                     currentRow.classList.add('catalog-row');
                     catalog.appendChild(currentRow);
-                }
-
-
+                }                
 
                 const item = new CatalogItem(currentRow, product);
                 item.createItem();
@@ -89,39 +96,45 @@ function getElements() {
         .catch((error) => console.log(error));
 }
 
-function getCookie(name) {
-    const cookies = document.cookie.split('; ');
-    for (let i = 0; i < cookies.length; i++) {
-        const cookie = cookies[i];
-        if (cookie.indexOf(name) === 0) {
-            return cookie.substring(name.length + 1);
-        }
-    }
-    return null;
-}
-
 const login = document.getElementById('login');
 
-let user, isStaff;
-if (getCookie('user')) {
-    user = getCookie('user');
-} else if (getCookie('staff')) {
-    user = getCookie('staff');
-    isStaff = true;
+function getCookie(name) {
+    const cookies = document.cookie.split('; ');
+    for (const cookie of cookies) {
+        const [cookieName, cookieValue] = cookie.split('=');
+        if (cookieName === name) {
+            return cookieValue;
+        }
+    }
+    return '';
 }
 
-if (user) {
-    const info = user.slice(0, 2).toUpperCase();
+function createInitialsElement(user, url) {
     const initials = document.createElement('h1');
-    initials.textContent = info;
-    initials.title = isStaff ? "Admin" : "Area personale";
-    const loginUrl = isStaff ? 'admin/to_be_named.html' : 'user.html';
-    login.href = loginUrl;
+    initials.textContent = user.slice(0, 2).toUpperCase();
+    login.href = url;
     login.appendChild(initials);
-} else {
+}
+
+function createLoginIconElement(url) {
     const loginIcon = document.createElement('img');
     loginIcon.src = '../../assets/images/login_icon.svg';
-    loginIcon.title = "Login";
-    login.href = 'login-page.html';
+    login.href = url;
     login.appendChild(loginIcon);
+}
+
+const logged = getCookie('logged');
+if (logged) {
+    const user = getCookie('user');
+    const staff = getCookie('staff');
+
+    if (user) {
+        createInitialsElement(user, 'user.html');
+    }
+
+    if (staff) {
+        createInitialsElement(staff, 'admin/to_be_named.html');
+    }
+} else {
+    createLoginIconElement('login-page.html');
 }

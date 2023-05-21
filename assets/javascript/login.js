@@ -13,6 +13,7 @@ loginForm.addEventListener('submit', (e) => {
     const loginData = {
         email: email.value,
         password: password.value,
+        remind: remindCheck.checked,
     }
 
     fetch('../php/executeLogin.php', {
@@ -22,17 +23,6 @@ loginForm.addEventListener('submit', (e) => {
         .then((response) => response.json())
         .then((login) => {
             if (login.user === 'found') {
-                const cookieName = login.type === 'user' ? 'user' : 'staff';
-                console.log("yo");
-
-                if (remindCheck.checked) {
-                    const user = login.info + login.id;
-                    const expirationTime = 30 * 60 * 1000; // 30 minutes in milliseconds
-                    const currentDate = new Date(Date.now() + expirationTime);
-                    const expires = "expires=" + currentDate.toUTCString();
-                    document.cookie = `${cookieName}=${user}; ${expires}; path=/`;
-                }
-
                 const from = urlSearchParams.get('from');
                 if (from === 'catalog') {
                     const isbn = urlSearchParams.get('isbn');
@@ -67,7 +57,6 @@ loginForm.addEventListener('submit', (e) => {
                 }, 3600);
             }
         })
-        .catch((error) => console.error(error));
 });
 
 const passwordInput = document.getElementById('password');

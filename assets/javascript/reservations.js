@@ -93,6 +93,13 @@ fetch('../../php/admin/getElement.php', {
                     }
                 }
 
+                /*fetch('../../php/admin/isAdminFromLibrary.php', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        staffId: 
+                    })
+                })*/
+
                 if (alreadyBookedflag) {
                     const collect = document.getElementById('collect');
 

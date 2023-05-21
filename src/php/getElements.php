@@ -7,27 +7,29 @@ $data = json_decode($requestBody, true);
 
 $tables = array();
 
-if ($data === null) {
+if ($data["elementFilters"] === null) {
     // if no filters were specified, then retrieve data from all tables
     $tables = array("tLibro", "tVolume", "tCartina");
 } else {
     // otherwise retrieve data from specific tables
-    if (in_array("Libri", $data)) {
+    if (in_array("Libri", $data["elementFilters"])) {
         $tables[] = "tLibro";
     }
-    if (in_array("Enciclopedie", $data)) {
+    if (in_array("Enciclopedie", $data["elementFilters"])) {
         $tables[] = "tVolume";
     }
-    if (in_array("Cartine", $data)) {
+    if (in_array("Cartine", $data["elementFilters"])) {
         $tables[] = "tCartina";
     }
 }
 
+$search = $data["searchFilters"];
+
 $products = array();
 foreach ($tables as $table) {
-    $get_element =
+    $get_elements =
         "SELECT 
-            tElemento.*, {$table}.*, 
+            tElemento.*, {$table}.*, tCasaEditrice.nome AS casaEditrice,
             foto, tBiblioteca.nome AS nomeBiblioteca,
             GROUP_CONCAT(CONCAT(tAutore.nome, ' ', tAutore.cognome) SEPARATOR ' & ') AS autori
         FROM tElemento
@@ -39,9 +41,17 @@ foreach ($tables as $table) {
             INNER JOIN tBiblioteca ON tBiblioteca.id = tStanza.idBiblioteca
             INNER JOIN tProduzione ON tProduzione.idElemento = tElemento.id
             INNER JOIN tAutore ON tAutore.id = tProduzione.idAutore
+            INNER JOIN tCasaEditrice ON tCasaEditrice.id = {$table}.idCasaEditrice
+        
+        
+        WHERE 
+            {$table}.titolo LIKE '%{$search}%' OR
+            {$table}.annoPubblicazione LIKE '%{$search}%' OR
+            {$table}.titolo LIKE '%{$search}%'
+            
         GROUP BY tElemento.isbn";
-    $get_element_res = mysqli_query($db, $get_element);
-    $products = array_merge($products, mysqli_fetch_all($get_element_res, MYSQLI_ASSOC));
+    $get_elements_res = mysqli_query($db, $get_elements);
+    $products = array_merge($products, mysqli_fetch_all($get_elements_res, MYSQLI_ASSOC));
 }
 
 echo json_encode($products);

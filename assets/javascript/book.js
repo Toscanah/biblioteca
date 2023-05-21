@@ -59,7 +59,13 @@ const bookElement = () => {
                 window.location.href = '../../index.html';
             });
         } else {
-            // CF non combaciano
+            const cf = modal.querySelector('#cf-container');
+
+            cf.classList.add('shake-element');
+            cf.classList.add('mdc-text-field--invalid');
+            setTimeout(() => {
+                cf.classList.remove('shake-element', 'mdc-text-field--invalid');
+            }, 1000);
         }
     };
 };
@@ -106,15 +112,14 @@ fetch('../php/booking/getElement.php', {
         desc.classList.add('desc');
         infoDiv.append(desc);
 
-        // biblioteca // TODO: sistermare
+        // biblioteca // TODO: sistemare
         const library = document.createElement('div');
         library.innerHTML = `
             <p class="library-name">Biblioteca: ${element.nomeBiblioteca}</p>
-            <p class="">${element.nomeBiblioteca + element.via}</p>
-        `;
+            <p class="">${element.nomeBiblioteca + element.via}</p>`;
         infoDiv.appendChild(library);
 
-        // TODO: sistermare
+        // TODO: sistemare
         switch (element.tipo) {
             case 'libro':
                 break;

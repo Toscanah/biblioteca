@@ -78,9 +78,7 @@ export class CatalogItem {
     createAutors() {
         const autors = document.createElement('div');
         autors.classList.add('item-autors');
-        autors.innerHTML = `
-            <p>di <b>${this.product.autori}</b></p>
-        `;
+        autors.innerHTML = `<p>di <b>${this.product.autori}</b></p>`;
         return autors;
     }
 
@@ -132,7 +130,9 @@ export class CatalogItem {
             <p class="info-item"><img src="../../assets/images/tag.svg"/> ISBN: <b>${this.product.isbn}</b></p>
             <!--<p class="info-item"><img src="../../assets/images/status.svg"/> Stato: <b>${this.product.stato}</b></p>-->
             <p class="info-item"><img src="../../assets/images/book_icon.svg"/> Tipo: <b>${this.product.tipo}</b></p>
-            <p class="info-item"><img src="../../assets/images/wrote.svg"/> Anno pubblicazione: <b>${this.product.annoPubblicazione}</b></p>`;
+            <p class="info-item"><img src="../../assets/images/wrote.svg"/> Anno pubblicazione: <b>${this.product.annoPubblicazione}</b></p>
+            <p class="info-item"><img src="../../assets/images/library24dp.svg"> Biblioteca: <b>${this.product.nomeBiblioteca}</b></p>`;
+
 
         if (this.product.volume) {
             content.innerHTML += `
@@ -187,7 +187,7 @@ export class CatalogItem {
 
             div.innerHTML = `
                 <div class="already-booked">
-                    <p class="a"><img src="../../assets/images/excla.svg"/> Prodotto già in prestito</p>
+                    <p class="a"><img src="../../assets/images/excla.svg"/> Prodotto già prenotato</p>
                     <p>Clicca <a href="">qui</a> per metterti in coda</p>
                 </div>`;
             return div;
