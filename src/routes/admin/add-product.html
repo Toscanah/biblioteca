@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>boocek. - Admin</title>
+
+    <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../../../assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../../../assets/css/add.css">
+</head>
+
+<body>
+    <header>
+        <a class="header" href="../catalog-page.html?page=1">
+            <h1>boocek.</h1>
+        </a>
+    </header>
+
+    <div class="divider-container">
+        <div class="section-divider">&nbsp;</div>
+    </div>
+
+    <main class="main-container">
+        <h1 class="title">Aggiungi prodotto</h1>
+
+        <form class="add">
+            <div class="add-row">
+                <div data-mdc-auto-init="MDCSelect" class="mdc-select mdc-select--filled field">
+                    <div class="mdc-select__anchor">
+                        <span class="mdc-select__ripple"></span>
+                        <span class="mdc-floating-label mdc-floating-label--float-above">Tipo prodotto</span>
+                        <span class="mdc-select__selected-text-container">
+                            <span class="mdc-select__selected-text"></span>
+                        </span>
+                        <span class="mdc-select__dropdown-icon">
+                            <svg class="mdc-select__dropdown-icon-graphic" viewBox="7 10 10 5" focusable="false">
+                                <polygon class="mdc-select__dropdown-icon-inactive" stroke="none" fill-rule="evenodd"
+                                    points="7 10 12 15 17 10">
+                                </polygon>
+                                <polygon class="mdc-select__dropdown-icon-active" stroke="none" fill-rule="evenodd"
+                                    points="7 15 12 10 17 15">
+                                </polygon>
+                            </svg>
+                        </span>
+                        <span class="mdc-line-ripple"></span>
+                    </div>
+
+                    <div class="mdc-select__menu demo-width-class mdc-menu mdc-menu-surface">
+                        <ul class="mdc-list">
+                            <li class="mdc-list-item" data-value="">
+                                <span class="mdc-list-item__ripple"></span>
+                            </li>
+                            <li class="mdc-list-item" data-value="book">
+                                <span class="mdc-list-item__ripple"></span>
+                                <span class="mdc-list-item__text">Libro</span>
+                            </li>
+                            <li class="mdc-list-item" data-value="volume">
+                                <span class="mdc-list-item__ripple"></span>
+                                <span class="mdc-list-item__text">Volume</span>
+                            </li>
+                            <li class="mdc-list-item" data-value="map">
+                                <span class="mdc-list-item__ripple"></span>
+                                <span class="mdc-list-item__text">Cartina</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <label data-mdc-auto-init="MDCTextField" class="mdc-text-field mdc-text-field--filled field">
+                    <span class="mdc-text-field__ripple"></span>
+                    <span class="mdc-floating-label">ISBN</span>
+                    <input required type="text" class="mdc-text-field__input" id="isbn">
+                    <span class="mdc-line-ripple"></span>
+                </label>
+
+                <label data-mdc-auto-init="MDCTextField" class="mdc-text-field mdc-text-field--filled field">
+                    <span class="mdc-text-field__ripple"></span>
+                    <span class="mdc-floating-label">Rating</span>
+                    <input min="1" max="5" required type="number" class="mdc-text-field__input" id="rating">
+                    <span class="mdc-line-ripple"></span>
+                </label>
+            </div>
+
+            <div class="add-row">
+                <label data-mdc-auto-init="MDCTextField" class="mdc-text-field mdc-text-field--filled field">
+                    <span class="mdc-text-field__ripple"></span>
+                    <span class="mdc-floating-label">Titolo</span>
+                    <input required type="text" class="mdc-text-field__input" id="title">
+                    <span class="mdc-line-ripple"></span>
+                </label>
+
+                <label data-mdc-auto-init="MDCTextField" class="mdc-text-field mdc-text-field--filled field">
+                    <span class="mdc-text-field__ripple"></span>
+                    <span class="mdc-floating-label">Anno pubblicazione</span>
+                    <input required type="text" class="mdc-text-field__input" id="pub">
+                    <span class="mdc-line-ripple"></span>
+                </label>
+
+                <div data-mdc-auto-init="MDCSelect" class="mdc-select mdc-select--filled field">
+                    <div class="mdc-select__anchor">
+                        <span class="mdc-select__ripple"></span>
+                        <span class="mdc-floating-label mdc-floating-label--float-above">Casa editrice</span>
+                        <span class="mdc-select__selected-text-container">
+                            <span class="mdc-select__selected-text"></span>
+                        </span>
+                        <span class="mdc-select__dropdown-icon">
+                            <svg class="mdc-select__dropdown-icon-graphic" viewBox="7 10 10 5" focusable="false">
+                                <polygon class="mdc-select__dropdown-icon-inactive" stroke="none" fill-rule="evenodd"
+                                    points="7 10 12 15 17 10">
+                                </polygon>
+                                <polygon class="mdc-select__dropdown-icon-active" stroke="none" fill-rule="evenodd"
+                                    points="7 15 12 10 17 15">
+                                </polygon>
+                            </svg>
+                        </span>
+                        <span class="mdc-line-ripple"></span>
+                    </div>
+
+                    <div class="mdc-select__menu demo-width-class mdc-menu mdc-menu-surface">
+                        <ul class="mdc-list" id="publishers">
+                            <li class="mdc-list-item" data-value="">
+                                <span class="mdc-list-item__ripple"></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="add-row">
+                <div data-mdc-auto-init="MDCSelect" class="mdc-select mdc-select--filled field" id="library-container">
+                    <div class="mdc-select__anchor">
+                        <span class="mdc-select__ripple"></span>
+                        <span class="mdc-floating-label mdc-floating-label--float-above">Biblioteca</span>
+                        <span class="mdc-select__selected-text-container">
+                            <span class="mdc-select__selected-text"></span>
+                        </span>
+                        <span class="mdc-select__dropdown-icon">
+                            <svg class="mdc-select__dropdown-icon-graphic" viewBox="7 10 10 5" focusable="false">
+                                <polygon class="mdc-select__dropdown-icon-inactive" stroke="none" fill-rule="evenodd"
+                                    points="7 10 12 15 17 10">
+                                </polygon>
+                                <polygon class="mdc-select__dropdown-icon-active" stroke="none" fill-rule="evenodd"
+                                    points="7 15 12 10 17 15">
+                                </polygon>
+                            </svg>
+                        </span>
+                        <span class="mdc-line-ripple"></span>
+                    </div>
+
+                    <div class="mdc-select__menu demo-width-class mdc-menu mdc-menu-surface">
+                        <ul class="mdc-list" id="library">
+                            <li class="mdc-list-item" data-value="">
+                                <span class="mdc-list-item__ripple"></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div data-mdc-auto-init="MDCSelect" class="mdc-select mdc-select--filled field" id="room-container">
+                    <div class="mdc-select__anchor">
+                        <span class="mdc-select__ripple"></span>
+                        <span class="mdc-floating-label mdc-floating-label--float-above">Stanza</span>
+                        <span class="mdc-select__selected-text-container">
+                            <span class="mdc-select__selected-text"></span>
+                        </span>
+                        <span class="mdc-select__dropdown-icon">
+                            <svg class="mdc-select__dropdown-icon-graphic" viewBox="7 10 10 5" focusable="false">
+                                <polygon class="mdc-select__dropdown-icon-inactive" stroke="none" fill-rule="evenodd"
+                                    points="7 10 12 15 17 10">
+                                </polygon>
+                                <polygon class="mdc-select__dropdown-icon-active" stroke="none" fill-rule="evenodd"
+                                    points="7 15 12 10 17 15">
+                                </polygon>
+                            </svg>
+                        </span>
+                        <span class="mdc-line-ripple"></span>
+                    </div>
+
+                    <div class="mdc-select__menu demo-width-class mdc-menu mdc-menu-surface">
+                        <ul class="mdc-list" id="room">
+                            <li class="mdc-list-item" data-value="">
+                                <span class="mdc-list-item__ripple"></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div data-mdc-auto-init="MDCSelect" class="mdc-select mdc-select--filled field" id="closet-container">
+                    <div class="mdc-select__anchor">
+                        <span class="mdc-select__ripple"></span>
+                        <span class="mdc-floating-label mdc-floating-label--float-above">Armadio</span>
+                        <span class="mdc-select__selected-text-container">
+                            <span class="mdc-select__selected-text"></span>
+                        </span>
+                        <span class="mdc-select__dropdown-icon">
+                            <svg class="mdc-select__dropdown-icon-graphic" viewBox="7 10 10 5" focusable="false">
+                                <polygon class="mdc-select__dropdown-icon-inactive" stroke="none" fill-rule="evenodd"
+                                    points="7 10 12 15 17 10">
+                                </polygon>
+                                <polygon class="mdc-select__dropdown-icon-active" stroke="none" fill-rule="evenodd"
+                                    points="7 15 12 10 17 15">
+                                </polygon>
+                            </svg>
+                        </span>
+                        <span class="mdc-line-ripple"></span>
+                    </div>
+
+                    <div class="mdc-select__menu demo-width-class mdc-menu mdc-menu-surface">
+                        <ul class="mdc-list" id="closet">
+                            <li class="mdc-list-item" data-value="">
+                                <span class="mdc-list-item__ripple"></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div data-mdc-auto-init="MDCSelect" class="mdc-select mdc-select--filled field" id="shelf-container">
+                    <div class="mdc-select__anchor">
+                        <span class="mdc-select__ripple"></span>
+                        <span class="mdc-floating-label mdc-floating-label--float-above">Scaffale</span>
+                        <span class="mdc-select__selected-text-container">
+                            <span class="mdc-select__selected-text"></span>
+                        </span>
+                        <span class="mdc-select__dropdown-icon">
+                            <svg class="mdc-select__dropdown-icon-graphic" viewBox="7 10 10 5" focusable="false">
+                                <polygon class="mdc-select__dropdown-icon-inactive" stroke="none" fill-rule="evenodd"
+                                    points="7 10 12 15 17 10">
+                                </polygon>
+                                <polygon class="mdc-select__dropdown-icon-active" stroke="none" fill-rule="evenodd"
+                                    points="7 15 12 10 17 15">
+                                </polygon>
+                            </svg>
+                        </span>
+                        <span class="mdc-line-ripple"></span>
+                    </div>
+
+                    <div class="mdc-select__menu demo-width-class mdc-menu mdc-menu-surface">
+                        <ul class="mdc-list" id="shelf">
+                            <li class="mdc-list-item" data-value="">
+                                <span class="mdc-list-item__ripple"></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <label data-mdc-auto-init="MDCTextField" class="mdc-text-field mdc-text-field--filled field">
+                    <span class="mdc-text-field__ripple"></span>
+                    <span class="mdc-floating-label">Pos scaffale</span>
+                    <input required type="number" class="mdc-text-field__input" id="num">
+                    <span class="mdc-line-ripple"></span>
+                </label>
+            </div>
+
+            <div class="add-row">
+                <label data-mdc-auto-init="MDCTextField"
+                    class="mdc-text-field mdc-text-field--filled mdc-text-field--textarea field desc">
+                    <span class="mdc-text-field__ripple"></span>
+                    <span class="mdc-floating-label">Descrizione</span>
+                    <textarea required class="mdc-text-field__input"></textarea>
+                    <span class="mdc-line-ripple"></span>
+                </label>
+            </div>
+        </form>
+    </main>
+
+
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <script src="../../../assets/javascript/add.js"></script>
+
+    <script type="text/javascript">
+        window.mdc.autoInit(document.body);    
+    </script>
+</body>
+
+</html>

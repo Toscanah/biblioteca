@@ -7,10 +7,8 @@ header {
 }
 
 .login {
-    padding-right: 25px;
     height: 48px;
     width: 48px;
-    transition: transform 0.2s ease-in-out;
     text-decoration: none;
     color: black;
     display: flex;
@@ -18,9 +16,15 @@ header {
     align-items: center;
 }
 
-.login:hover {
-    transform: scale(1.5);
-    transform-origin: center center;
+.right-corner {
+    width: 200px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.right-corner:hover {
+    cursor: pointer;
 }
 
 .catalog-container {
@@ -265,12 +269,9 @@ footer {
 
 .filters {
     display: flex;
-
-
     align-items: center;
     justify-content: space-evenly;
     width: 450px;
-
 }
 
 .filter {
@@ -291,7 +292,6 @@ footer {
 .filter-books {
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
-
 }
 
 .filter-encyclopedia {

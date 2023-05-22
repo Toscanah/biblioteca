@@ -10,7 +10,7 @@ const searchInput = searchForm.querySelector('input');
 
 searchForm.addEventListener('submit', (e) => {
     e.preventDefault();
-  });
+});
 
 searchInput.addEventListener('input', () => {
     search = searchInput.value;
@@ -83,7 +83,7 @@ function getElements() {
                     currentRow = document.createElement('div');
                     currentRow.classList.add('catalog-row');
                     catalog.appendChild(currentRow);
-                }                
+                }
 
                 const item = new CatalogItem(currentRow, product);
                 item.createItem();
@@ -113,6 +113,11 @@ function createInitialsElement(user, url) {
     const initials = document.createElement('h1');
     initials.textContent = user.slice(0, 2).toUpperCase();
     login.href = url;
+
+    if (user === getCookie('staff')) {
+        login.style.color = 'red';
+    }
+
     login.appendChild(initials);
 }
 
@@ -133,6 +138,15 @@ if (logged) {
     }
 
     if (staff) {
+        const rightCorner = document.getElementById('right-corner');
+        const addProduct = document.createElement('img');
+        addProduct.src = '../../assets/images/add.svg';
+        addProduct.title = 'Aggiungi prodotto';
+        addProduct.addEventListener('click', () => {
+            window.location.href = 'admin/add-product.html';
+        });
+
+        rightCorner.insertBefore(addProduct, rightCorner.firstChild);
         createInitialsElement(staff, 'admin/to_be_named.html');
     }
 } else {

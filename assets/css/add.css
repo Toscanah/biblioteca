@@ -1,0 +1,40 @@
+.main-container {
+    margin-top: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    width: 80%;
+}
+
+.mdc-select:not(.mdc-select--disabled).mdc-select--focused .mdc-floating-label {
+    color: var(--mdc-theme-primary)
+}
+
+.add {
+    display: flex;
+    height: 500px;
+    width: 65%;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.add-row {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.field {
+    width: 40%;
+    margin: 10px;
+}
+
+.desc {
+    width: 100%;
+}
