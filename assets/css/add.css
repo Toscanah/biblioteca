@@ -31,10 +31,13 @@
 }
 
 .field {
-    width: 40%;
-    margin: 10px;
+    width: 200px;
+    flex-grow: 1;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .desc {
     width: 100%;
+    height: 150px;
 }

@@ -4,6 +4,7 @@
 <head>
     <title>boocek. - Admin</title>
 
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
     <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../../../assets/css/style.css">
@@ -26,7 +27,7 @@
 
         <form class="add">
             <div class="add-row">
-                <div data-mdc-auto-init="MDCSelect" class="mdc-select mdc-select--filled field">
+                <div data-mdc-auto-init="MDCSelect" class="mdc-select mdc-select--filled field" id="types">
                     <div class="mdc-select__anchor">
                         <span class="mdc-select__ripple"></span>
                         <span class="mdc-floating-label mdc-floating-label--float-above">Tipo prodotto</span>
@@ -57,7 +58,7 @@
                             </li>
                             <li class="mdc-list-item" data-value="volume">
                                 <span class="mdc-list-item__ripple"></span>
-                                <span class="mdc-list-item__text">Volume</span>
+                                <span class="mdc-list-item__text">Enciclopedia</span>
                             </li>
                             <li class="mdc-list-item" data-value="map">
                                 <span class="mdc-list-item__ripple"></span>
@@ -82,7 +83,7 @@
                 </label>
             </div>
 
-            <div class="add-row">
+            <div class="add-row" id="info-row">
                 <label data-mdc-auto-init="MDCTextField" class="mdc-text-field mdc-text-field--filled field">
                     <span class="mdc-text-field__ripple"></span>
                     <span class="mdc-floating-label">Titolo</span>
@@ -121,6 +122,45 @@
                         <ul class="mdc-list" id="publishers">
                             <li class="mdc-list-item" data-value="">
                                 <span class="mdc-list-item__ripple"></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="add-row" id="author-row">
+                <div data-mdc-auto-init="MDCSelect" class="mdc-select mdc-select--filled field" id="first-author">
+                    <div class="mdc-select__anchor">
+                        <span class="mdc-select__ripple"></span>
+                        <span class="mdc-floating-label mdc-floating-label--float-above">Autore</span>
+                        <span class="mdc-select__selected-text-container">
+                            <span class="mdc-select__selected-text">Seleziona...</span>
+                        </span>
+                        <span class="mdc-select__dropdown-icon">
+                            <svg class="mdc-select__dropdown-icon-graphic" viewBox="7 10 10 5" focusable="false">
+                                <polygon class="mdc-select__dropdown-icon-inactive" stroke="none" fill-rule="evenodd"
+                                    points="7 10 12 15 17 10">
+                                </polygon>
+                                <polygon class="mdc-select__dropdown-icon-active" stroke="none" fill-rule="evenodd"
+                                    points="7 15 12 10 17 15">
+                                </polygon>
+                            </svg>
+                        </span>
+                        <span class="mdc-line-ripple"></span>
+                    </div>
+
+                    <div class="mdc-select__menu demo-width-class mdc-menu mdc-menu-surface">
+                        <ul class="mdc-list">
+                            <li class="mdc-list-item" data-value="">
+                                <span class="mdc-list-item__ripple"></span>
+                            </li>
+                            <li class="mdc-list-item mdc-list-item--selected" data-value="0">
+                                <span class="mdc-list-item__ripple"></span>
+                                <span class="mdc-list-item__text">Seleziona...</span>
+                            </li>
+                            <li class="mdc-list-item" data-value="0">
+                                <span class="mdc-list-item__ripple"></span>
+                                <span class="mdc-list-item__text">Svevo di merda</span>
                             </li>
                         </ul>
                     </div>
@@ -265,7 +305,6 @@
     </main>
 
 
-    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
     <script src="../../../assets/javascript/add.js"></script>
 
     <script type="text/javascript">

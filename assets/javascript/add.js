@@ -1,3 +1,104 @@
+const authorRow = document.getElementById('author-row');
+const firstAuthor = document.getElementById('first-author');
+
+let counter = 1;
+
+firstAuthor.addEventListener('click', () => {
+
+
+    let currentAuthor = firstAuthor
+        .querySelector('.mdc-list-item.mdc-list-item--selected')
+        .querySelector('.mdc-list-item__text').innerHTML;
+    console.log("current: " + currentAuthor);
+    if (currentAuthor !== 'Seleziona...') {
+        //
+
+        if (!authorRow.querySelector('#author' + counter)) {
+            counter++;
+            var newAuthor = document.createElement('div');
+            newAuthor.setAttribute('data-mdc-auto-init', 'MDCSelect');
+            newAuthor.classList.add('mdc-select', 'mdc-select--filled', 'field');
+            newAuthor.id = 'author' + counter;
+            newAuthor.innerHTML = `
+            <div class="mdc-select__anchor">
+                <span class="mdc-select__ripple"></span>
+                <span class="mdc-floating-label mdc-floating-label--float-above">Autore</span>
+                <span class="mdc-select__selected-text-container">
+                    <span class="mdc-select__selected-text">Seleziona...</span>
+                </span>
+            <span class="mdc-select__dropdown-icon">
+              <svg class="mdc-select__dropdown-icon-graphic" viewBox="7 10 10 5" focusable="false">
+                <polygon class="mdc-select__dropdown-icon-inactive" stroke="none" fill-rule="evenodd" points="7 10 12 15 17 10"></polygon>
+                <polygon class="mdc-select__dropdown-icon-active" stroke="none" fill-rule="evenodd" points="7 15 12 10 17 15"></polygon>
+              </svg>
+            </span>
+            <span class="mdc-line-ripple"></span>
+          </div>
+        
+          <div class="mdc-select__menu demo-width-class mdc-menu mdc-menu-surface">
+            <ul class="mdc-list">
+              <li class="mdc-list-item" data-value="">
+                <span class="mdc-list-item__ripple"></span>
+              </li>
+              <li class="mdc-list-item mdc-list-item--selected" data-value="0">
+                <span class="mdc-list-item__ripple"></span>
+                <span class="mdc-list-item__text">Seleziona...</span>
+              </li>
+            </ul>
+          </div>`;
+
+            authorRow.appendChild(newAuthor);
+        }
+    } else {
+        let existingAuthor = authorRow.querySelector('#author' + counter);
+        if (existingAuthor) {
+            authorRow.removeChild(existingAuthor);
+        }
+    }
+
+    /*
+        if (prevAuthor !== currentAuthor) {
+            // l'utente ha selezionato un autore diverso da prima
+            prevAuthor = currentAuthor;
+    
+            console.log("porco dio");
+        } else {
+            // utente ha selezionat stesso autore
+        }
+        */
+});
+
+
+const types = document.getElementById('types');
+const infoRow = document.getElementById('info-row');
+
+// TODO: porco dio mancano gli autori
+
+types.addEventListener('click', () => {
+    const type = types.querySelector('.mdc-select__selected-text');
+
+    switch (type.innerHTML) {
+        case 'Enciclopedia':
+            //const 
+
+            /*<label data-mdc-auto-init="MDCTextField" class="mdc-text-field mdc-text-field--filled field">
+                <span class="mdc-text-field__ripple"></span>
+                <span class="mdc-floating-label">Titolo</span>
+                <input required type="text" class="mdc-text-field__input" id="title">
+                    <span class="mdc-line-ripple"></span>
+            </label>*/
+
+
+            break;
+        case 'Cartina':
+            break;
+    }
+
+    if (type.innerHTML == "Enciclopedia") {
+
+    }
+});
+
 const publishers = document.getElementById('publishers');
 
 fetch('../../php/admin/getPublishers.php')
@@ -28,7 +129,7 @@ function createItem(name, id) {
     return item;
 }
 
-function fetchItems(container, list, dataKey) {
+function fetchItems(container, listContainer, dataKey) {
     fetch('../../php/admin/getElementPlaces.php', {
         method: 'POST',
         body: JSON.stringify({
@@ -41,37 +142,23 @@ function fetchItems(container, list, dataKey) {
         .then(data => {
             console.log(data);
 
-            /**
-             * PROBLEMA: quando riseleziona per esempio una nuova biblioteca
-             * tutti gli altri select rimangono con i valori vecchi
-             * il fix sarebbe togliere sia dalla lista delle opzioni
-             * sia dal ".mdc-select__selected-text" l'html
-             * 
-             * problema però: nella funzione io ho solo il container grande della biblioteca
-             * e la lista dove mettere le opzioni
-             * 
-             * allora TODO: reworfare il sistema senza avere il container grande
-             * e la lista dove mettere le opzioni, ma avere solamente il container grande
-             * e il container grande per poi dove mettere le opzioni.
-             * 
-             * Cosi posso fare una querySelect e mettere l'html vuoto
-             * 
-             * (teoricamente potrei fare questa cosa per tutti i select)
-             * 
-             * 
-             */
-
             if (data && data.length > 0) {
                 for (const item of data) {
-                    const existingItem = list.querySelector(`[data-value="${item.id}"]`);
+                    const existingItem = listContainer.querySelector(`[data-value="${item.id}"]`);
 
                     if (!existingItem) {
-                        list.appendChild(createItem(item.info, item.id));
+                        listContainer.querySelector('.mdc-list').appendChild(createItem(item.info, item.id));
                     }
                 }
             } else {
-                list.innerHTML = '';
-                container.querySelector('.mdc-select__selected-text').innerHTML = '';
+                let listContainers = listContainer.querySelectorAll('.mdc-list-item');
+                listContainers.forEach(function (listItem) {
+                    var dataValue = listItem.getAttribute('data-value');
+                    if (dataValue !== null && dataValue !== '') {
+                        listItem.parentNode.removeChild(listItem);
+                    }
+                });
+                listContainer.querySelector('.mdc-select__selected-text').innerHTML = '';
             }
         });
 }
@@ -98,18 +185,18 @@ fetch('../../php/admin/getLibraries.php')
 
 libraryContainer.addEventListener('click', () => {
     fetchItems(
-        libraryContainer, room, 'library',
+        libraryContainer, roomContainer, 'library',
     );
 });
 
 roomContainer.addEventListener('click', () => {
     fetchItems(
-        roomContainer, closet, 'room',
+        roomContainer, closetContainer, 'room',
     );
 });
 
 closetContainer.addEventListener('click', () => {
     fetchItems(
-        closetContainer, shelf, 'closet',
+        closetContainer, shelfContainer, 'closet',
     );
 });
