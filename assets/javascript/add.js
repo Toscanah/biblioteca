@@ -3,16 +3,12 @@ const firstAuthor = document.getElementById('first-author');
 
 let counter = 1;
 
-firstAuthor.addEventListener('click', () => {
-
-
-    let currentAuthor = firstAuthor
+const autorListener = function (author) {
+    let currentAuthor = author
         .querySelector('.mdc-list-item.mdc-list-item--selected')
         .querySelector('.mdc-list-item__text').innerHTML;
-    console.log("current: " + currentAuthor);
-    if (currentAuthor !== 'Seleziona...') {
-        //
 
+    if (currentAuthor !== 'Seleziona...') {
         if (!authorRow.querySelector('#author' + counter)) {
             counter++;
             var newAuthor = document.createElement('div');
@@ -20,59 +16,73 @@ firstAuthor.addEventListener('click', () => {
             newAuthor.classList.add('mdc-select', 'mdc-select--filled', 'field');
             newAuthor.id = 'author' + counter;
             newAuthor.innerHTML = `
-            <div class="mdc-select__anchor">
-                <span class="mdc-select__ripple"></span>
-                <span class="mdc-floating-label mdc-floating-label--float-above">Autore</span>
-                <span class="mdc-select__selected-text-container">
-                    <span class="mdc-select__selected-text">Seleziona...</span>
+                <div class="mdc-select__anchor">
+                    <span class="mdc-select__ripple"></span>
+                    <span class="mdc-floating-label mdc-floating-label--float-above">Autore</span>
+                    <span class="mdc-select__selected-text-container">
+                        <span class="mdc-select__selected-text">Seleziona...</span>
+                    </span>
+                    <span class="mdc-select__dropdown-icon">
+                  <svg class="mdc-select__dropdown-icon-graphic" viewBox="7 10 10 5" focusable="false">
+                    <polygon class="mdc-select__dropdown-icon-inactive" stroke="none" fill-rule="evenodd" points="7 10 12 15 17 10"></polygon>
+                    <polygon class="mdc-select__dropdown-icon-active" stroke="none" fill-rule="evenodd" points="7 15 12 10 17 15"></polygon>
+                  </svg>
                 </span>
-            <span class="mdc-select__dropdown-icon">
-              <svg class="mdc-select__dropdown-icon-graphic" viewBox="7 10 10 5" focusable="false">
-                <polygon class="mdc-select__dropdown-icon-inactive" stroke="none" fill-rule="evenodd" points="7 10 12 15 17 10"></polygon>
-                <polygon class="mdc-select__dropdown-icon-active" stroke="none" fill-rule="evenodd" points="7 15 12 10 17 15"></polygon>
-              </svg>
-            </span>
-            <span class="mdc-line-ripple"></span>
-          </div>
-        
-          <div class="mdc-select__menu demo-width-class mdc-menu mdc-menu-surface">
-            <ul class="mdc-list">
-              <li class="mdc-list-item" data-value="">
-                <span class="mdc-list-item__ripple"></span>
-              </li>
-              <li class="mdc-list-item mdc-list-item--selected" data-value="0">
-                <span class="mdc-list-item__ripple"></span>
-                <span class="mdc-list-item__text">Seleziona...</span>
-              </li>
-            </ul>
-          </div>`;
+                <span class="mdc-line-ripple"></span>
+              </div>
+            
+              <div class="mdc-select__menu demo-width-class mdc-menu mdc-menu-surface">
+                <ul class="mdc-list">
+                  <li class="mdc-list-item" data-value="">
+                    <span class="mdc-list-item__ripple"></span>
+                  </li>
+                  <li class="mdc-list-item mdc-list-item--selected" data-value="0">
+                    <span class="mdc-list-item__ripple"></span>
+                    <span class="mdc-list-item__text">Seleziona...</span>
+                  </li>
+                  <li class="mdc-list-item mdc-list-item--selected" data-value="0">
+                    <span class="mdc-list-item__ripple"></span>
+                    <span class="mdc-list-item__text">orco cane</span>
+                  </li>
+                </ul>
+              </div>`;
+            newAuthor.addEventListener('click', function () {
+                autorListener(newAuthor);
+            });
 
             authorRow.appendChild(newAuthor);
+            window.mdc.autoInit(document.body);
         }
     } else {
-        let existingAuthor = authorRow.querySelector('#author' + counter);
+        let existingAuthor = authorRow.querySelector('#author' + (counter - 1));
+
         if (existingAuthor) {
             authorRow.removeChild(existingAuthor);
         }
+        counter--;
     }
+}
 
-    /*
-        if (prevAuthor !== currentAuthor) {
-            // l'utente ha selezionato un autore diverso da prima
-            prevAuthor = currentAuthor;
-    
-            console.log("porco dio");
-        } else {
-            // utente ha selezionat stesso autore
-        }
-        */
+firstAuthor.addEventListener('click', function () {
+    autorListener(firstAuthor);
 });
+
+
+/*
+    if (prevAuthor !== currentAuthor) {
+        // l'utente ha selezionato un autore diverso da prima
+        prevAuthor = currentAuthor;
+ 
+        console.log("porco dio");
+    } else {
+        // utente ha selezionat stesso autore
+    }
+    */
+
 
 
 const types = document.getElementById('types');
 const infoRow = document.getElementById('info-row');
-
-// TODO: porco dio mancano gli autori
 
 types.addEventListener('click', () => {
     const type = types.querySelector('.mdc-select__selected-text');

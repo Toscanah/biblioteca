@@ -99,7 +99,7 @@ window.addEventListener('load', function () {
     };
 
     const map = new google.maps.Map(document.getElementById('map'), mapOptions);
-    const markerImage = 'src/images/book64.svg';
+    const markerImage = 'assets/images/book64.svg';
 
     fetch('src/php/getLibraries.php', {
         method: 'POST'
@@ -119,9 +119,9 @@ window.addEventListener('load', function () {
                     url: 'src/routes/library-info-page.html?id=' + site.id
                 });
 
-                google.maps.event.addListener(marker, 'click', function () {
+                /*google.maps.event.addListener(marker, 'click', function () {
                     window.location.href = this.url;
-                });
+                });*/
             }
         })
         .catch((error) => console.log(error));

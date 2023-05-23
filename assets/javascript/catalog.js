@@ -134,11 +134,11 @@ if (logged) {
     const staff = getCookie('staff');
 
     if (user) {
-        createInitialsElement(user, 'user.html');
+        createInitialsElement(user, 'user-page.html');
     }
 
     if (staff) {
-        const rightCorner = document.getElementById('right-corner');
+        /*const rightCorner = document.getElementById('right-corner');
         const addProduct = document.createElement('img');
         addProduct.src = '../../assets/images/add.svg';
         addProduct.title = 'Aggiungi prodotto';
@@ -146,7 +146,7 @@ if (logged) {
             window.location.href = 'admin/add-product.html';
         });
 
-        rightCorner.insertBefore(addProduct, rightCorner.firstChild);
+        rightCorner.insertBefore(addProduct, rightCorner.firstChild);*/
         createInitialsElement(staff, 'admin/to_be_named.html');
     }
 } else {

@@ -43,7 +43,6 @@ foreach ($tables as $table) {
             INNER JOIN tAutore ON tAutore.id = tProduzione.idAutore
             INNER JOIN tCasaEditrice ON tCasaEditrice.id = {$table}.idCasaEditrice
         
-        
         WHERE 
             {$table}.titolo LIKE '%{$search}%' OR
             {$table}.annoPubblicazione LIKE '%{$search}%' OR
