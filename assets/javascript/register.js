@@ -9,21 +9,24 @@ registerForm.addEventListener('submit', (e) => {
     const email = document.getElementById('email');
     const password = document.getElementById('password');
     const passwordConfirm = document.getElementById('password-confirm');
+    const mainTel = document.getElementById('tel-main');
+    const otherTel = document.getElementById('other-tel-input');
 
     const registerData = {
         name: name.value,
         surname: surname.value,
         cf: cf.value,
         email: email.value,
-        password: password.value
+        password: password.value,
+        mainTel: mainTel.value,
+        otherTel: otherTel.value
     };
-    console.log(registerData);
 
     if (password.value == passwordConfirm.value) {
         fetch('../php/addAccount.php', {
-                method: 'POST',
-                body: JSON.stringify(registerData)
-            })
+            method: 'POST',
+            body: JSON.stringify(registerData)
+        })
             .then((response) => response.json())
             .then((result) => {
                 console.log(result);
@@ -86,5 +89,35 @@ togglePsw2.addEventListener('click', () => {
     } else {
         passwordConfirm.type = 'password';
         togglePsw2.innerHTML = 'visibility';
+    }
+});
+
+const telRow = document.getElementById('tel-row');
+
+const telMain = document.getElementById('tel-main');
+telMain.addEventListener('input', () => {
+    if (telMain.value == '') {
+        const otherTelElement = telRow.querySelector('#other-tel');
+        if (otherTelElement) {
+            telRow.removeChild(otherTelElement);
+            telRow.removeChild(otherTelElement);
+        }
+    }
+
+    if (!document.getElementById('other-tel')) {
+        const newTel = document.createElement('label');
+        newTel.setAttribute('data-mdc-auto-init', 'MDCTextField');
+        newTel.classList.add('mdc-text-field', 'mdc-text-field--filled', 'tel');
+        newTel.id = 'other-tel';
+        newTel.style.marginLeft = '40px';
+
+        newTel.innerHTML = `
+            <span class="mdc-text-field__ripple"></span>
+            <span class="mdc-floating-label">Telefono</span>
+            <input type="tel" pattern="[0-9]{10}" class="mdc-text-field__input"
+                id="other-tel-input">
+            <span class="mdc-line-ripple"></span>`;
+        telRow.appendChild(newTel);
+        window.mdc.autoInit(document.body);
     }
 });

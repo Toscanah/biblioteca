@@ -94,12 +94,12 @@ window.addEventListener('load', function () {
 
     const mapOptions = {
         center: new google.maps.LatLng(latitude, longitude),
-        zoom: 14,
+        zoom: 5,
         mapTypeId: google.maps.MapTypeId.SATELLITE
     };
 
     const map = new google.maps.Map(document.getElementById('map'), mapOptions);
-    const markerImage = 'assets/images/book64.svg';
+    const markerImage = 'assets/images/marker (1).png';
 
     fetch('src/php/getLibraries.php', {
         method: 'POST'

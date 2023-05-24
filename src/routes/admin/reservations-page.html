@@ -29,8 +29,12 @@
             <div class="section-divider">&nbsp;</div>
         </div>
 
+        <div class="no-book" id="no-book">
+
+        </div>
+
         <div class="bookings" id="bookings">
-            <h1 id="bookings-title">Prenotazioni</h1>
+            <h1 id="bookings-title"></h1>
             <p class="" id="collect"></p>
         </div>
 
@@ -58,6 +62,19 @@
         <p id="confirm"></p>
 
         <button type="submit" class="mdc-button mdc-button--raised" id="confirm-btn">
+            <span class="mdc-button__ripple"></span>
+            <span class="mdc-button__focus-ring"></span>
+            <span class="mdc-button__label">CONFERMA</span>
+        </button>
+    </dialog>
+
+    <dialog id="confirmation-dialog-collect">
+        <img src="../../../assets/images/close_dialog.svg" class="close-dialog" id="close-btn-collect">
+
+        <h1>Confermi?</h1>
+        <p id="confirm-collect"></p>
+
+        <button type="submit" class="mdc-button mdc-button--raised" id="confirm-btn-collect">
             <span class="mdc-button__ripple"></span>
             <span class="mdc-button__focus-ring"></span>
             <span class="mdc-button__label">CONFERMA</span>

@@ -56,7 +56,7 @@ const bookElement = () => {
                 })
             }).then((response) => {
                 modal.close();
-                window.location.href = '../../index.html';
+                window.location.href = 'catalog-page.html?page=1';
             });
         } else {
             const cf = modal.querySelector('#cf-container');
@@ -106,34 +106,25 @@ fetch('../php/booking/getElement.php', {
         autors.innerHTML = `di <b>${element.autori}</b>`;
         infoDiv.append(autors);
 
+        switch (element.tipo) {
+            case 'enciclopedia':
+                title.innerHTML += ' (vol ' + element.volume + ')';
+                break;
+            case 'carta geopolitica':
+                title.innerHTML += ' (' + element.annoRiferimento + ')';
+                break;
+        }
+
         // descrizione
         const desc = document.createElement('p');
         desc.textContent = element.descrizione;
         desc.classList.add('desc');
         infoDiv.append(desc);
 
-        // biblioteca // TODO: sistemare
         const library = document.createElement('div');
         library.innerHTML = `
-            <p class="library-name">Biblioteca: ${element.nomeBiblioteca}</p>
-            <p class="">${element.nomeBiblioteca + element.via}</p>`;
+            <p class="library-name">in <b>${element.nomeBiblioteca + ', ' + element.via}</b></p>`
         infoDiv.appendChild(library);
-
-        // TODO: sistemare
-        switch (element.tipo) {
-            case 'libro':
-                break;
-            case 'enciclopedia':
-                const volume = document.createElement('p');
-                volume.textContent = element.volume;
-                infoDiv.appendChild(volume);
-                break;
-            case 'carta geopolitica':
-                const dates = document.createElement('p');
-                dates.textContent = element.annoPubblicazione + ' ' + element.annoRiferimento;
-                infoDiv.appendChild(dates);
-                break;
-        }
 
         // bottone prenota
         const button = document.createElement('button');

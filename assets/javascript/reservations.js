@@ -8,7 +8,16 @@ const tableBody = table.getElementsByTagName("tbody")[0];
 
 const confirmationDialog = document.getElementById('confirmation-dialog');
 
-//document.getElementById('title').textContent = 'Prenotazioni per "' + title + '"';
+function getCookie(name) {
+    const cookies = document.cookie.split('; ');
+    for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i];
+        if (cookie.indexOf(name) === 0) {
+            return cookie.substring(name.length + 1);
+        }
+    }
+    return null;
+}
 
 fetch('../../php/admin/getElement.php', {
     method: 'POST',
@@ -18,6 +27,8 @@ fetch('../../php/admin/getElement.php', {
 })
     .then(response => response.json())
     .then(element => {
+        console.log(element);
+
         const image = document.createElement('img');
         image.src = '../../../assets/images/products/' + element.foto;
         product.appendChild(image);
@@ -30,6 +41,7 @@ fetch('../../php/admin/getElement.php', {
         title2 = element.titolo;
         title.textContent = element.titolo;
         title.classList.add('product-title');
+        title.id = 'element-title';
         infoDiv.append(title);
 
         const autors = document.createElement('p');
@@ -42,22 +54,22 @@ fetch('../../php/admin/getElement.php', {
         desc.classList.add('desc');
         infoDiv.append(desc);
 
-        const library = document.createElement('div');
-        library.innerHTML = `<p class="library-name">${element.nomeBiblioteca}</p>`;
-        infoDiv.appendChild(library);
+        // posizionamento
+        const pos = document.createElement('p');
+        pos.classList.add('pos');
+        pos.innerHTML = 'Biblioteca <b>' + element.nomeBiblioteca + '</b>: '
+            + '<br>- stanza <b>' + element.stanza + '</b> '
+            + '<br>- armadio <b>' + element.armadio + '</b> '
+            + '<br>- scaffale <b>' + element.scaffale + '</b>';
+        infoDiv.appendChild(pos);
+
 
         switch (element.tipo) {
-            case 'libro':
-                break;
             case 'enciclopedia':
-                const volume = document.createElement('p');
-                volume.textContent = 'Volume: ' + element.volume;
-                infoDiv.appendChild(volume);
+                title.innerHTML += ' (vol ' + element.volume + ')';
                 break;
             case 'carta geopolitica':
-                const dates = document.createElement('p');
-                dates.textContent = element.annoPubblicazione + ' ' + element.annoRiferimento;
-                infoDiv.appendChild(dates);
+                title.innerHTML += ' (' + element.annoRiferimento + ')';
                 break;
         }
 
@@ -88,64 +100,92 @@ fetch('../../php/admin/getElement.php', {
                     const table = document.getElementById('bookings-table');
                     if (table) {
                         table.remove();
-                        const bookingsTitlte = document.getElementById('bookings-title');
+                        const bookingsTitlte = document.getElementById('no-book');
                         bookingsTitlte.textContent = 'Nessuna prenotazione!';
                     }
                 }
 
-                /*fetch('../../php/admin/isAdminFromLibrary.php', {
+                let isAdminFromLibrary = true;
+
+                fetch('../../php/admin/isAdminFromLibrary.php', {
                     method: 'POST',
                     body: JSON.stringify({
-                        staffId: 
+                        elementId: bookings[0].idElemento,
+                        elementType: bookings[0].tipo,
+                        staffId: getCookie('staff').charAt(2)
                     })
-                })*/
+                })
+                    .then((response) => response.json())
+                    .then(data => {
+                        console.log(data.result)
+                        isAdminFromLibrary = data.result;
 
-                if (alreadyBookedflag) {
-                    const collect = document.getElementById('collect');
+                        if (alreadyBookedflag && isAdminFromLibrary) {
+                            const collect = document.getElementById('collect');
 
-                    const collectBtn = document.createElement('button');
-                    collectBtn.className = 'mdc-button mdc-button--raised';
-                    collectBtn.innerHTML = `
-                        <span class="mdc-button__ripple"></span>
-                        <span class="mdc-button__focus-ring"></span>
-                        <span class="mdc-button__label">RITIRA</span>`;
-                    collectBtn.addEventListener('click', () => {
-                        fetch('../../php/admin/collectItem.php', {
-                            method: 'POST',
-                            body: JSON.stringify({
-                                id: loanedBookingId,
-                                elementId: bookings[0].idElemento
-                            })
-                        })
-                            .then(() => {
-                                window.location.reload();
+                            document.querySelector('.bookings-container').remove();
+
+                            const collectBtn = document.createElement('button');
+                            collectBtn.className = 'mdc-button mdc-button--raised collect-btn';
+                            collectBtn.style.marginLeft = '10px';
+                            collectBtn.innerHTML = `
+                                <span class="mdc-button__ripple"></span>
+                                <span class="mdc-button__focus-ring"></span>
+                                <span class="mdc-button__label">RITIRA</span>`;
+                            collectBtn.addEventListener('click', () => {
+                                const modal = document.getElementById('confirmation-dialog-collect');
+                                modal.showModal();
+
+                                const closeBtn = document.getElementById('close-btn-collect');
+                                closeBtn.onclick = () => modal.close();
+
+                                modal.querySelector('#confirm-collect').innerHTML = `
+                                    Stai ritirando <b>${document.getElementById('element-title').innerHTML}</b>`;
+
+                                    modal.querySelector('button').addEventListener('click', () => {
+                                    fetch('../../php/admin/collectItem.php', {
+                                        method: 'POST',
+                                        body: JSON.stringify({
+                                            id: loanedBookingId,
+                                            elementId: bookings[0].idElemento
+                                        })
+                                    })
+                                        .then(() => {
+                                            window.location.reload();
+                                        });
+                                });
                             });
+
+                            collect.innerHTML = '<b>Questo prodotto e\' in prestito</b>';
+                            collect.appendChild(collectBtn);
+                        }
                     });
 
-                    collect.textContent = 'Questo prodotto e\' gia\' in prestito.';
-                    collect.appendChild(collectBtn);
-                }
+
+                let counter = 0;
 
                 for (let i = 0; i < bookings.length; i++) {
                     let booking = bookings[i];
 
-                    let row = tableBody.insertRow(i);
-                    let nCell = row.insertCell(0);
-                    let nameCell = row.insertCell(1);
-                    let surnameCell = row.insertCell(2);
-                    let cfCell = row.insertCell(3);
-                    let dateCell = row.insertCell(4);
-                    let actionCell = row.insertCell(5);
-
                     if (booking.stato === 'da confermare') {
-                        nCell.innerHTML = (i + 1);
+                        counter++;
+
+                        let row = tableBody.appendChild(document.createElement("tr"));
+                        let nCell = row.insertCell(0);
+                        let nameCell = row.insertCell(1);
+                        let surnameCell = row.insertCell(2);
+                        let cfCell = row.insertCell(3);
+                        let dateCell = row.insertCell(4);
+                        let actionCell = row.insertCell(5);
+
+                        nCell.innerHTML = counter;
                         nameCell.innerHTML = booking.nome;
                         surnameCell.innerHTML = booking.cognome;
                         cfCell.innerHTML = booking.cf;
                         dateCell.innerHTML = booking.data;
 
                         const button = document.createElement('button');
-                        button.className = 'mdc-button mdc-button--raised';
+                        button.className = 'mdc-button mdc-button--raised confirm-btn';
                         button.innerHTML = `
                             <span class="mdc-button__ripple"></span>
                             <span class="mdc-button__focus-ring"></span>
@@ -157,6 +197,8 @@ fetch('../../php/admin/getElement.php', {
 
                         button.addEventListener('click', () => {
                             confirmationDialog.showModal();
+                            const closeBtn = document.getElementById('close-btn');
+                            closeBtn.onclick = () => confirmationDialog.close();
                             confirmationDialog.querySelector('#confirm').innerHTML = `
                                 Stai confermando la prenotazione di <b>${booking.nome} ${booking.cognome}</b>
                                 per <b>${title2}</b>`;
@@ -169,7 +211,7 @@ fetch('../../php/admin/getElement.php', {
                                     })
                                 })
                                 confirmationDialog.close();
-                                //window.location.href = '../catalog-page.html?page=1';
+                                window.location.reload();
                             });
                         });
 

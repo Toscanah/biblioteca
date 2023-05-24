@@ -30,13 +30,8 @@ export class CatalogItem {
         const title = this.createTitle();
         const autors = this.createAutors();
         const rating = this.createRating();
-        const infoDialog = this.createInfoDialog();
+        const infoDialog = this.createInfoDialog(title);
         const button = this.createButton();
-
-        // TODO: aggiungere funzionalità staff
-        // chainare le isbn + titolo per risparmiare un fetch
-        // window.location.href = 'admin/reservations.html?isbn=' + isbn
-        // window.location.href = 'admin/reservations.html?titolo=' + titolo
 
         this.container.appendChild(image);
         this.container.appendChild(infoDiv);
@@ -102,7 +97,7 @@ export class CatalogItem {
         return rating;
     }
 
-    createInfoDialog() {
+    createInfoDialog(title) {
         const displayInfo = document.createElement('div');
         displayInfo.classList.add('display-info');
 
@@ -125,23 +120,24 @@ export class CatalogItem {
         const content = document.createElement('div');
         content.classList.add('content');
 
-        // TODO: volume per le enciclopedia e anno riferimento per cartine geopoltiche
         content.innerHTML = `
             <p class="info-item"><img src="../../assets/images/tag.svg"/> ISBN: <b>${this.product.isbn}</b></p>
             <!--<p class="info-item"><img src="../../assets/images/status.svg"/> Stato: <b>${this.product.stato}</b></p>-->
-            <p class="info-item"><img src="../../assets/images/book_icon.svg"/> Tipo: <b>${this.product.tipo}</b></p>
+            <p class="info-item"><img src="../../assets/images/type.svg"/> Tipo: <b>${this.product.tipo}</b></p>
             <p class="info-item"><img src="../../assets/images/wrote.svg"/> Anno pubblicazione: <b>${this.product.annoPubblicazione}</b></p>
-            <p class="info-item"><img src="../../assets/images/library24dp.svg"> Biblioteca: <b>${this.product.nomeBiblioteca}</b></p>`;
+            <p class="info-item"><img src="../../assets/images/place.svg"> Biblioteca: <b>${this.product.nomeBiblioteca}</b></p>`;
 
 
         if (this.product.volume) {
-            content.innerHTML += `
-                <p class="info-item"><img src="../../assets/images/list.svg"/> Volume: <b>${this.product.volume}</b></p>`;
+            title.innerHTML += `
+                <!--<p class="info-item"><img src="../../assets/images/list.svg"/> Volume: <b>${this.product.volume}</b></p>-->
+                (vol. ${this.product.volume})`;
         }
 
         if (this.product.annoRiferimento) {
-            content.innerHTML += `
-                <p class="info-item"><img src="../../assets/images/search.svg"/> Anno riferimento: <b>${this.product.annoRiferimento}</b></p>`;
+            title.innerHTML += `
+                <!--<p class="info-item"><img src="../../assets/images/search.svg"/> Anno riferimento: <b>${this.product.annoRiferimento}</b></p>-->
+                (${this.product.annoRiferimento})`;
         }
 
         displayInfo.appendChild(content);
@@ -150,22 +146,6 @@ export class CatalogItem {
 
     createButton() {
         const isbn = this.product.isbn;
-        const userButton = document.createElement('button');
-        userButton.classList.add('mdc-button', 'mdc-button--raised');
-        userButton.setAttribute('id', 'book');
-        userButton.innerHTML = `
-            <span class="mdc-button__ripple"></span>
-            <span class="mdc-button__focus-ring"></span>
-            <span class="mdc-button__label">
-                ${this.product.stato === 'disponibile' ? 'PRENOTA' : 'INCODATI'}
-            </span>`;
-        userButton.addEventListener('click', (e) => {
-            var logged = this.isLogged();
-
-            window.location.href = !logged ?
-                `login-page.html?from=catalog&isbn=${isbn}` :
-                `book-product-page.html?isbn=${isbn}`;
-        });
 
         if (this.getCookie('staff')) {
             const adminButton = document.createElement('button');
@@ -182,18 +162,63 @@ export class CatalogItem {
             return adminButton;
         }
 
+        const userButton = document.createElement('button');
+        userButton.classList.add('mdc-button', 'mdc-button--raised');
+        userButton.setAttribute('id', 'book');
+        userButton.innerHTML = `
+            <span class="mdc-button__ripple"></span>
+            <span class="mdc-button__focus-ring"></span>
+            <span class="mdc-button__label">PRENOTA</span>`;
+        userButton.addEventListener('click', (e) => {
+            var logged = this.isLogged();
+
+            window.location.href = !logged ?
+                `login-page.html?from=catalog&isbn=${isbn}` :
+                `book-product-page.html?isbn=${isbn}`;
+        });
+
         if (this.product.stato === 'prenotato' || this.product.stato === 'prestato') {
             const div = document.createElement('div');
+            
+            if (this.getCookie('user')) {
+                fetch('../php/isBookByUser.php', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        userId: this.getCookie('user').charAt(2),
+                        elementId: this.product.idElemento,
+                    })
+                })
+                    .then(response => response.json())
+                    .then((data) => {
+                        console.log(data);
+                        if (data.result === true) {
+                            div.innerHTML = `
+                                <div class="already-booked">
+                                    <p class="a"><img src="../../assets/images/excla.svg"/> Prodotto già prenotato</p>
+                                </div>`;
+                        } else {
+                            div.innerHTML = `
+                                <div class="already-booked">
+                                    <p class="a"><img src="../../assets/images/excla.svg"/> Prodotto già prenotato</p>
+                                    <p>Clicca <a href="book-product-page.html?isbn=${isbn}">qui</a> per metterti in coda</p>
+                                </div>`;
+                        }
 
-            div.innerHTML = `
-                <div class="already-booked">
-                    <p class="a"><img src="../../assets/images/excla.svg"/> Prodotto già prenotato</p>
-                    <p>Clicca <a href="">qui</a> per metterti in coda</p>
-                </div>`;
-            return div;
+                    });
+                return div;
+            } else {
+                div.innerHTML = `
+                    <div class="already-booked">
+                        <p class="a"><img src="../../assets/images/excla.svg"/> Prodotto già prenotato</p>
+                        <p>Clicca <a href="login-page.html?from=catalog&isbn=${isbn}">qui</a> per metterti in coda</p>
+                    </div>`
+
+                return div;
+            }
+
+        } else {
+            return userButton;
         }
-
-        return userButton;
     }
 
     getContainer() {

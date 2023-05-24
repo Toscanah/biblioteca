@@ -108,6 +108,12 @@ h4 {
     position: relative;
     width: 80%;
     box-shadow: 0 1px 7px hsla(0, 0%, 0%, 0.2);
+
+    box-shadow: rgba(237, 172, 81, 0.4) -5px 5px,
+        rgba(237, 172, 81, 0.3) -10px 10px,
+        rgba(237, 172, 81, 0.2) -15px 15px,
+        rgba(237, 172, 81, 0.1) -20px 20px,
+        rgba(237, 172, 81, 0.05) -25px 25px;
 }
 
 .section img {
@@ -125,7 +131,7 @@ h4 {
     /* size of the corner*/
     --g: 30px;
     /* the gap*/
-    --c: #edac51;
+    --c: rgb(237, 172, 81);
 
     padding: calc(var(--b) + var(--g));
     background-image:
@@ -215,12 +221,17 @@ h1.shadow {
 }
 
 #map {
-    width: 55%;
+    width: 110%;
     height: 500px;
 
     box-shadow:
-        -50px -50px 0 -46px black,
-        50px 50px 0 -46px black;
+        -50px -50px 0 -46px #edac51,
+        50px 50px 0 -46px #edac51;
+}
+
+footer {
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 .map-container {
@@ -235,14 +246,22 @@ h1.shadow {
     height: 500px;
 }
 
-.map-info h1 {
-    font-size: 4em;
+
+.section.map {
+    width: 40%;
 }
 
-.map-info p {
+.map h1 {
+    text-shadow: 0 0 5px #edac51
+}
+
+/*
+
+.map p {
     font-size: 2.2em;
     font-weight: 5%;
 }
+*/
 
 .up {
     position: fixed;

@@ -37,7 +37,7 @@
                             <span class="mdc-line-ripple"></span>
                         </label>
                     </div>
-    
+
                     <div>
                         <label data-mdc-auto-init="MDCTextField" class="mdc-text-field mdc-text-field--filled">
                             <span class="mdc-text-field__ripple"></span>
@@ -54,6 +54,16 @@
                     <input required type="text" class="mdc-text-field__input" id="cf">
                     <span class="mdc-line-ripple"></span>
                 </label>
+
+                <div class="tel-row" id="tel-row">
+                    <label data-mdc-auto-init="MDCTextField" class="mdc-text-field mdc-text-field--filled tel">
+                        <span class="mdc-text-field__ripple"></span>
+                        <span class="mdc-floating-label">Telefono</span>
+                        <input required type="tel" pattern="[0-9]{10}" class="mdc-text-field__input"
+                            id="tel-main">
+                        <span class="mdc-line-ripple"></span>
+                    </label>
+                </div>
 
                 <label data-mdc-auto-init="MDCTextField" class="mdc-text-field mdc-text-field--filled">
                     <span class="mdc-text-field__ripple"></span>
@@ -94,8 +104,8 @@
             }
         </script>
 
-        <div class="register-img">
-            <img src="../../assets/images/a.jpg">
+        <div class="register-img border">
+            <img src="../../assets/images/register3.jpg">
         </div>
 
         <script src="../../assets/javascript/register.js"></script>

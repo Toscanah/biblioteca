@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 18, 2023 at 10:45 PM
+-- Generation Time: May 24, 2023 at 11:49 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -52,7 +52,7 @@ INSERT INTO `taddetto` (`id`, `nome`, `cognome`, `cf`, `email`, `password`, `idB
 
 CREATE TABLE `tarmadio` (
   `id` int(11) NOT NULL,
-  `armadio` int(11) DEFAULT NULL,
+  `armadio` text DEFAULT NULL,
   `idStanza` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -61,7 +61,7 @@ CREATE TABLE `tarmadio` (
 --
 
 INSERT INTO `tarmadio` (`id`, `armadio`, `idStanza`) VALUES
-(1, 1, 1);
+(1, '34gpiko3j4g', 1);
 
 -- --------------------------------------------------------
 
@@ -135,11 +135,11 @@ CREATE TABLE `tcartina` (
 --
 
 INSERT INTO `tcartina` (`id`, `titolo`, `descrizione`, `annoPubblicazione`, `annoRiferimento`, `idElemento`, `idFoto`, `idCasaEditrice`, `idScaffale`, `numeroScaffale`) VALUES
-(1, 'Titolo 1', NULL, 2000, 1990, 11, 1, 1, 1, 11),
-(2, 'Titolo 2', NULL, 2005, 2000, 12, 1, 1, 1, 12),
-(3, 'Titolo 3', NULL, 2010, 2005, 13, 1, 1, 1, 13),
-(4, 'Titolo 4', NULL, 2015, 2010, 14, 1, 1, 1, 14),
-(5, 'Titolo 5', NULL, 2020, 2015, 15, 1, 1, 1, 15);
+(1, 'Italia', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 2000, 1990, 11, 6, 1, 1, 11),
+(2, 'Germania', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 2005, 2000, 12, 6, 1, 1, 12),
+(3, 'Francia', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 2010, 2005, 13, 6, 1, 1, 13),
+(4, 'Spagna', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 2015, 2010, 14, 6, 1, 1, 14),
+(5, 'Croazia', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 2020, 2015, 15, 6, 1, 1, 15);
 
 -- --------------------------------------------------------
 
@@ -157,7 +157,8 @@ CREATE TABLE `tcasaeditrice` (
 --
 
 INSERT INTO `tcasaeditrice` (`id`, `nome`) VALUES
-(1, 'Mondadori');
+(1, 'Mondadori'),
+(2, 'Feltrinelli');
 
 -- --------------------------------------------------------
 
@@ -178,10 +179,10 @@ CREATE TABLE `telemento` (
 --
 
 INSERT INTO `telemento` (`id`, `isbn`, `tipo`, `stato`, `rating`) VALUES
-(1, '9788806220703', 'libro', 'prestato', '5'),
-(2, '9788806237534', 'libro', 'disponibile', '5'),
+(1, '9788806220703', 'libro', 'prenotato', '5'),
+(2, '9788806237534', 'libro', 'prenotato', '5'),
 (3, '9788817106104', 'libro', 'disponibile', '5'),
-(4, '9788815240115', 'libro', 'disponibile', '4'),
+(4, '9788815240115', 'libro', 'prenotato', '4'),
 (5, '9788817106128', 'libro', 'disponibile', '5'),
 (6, '9788861905365', 'enciclopedia', 'disponibile', '3'),
 (7, '9788861905389', 'enciclopedia', 'disponibile', '3'),
@@ -192,7 +193,8 @@ INSERT INTO `telemento` (`id`, `isbn`, `tipo`, `stato`, `rating`) VALUES
 (12, '9788898436064', 'carta geopolitica', 'disponibile', '5'),
 (13, '9788879143811', 'carta geopolitica', 'disponibile', '3'),
 (14, '9788839208265', 'carta geopolitica', 'disponibile', '5'),
-(15, '9788898436033', 'carta geopolitica', 'disponibile', '5');
+(15, '9788898436033', 'carta geopolitica', 'disponibile', '5'),
+(16, '9788815240195', 'libro', 'disponibile', '5');
 
 -- --------------------------------------------------------
 
@@ -214,7 +216,9 @@ INSERT INTO `tfoto` (`id`, `foto`) VALUES
 (2, 'eldest.jpg'),
 (3, 'inheritance.jpg'),
 (4, 'brisingr.jpg'),
-(5, 'signore_anelli.jpg');
+(5, 'signore_anelli.jpg'),
+(6, 'default.png'),
+(7, 'narnia.jpg\r\n');
 
 -- --------------------------------------------------------
 
@@ -243,7 +247,8 @@ INSERT INTO `tlibro` (`id`, `titolo`, `descrizione`, `annoPubblicazione`, `idEle
 (2, 'Eldest', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 2005, 2, 2, 1, 1, 2),
 (3, 'Inheritance', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 2011, 4, 3, 1, 1, 4),
 (4, 'Brisingr', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 2008, 3, 4, 1, 1, 3),
-(5, 'Il signore degli anelli', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 1954, 5, 5, 1, 1, 5);
+(5, 'Il signore degli anelli', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 1954, 5, 5, 1, 1, 5),
+(6, 'Le cronache di Narnia', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 1939, 16, 7, 1, 1, 6);
 
 -- --------------------------------------------------------
 
@@ -264,20 +269,24 @@ CREATE TABLE `tprenotazione` (
 --
 
 INSERT INTO `tprenotazione` (`id`, `idElemento`, `dataPrenotazione`, `stato`, `idUtente`) VALUES
-(24, 1, '2023-05-08 00:00:00', 'in prestito', 1),
-(25, 1, '2023-05-08 00:00:00', 'da confermare', 1),
-(26, 1, '2023-05-08 00:00:00', 'da confermare', 1),
-(27, 1, '2023-05-08 00:00:00', 'da confermare', 1),
-(28, 1, '2023-05-08 00:00:00', 'da confermare', 1),
-(29, 1, '2023-05-08 00:00:00', 'da confermare', 1),
-(30, 1, '2023-05-08 00:00:00', 'da confermare', 1),
-(31, 1, '2023-05-08 00:00:00', 'da confermare', 1),
-(32, 1, '2023-05-08 00:00:00', 'da confermare', 1),
-(33, 1, '2023-05-08 00:00:00', 'da confermare', 1),
+(24, 1, '2023-05-08 10:00:00', 'terminata', 1),
+(25, 1, '2023-05-08 00:00:00', 'terminata', 1),
+(27, 1, '2023-05-08 00:00:00', 'terminata', 1),
+(28, 1, '2023-05-08 00:00:00', 'terminata', 1),
+(29, 1, '2023-05-08 00:00:00', 'terminata', 1),
+(30, 1, '2023-05-08 00:00:00', 'terminata', 1),
+(31, 1, '2023-05-08 00:00:00', 'terminata', 1),
+(32, 1, '2023-05-08 00:00:00', 'terminata', 1),
+(33, 8, '2023-05-08 00:00:00', 'da confermare', 1),
 (34, 1, '2023-05-08 00:00:00', 'da confermare', 1),
-(35, 1, '2023-05-08 00:00:00', 'da confermare', 1),
+(35, 12, '2023-05-08 00:00:00', 'da confermare', 1),
 (36, 1, '2023-05-08 00:00:00', 'da confermare', 1),
-(37, 1, '2023-05-08 00:00:00', 'da confermare', 1);
+(37, 1, '2023-05-08 00:00:00', 'da confermare', 1),
+(40, 2, '2023-05-24 00:00:00', 'da confermare', 1),
+(41, 4, '2023-05-24 00:00:00', 'da confermare', 1),
+(42, 4, '2023-05-24 00:00:00', 'da confermare', 1),
+(43, 4, '2023-05-24 00:00:00', 'da confermare', 1),
+(44, 4, '2023-05-24 00:00:00', 'da confermare', 1);
 
 -- --------------------------------------------------------
 
@@ -297,7 +306,14 @@ CREATE TABLE `tprestito` (
 --
 
 INSERT INTO `tprestito` (`id`, `dataPrestito`, `idPrenotazione`, `idAddetto`) VALUES
-(3, '2023-05-18 22:37:03', 24, 1);
+(3, '2023-05-18 22:37:03', 24, 1),
+(4, '2023-05-24 21:03:09', 25, 1),
+(5, '2023-05-24 21:05:20', 26, 1),
+(6, '2023-05-24 23:20:36', 28, 1),
+(7, '2023-05-24 23:30:06', 29, 1),
+(8, '2023-05-24 23:30:57', 30, 1),
+(9, '2023-05-24 23:31:03', 31, 1),
+(10, '2023-05-24 23:31:09', 32, 1);
 
 -- --------------------------------------------------------
 
@@ -330,7 +346,8 @@ INSERT INTO `tproduzione` (`id`, `idAutore`, `idElemento`) VALUES
 (13, 1, 12),
 (14, 1, 13),
 (15, 1, 14),
-(16, 1, 15);
+(16, 1, 15),
+(17, 1, 16);
 
 -- --------------------------------------------------------
 
@@ -345,6 +362,20 @@ CREATE TABLE `tritiro` (
   `idAddetto` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `tritiro`
+--
+
+INSERT INTO `tritiro` (`id`, `dataRitiro`, `idPrenotazione`, `idAddetto`) VALUES
+(1, '2023-05-24 21:02:34', 24, 1),
+(2, '2023-05-24 21:04:31', 25, 1),
+(3, '2023-05-24 23:20:27', 27, 1),
+(4, '2023-05-24 23:29:05', 28, 1),
+(5, '2023-05-24 23:30:51', 29, 1),
+(6, '2023-05-24 23:30:59', 30, 1),
+(7, '2023-05-24 23:31:05', 31, 1),
+(8, '2023-05-24 23:31:14', 32, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -353,7 +384,7 @@ CREATE TABLE `tritiro` (
 
 CREATE TABLE `tscaffale` (
   `id` int(11) NOT NULL,
-  `scaffale` int(11) DEFAULT NULL,
+  `scaffale` text DEFAULT NULL,
   `idArmadio` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -362,7 +393,7 @@ CREATE TABLE `tscaffale` (
 --
 
 INSERT INTO `tscaffale` (`id`, `scaffale`, `idArmadio`) VALUES
-(1, 1, 1);
+(1, '123gf23f', 1);
 
 -- --------------------------------------------------------
 
@@ -372,7 +403,7 @@ INSERT INTO `tscaffale` (`id`, `scaffale`, `idArmadio`) VALUES
 
 CREATE TABLE `tstanza` (
   `id` int(11) NOT NULL,
-  `stanza` int(11) DEFAULT NULL,
+  `stanza` text DEFAULT NULL,
   `idBiblioteca` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -381,7 +412,8 @@ CREATE TABLE `tstanza` (
 --
 
 INSERT INTO `tstanza` (`id`, `stanza`, `idBiblioteca`) VALUES
-(1, 1, 1);
+(1, 'sium', 1),
+(2, 'sadfsdf', 1);
 
 -- --------------------------------------------------------
 
@@ -394,6 +426,18 @@ CREATE TABLE `ttelefono` (
   `telefono` text DEFAULT NULL,
   `idUtente` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `ttelefono`
+--
+
+INSERT INTO `ttelefono` (`id`, `telefono`, `idUtente`) VALUES
+(1, '', 6),
+(2, '3333333333', 7),
+(3, '1234567891', 8),
+(4, '1234567891', 8),
+(5, '3349999999', 9),
+(6, '4444444444', 9);
 
 -- --------------------------------------------------------
 
@@ -415,7 +459,11 @@ CREATE TABLE `tutente` (
 --
 
 INSERT INTO `tutente` (`id`, `nome`, `cognome`, `cf`, `email`, `password`) VALUES
-(1, 'Alessandro', 'Cecchini', 'ggg423g4', 'a@a.a', '123');
+(1, 'Alessandro', 'Cecchini', 'ggg423g4', 'a@a.a', '123'),
+(6, '234', '234', 'gg4', 'sauli@com', '123'),
+(7, 'Gamma', '23t', 'g4', '234@325', '4444444'),
+(8, 'Sanchez', 'Daniele', '20983hg29u43hg', 'sanchez@gmail.com', '123'),
+(9, 'Alessandro', 'Cecchini', '2038ghj2394ugh', 'alego.cecchini@gmail.com', '123');
 
 -- --------------------------------------------------------
 
@@ -441,11 +489,11 @@ CREATE TABLE `tvolume` (
 --
 
 INSERT INTO `tvolume` (`id`, `titolo`, `descrizione`, `annoPubblicazione`, `volume`, `idElemento`, `idFoto`, `idCasaEditrice`, `idScaffale`, `numeroScaffale`) VALUES
-(1, 'Enciclopedia della musica', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 2006, 1, 6, 1, 1, 1, 6),
-(2, 'Enciclopedia della musica', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 2006, 2, 7, 1, 1, 1, 7),
-(3, 'Enciclopedia delle scienze', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 2015, 1, 8, 1, 1, 1, 8),
-(4, 'Enciclopedia degli scienze', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 2015, 2, 9, 1, 1, 1, 9),
-(5, 'Enciclopedia degli scienze', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 2015, 3, 10, 1, 1, 1, 10);
+(1, 'Bandiere', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 2006, 1, 6, 6, 1, 1, 6),
+(2, 'Bandiera', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 2006, 2, 7, 6, 1, 1, 7),
+(3, 'Paesi', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 2015, 1, 8, 6, 1, 1, 8),
+(4, 'Paesi', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 2015, 2, 9, 6, 1, 1, 9),
+(5, 'Paesi', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 2015, 3, 10, 6, 1, 1, 10);
 
 --
 -- Indexes for dumped tables
@@ -601,49 +649,49 @@ ALTER TABLE `tcartina`
 -- AUTO_INCREMENT for table `tcasaeditrice`
 --
 ALTER TABLE `tcasaeditrice`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `telemento`
 --
 ALTER TABLE `telemento`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `tfoto`
 --
 ALTER TABLE `tfoto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tlibro`
 --
 ALTER TABLE `tlibro`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `tprenotazione`
 --
 ALTER TABLE `tprenotazione`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `tprestito`
 --
 ALTER TABLE `tprestito`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tproduzione`
 --
 ALTER TABLE `tproduzione`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `tritiro`
 --
 ALTER TABLE `tritiro`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tscaffale`
@@ -655,19 +703,19 @@ ALTER TABLE `tscaffale`
 -- AUTO_INCREMENT for table `tstanza`
 --
 ALTER TABLE `tstanza`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `ttelefono`
 --
 ALTER TABLE `ttelefono`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tutente`
 --
 ALTER TABLE `tutente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tvolume`

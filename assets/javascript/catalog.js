@@ -112,7 +112,7 @@ function getCookie(name) {
 function createInitialsElement(user, url) {
     const initials = document.createElement('h1');
     initials.textContent = user.slice(0, 2).toUpperCase();
-    login.href = url;
+    //login.href = url;
 
     if (user === getCookie('staff')) {
         login.style.color = 'red';
@@ -128,6 +128,27 @@ function createLoginIconElement(url) {
     login.appendChild(loginIcon);
 }
 
+function createLogout() {
+    const rightCorner = document.getElementById('right-corner');
+    const logout = document.createElement('img');
+    logout.src = '../../assets/images/logout.svg';
+    logout.title = 'Esci';
+    logout.addEventListener('click', () => {
+        let cookies = document.cookie.split(";");
+
+        for (let i = 0; i < cookies.length; i++) {
+            let cookie = cookies[i];
+            let eqPos = cookie.indexOf("=");
+            let name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+            document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+        }
+
+        window.location.reload();
+    });
+
+    rightCorner.appendChild(logout);
+}
+
 const logged = getCookie('logged');
 if (logged) {
     const user = getCookie('user');
@@ -135,6 +156,7 @@ if (logged) {
 
     if (user) {
         createInitialsElement(user, 'user-page.html');
+
     }
 
     if (staff) {
@@ -149,6 +171,8 @@ if (logged) {
         rightCorner.insertBefore(addProduct, rightCorner.firstChild);*/
         createInitialsElement(staff, 'admin/to_be_named.html');
     }
+
+    createLogout();
 } else {
     createLoginIconElement('login-page.html');
 }

@@ -27,7 +27,7 @@ h5 {
 }
 
 :root {
-    --mdc-theme-primary: #ef9825;
+    --mdc-theme-primary: rgb(239, 152, 37);
     --mdc-theme-secondary: #ffbc50;
     --mdc-theme-background: #fff;
     --mdc-theme-surface: #fff;
