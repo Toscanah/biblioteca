@@ -17,6 +17,13 @@ searchInput.addEventListener('input', () => {
     getElements();
 });
 
+const cancel = document.getElementById('cancel');
+cancel.addEventListener('click', () => {
+    searchInput.value = '';
+    search = '';
+    getElements();
+});
+
 document.querySelectorAll('.filter').forEach(element => {
     element.addEventListener('click', () => {
         element.classList.toggle('active-filter');
@@ -112,7 +119,7 @@ function getCookie(name) {
 function createInitialsElement(user, url) {
     const initials = document.createElement('h1');
     initials.textContent = user.slice(0, 2).toUpperCase();
-    //login.href = url;
+    login.href = url;
 
     if (user === getCookie('staff')) {
         login.style.color = 'red';
@@ -156,7 +163,6 @@ if (logged) {
 
     if (user) {
         createInitialsElement(user, 'user-page.html');
-
     }
 
     if (staff) {

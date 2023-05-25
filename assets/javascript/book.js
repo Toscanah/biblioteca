@@ -4,6 +4,7 @@ const cointainer = document.getElementById('booking');
 const urlSearchParams = new URLSearchParams(window.location.search);
 const isbn = urlSearchParams.get('isbn');
 
+
 function getCookie(name) {
     const cookies = document.cookie.split('; ');
     for (let i = 0; i < cookies.length; i++) {

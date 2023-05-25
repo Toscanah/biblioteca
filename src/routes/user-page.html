@@ -12,7 +12,7 @@
 
 <body>
     <header>
-        <a class="header" href="../../index.html">
+        <a class="header" href="catalog-page.html?page=1">
             <h1>boocek.</h1>
         </a>
 
@@ -27,11 +27,44 @@
     </div>
 
     <main class="main-container" id="">
-        <h1 id="title">Ciao</h1>
+        <div class="title">
+            <p id="title">Area personale</p>
+        </div>
+
+        <div class="private-area">
+            <div class="sections">
+                <div class="section selected" id="first">
+                    <p>Dati personali</p>
+                </div>
+                <div class="section unselected" id="second">
+                    <p>Le mie prenotazioni</p>
+                </div>
+            </div>
+            <div class="content" id="content">
+            </div>
+        </div>
     </main>
 
-    <script src="../../assets/javascript/user.js"></script>
+    <dialog id="confirm">
+        <img src="../../assets/images/close_dialog.svg" class="close-dialog" id="close-btn">
+        <h1>Attenzione</h1>
+        <p>Stai per cambiare la tua password</p>
 
+        <div>
+            <button type="submit" class="mdc-button mdc-button--raised" id="update-btn-dialog">
+                <span class="mdc-button__ripple"></span>
+                <span class="mdc-button__focus-ring"></span>
+                <span class="mdc-button__label">AGGIORNA</span>
+            </button>
+        </div>
+    </dialog>
+
+    <script src="../../assets/javascript/user.js"></script>
 </body>
+
+<script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+<script type="text/javascript">
+    window.mdc.autoInit(document.body);
+</script>
 
 </html>

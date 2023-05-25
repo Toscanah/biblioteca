@@ -55,6 +55,24 @@ a {
     margin: 20px;
 }
 
+.cancel {
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    color: var(--mdc-theme-primary);
+}
+
+.cancel:hover {
+    cursor: pointer;
+}
+
+#search-form {
+    margin-left: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 #cover {
     width: 350px;
     height: 500px;
@@ -67,7 +85,7 @@ a {
 }
 
 .item-info {
-    width: 70%;
+    width: 75%;
     text-align: start;
     padding-left: 20px;
     position: relative;

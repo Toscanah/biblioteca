@@ -59,8 +59,7 @@
                     <label data-mdc-auto-init="MDCTextField" class="mdc-text-field mdc-text-field--filled tel">
                         <span class="mdc-text-field__ripple"></span>
                         <span class="mdc-floating-label">Telefono</span>
-                        <input required type="tel" pattern="[0-9]{10}" class="mdc-text-field__input"
-                            id="tel-main">
+                        <input required type="tel" pattern="[0-9]{10}" class="mdc-text-field__input" id="tel-main">
                         <span class="mdc-line-ripple"></span>
                     </label>
                 </div>
@@ -93,7 +92,18 @@
                     <span class="mdc-button__focus-ring"></span>
                     <span class="mdc-button__label">REGISTRATI</span>
                 </button>
+
+                <div class="horizzontal-divider">&nbsp;</div>
+
+                <p>Gia' registrato?</p>
             </form>
+
+            <button type="submit" class="mdc-button mdc-button--outlined" id="login-btn"
+                onclick="window.location.href = 'login-page.html'">
+                <span class="mdc-button__ripple"></span>
+                <span class="mdc-button__focus-ring"></span>
+                <span class="mdc-button__label">ACCEDI</span>
+            </button>
         </div>
 
         <div class="vertical-divider">&nbsp;</div>

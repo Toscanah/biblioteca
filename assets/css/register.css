@@ -84,7 +84,6 @@ label.mdc-text-field {
 
 #register-btn {
     width: 100%;
-    border: 2px solid black;
     font-weight: bold;
 }
 
@@ -134,4 +133,17 @@ label.mdc-text-field {
             rgba(239, 152, 37, 0.6) 60px -60px,
             rgb(255, 255, 255) 80px -80px 0px -3px;
     }
+}
+
+.horizzontal-divider {
+    height: 2px;
+    width: 100%;
+    background-image: linear-gradient(90deg, white, black, white);
+}
+
+#login-btn {
+    width: 500px;
+    color: black;
+    font-weight: bold;
+    margin-top: 10px;
 }

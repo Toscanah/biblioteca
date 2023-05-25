@@ -1,4 +1,306 @@
 .main-container {
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    display: flex;
+    width: 90%;
+    font-size: 6.6em;
+}
+
+.private-area {
+    margin-top: 40px;
+    width: 90%;
+    height: 500px;
+    display: flex;
+}
+
+.sections {
+    width: 15%;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.section {
+    display: flex;
+    width: 100%;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    /* border: 3px solid black; */
+}
+
+
+
+.section:hover {
+    cursor: pointer;
+}
+
+.unselected {
+    background-color: unset;
+}
+
+:root {
+    /*--bg-color: rgb(230, 230, 230);*/
+    --bg-color: white;
+}
+
+.selected {
+    position: relative;
+    z-index: 10;
+    background-color: var(--bg-color);
+    border-left: 2px solid rgba(239, 152, 37, 1);
+    border-bottom: 2px solid rgba(239, 152, 37, 1);
+    border-top: 2px solid rgba(239, 152, 37, 1);
+}
+
+.selected::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0px;
+    width: 2px;
+    background-color: var(--bg-color);
+}
+
+.selected#second {
+    box-shadow: rgba(239, 152, 37, 0.5) 5px 5px,
+        rgba(239, 152, 37, 0.4) 10px 10px,
+        rgba(239, 152, 37, 0.3) 15px 15px,
+        rgba(239, 152, 37, 0.2) 20px 20px,
+        rgba(239, 152, 37, 0.1) 25px 25px;
+}
+
+.content {
+    z-index: 20;
+    position: relative;
+    width: 75%;
+    height: 500px;
+    background-color: var(--bg-color);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: 2px solid rgba(239, 152, 37, 1);
+
+    box-shadow: rgba(239, 152, 37, 0.5) 5px 5px,
+        rgba(239, 152, 37, 0.4) 10px 10px,
+        rgba(239, 152, 37, 0.3) 15px 15px,
+        rgba(239, 152, 37, 0.2) 20px 20px,
+        rgba(239, 152, 37, 0.1) 25px 25px;
+
+    /*box-shadow: 8px 8px 0 0 rgba(239, 152, 37, 1);*/
+    /*box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.22),
+        1px 0px 0px 0px rgba(0, 0, 0, 0.22),
+        1px 2px 0px 0px rgba(0, 0, 0, 0.22),
+        2px 1px 0px 0px rgba(0, 0, 0, 0.22),
+        2px 3px 0px 0px rgba(0, 0, 0, 0.22),
+        3px 2px 0px 0px rgba(0, 0, 0, 0.22),
+        3px 4px 0px 0px rgba(0, 0, 0, 0.22),
+        4px 3px 0px 0px rgba(0, 0, 0, 0.22),
+        4px 5px 0px 0px rgba(0, 0, 0, 0.22),
+        5px 4px 0px 0px rgba(0, 0, 0, 0.22),
+        5px 6px 0px 0px rgba(0, 0, 0, 0.22),
+        6px 5px 0px 0px rgba(0, 0, 0, 0.22),
+        6px 7px 0px 0px rgba(0, 0, 0, 0.22),
+        7px 6px 0px 0px rgba(0, 0, 0, 0.22),
+        7px 8px 0px 0px rgba(0, 0, 0, 0.22),
+        8px 7px 0px 0px rgba(0, 0, 0, 0.22);*/
+}
+
+.info-div {
+    width: 50%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+}
+
+#update-btn {
+    font-weight: bold;
+    borde: 1px solid black;
+}
+
+.content-element {
+    font-size: 2.5em;
+}
+
+.change-password {
+    font-size: 2.5em;
+    width: 50%;
+    height: 70%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+}
+
+.bookings {
+    max-height: 400px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+
+    display: flex;
+    justify-content: center;
+}
+
+table {
+    table-layout: fixed;
+    width: 80%;
+    font-size: 25px;
+    border-collapse: collapse;
+}
+
+thead {
+    margin-bottom: 50px;
+}
+
+td {
+    text-align: center;
+}
+
+thead th {
+    background-color: var(--bg-color);
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+tbody td {
+    padding: 20px;
+}
+
+.state {
+    border-radius: 10px;
+    padding: 2px;
+}
+
+.wait {
+    background-color: rgb(233, 222, 66);
+}
+
+.accepted {
+    background-color: rgb(43, 200, 43);
+}
+
+.done {
+    background-color: rgb(43, 127, 200);
+}
+
+.no-book {
+    font-size: 3em;
+    font-weight: bold;
+}
+
+.vertical-divider {
+    height: 300px;
+    width: 2px;
+    background-image: linear-gradient(0deg, white, black, white);
+}
+
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+
+    10% {
+        transform: translateX(-5px);
+    }
+
+    20% {
+        transform: translateX(5px);
+    }
+
+    30% {
+        transform: translateX(-5px);
+    }
+
+    40% {
+        transform: translateX(5px);
+    }
+
+    50% {
+        transform: translateX(-5px);
+    }
+
+    60% {
+        transform: translateX(5px);
+    }
+
+    70% {
+        transform: translateX(-5px);
+    }
+
+    80% {
+        transform: translateX(5px);
+    }
+
+    90% {
+        transform: translateX(-5px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.shake-element {
+    animation: shake 0.6s infinite;
+}
+
+dialog[open] {
+    z-index: 10;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    height: 150px;
+    width: 20%;
+    animation: show 1s ease-in-out;
+    border: 2px solid black;
+    border-radius: 8px;
+}
+
+@keyframes show {
+    from {
+        transform: translateY(-650px);
+    }
+
+    to {
+        transform: translateY(0%);
+    }
+}
+
+dialog::backdrop {
+    backdrop-filter: blur(10px);
+}
+
+.close-dialog {
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    transform-origin: center;
+    transform: scale(1);
+    transition: transform .3s ease-in-out;
+}
+
+.close-dialog:hover {
+    cursor: pointer;
+    transform: scale(1.4);
+}
+
+#update-btn-dialog {
+    font-weight: bold;
 }

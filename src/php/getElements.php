@@ -42,13 +42,11 @@ foreach ($tables as $table) {
             INNER JOIN tProduzione ON tProduzione.idElemento = tElemento.id
             INNER JOIN tAutore ON tAutore.id = tProduzione.idAutore
             INNER JOIN tCasaEditrice ON tCasaEditrice.id = {$table}.idCasaEditrice
-        
         WHERE 
             {$table}.titolo LIKE '%{$search}%' OR
             {$table}.annoPubblicazione LIKE '%{$search}%' OR
-            {$table}.titolo LIKE '%{$search}%'
-            
-        GROUP BY tElemento.isbn";
+            CONCAT(tAutore.nome, ' ', tAutore.cognome) LIKE '%{$search}%'
+        GROUP BY tElemento.isbn;";
     $get_elements_res = mysqli_query($db, $get_elements);
     $products = array_merge($products, mysqli_fetch_all($get_elements_res, MYSQLI_ASSOC));
 }

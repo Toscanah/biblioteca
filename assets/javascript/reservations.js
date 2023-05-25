@@ -142,7 +142,7 @@ fetch('../../php/admin/getElement.php', {
                                 modal.querySelector('#confirm-collect').innerHTML = `
                                     Stai ritirando <b>${document.getElementById('element-title').innerHTML}</b>`;
 
-                                    modal.querySelector('button').addEventListener('click', () => {
+                                modal.querySelector('button').addEventListener('click', () => {
                                     fetch('../../php/admin/collectItem.php', {
                                         method: 'POST',
                                         body: JSON.stringify({
@@ -160,7 +160,6 @@ fetch('../../php/admin/getElement.php', {
                             collect.appendChild(collectBtn);
                         }
                     });
-
 
                 let counter = 0;
 
