@@ -53,6 +53,7 @@ h4 {
 
 #arrow-down {
     animation-delay: 2s;
+    user-select: none;
 }
 
 #arrow-down:hover {
@@ -273,7 +274,8 @@ footer {
     transition: opacity 0.5s ease-in-out;
     border: 2px solid black;
     border-radius: 50px;
-    background-color: rgba(226, 222, 222, 0.656)
+    background-color: rgba(226, 222, 222, 0.656);
+    user-select: none;
 }
 
 #up:hover {

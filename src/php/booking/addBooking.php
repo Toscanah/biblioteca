@@ -8,7 +8,7 @@ $userId = $data["userId"];
 $isbn = $data["isbn"];
 
 $date = new DateTime();
-$formatted_date = $date->format('Y-m-d');
+$formatted_date = $date->format('Y-m-d H-m-s');
 
 $add_booking =
     "INSERT INTO tPrenotazione

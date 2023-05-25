@@ -48,8 +48,7 @@ foreach ($tables as $table) {
             {$table}.annoPubblicazione LIKE '%{$search}%' OR
             {$table}.titolo LIKE '%{$search}%'
             
-        GROUP BY tElemento.isbn
-        ORDER BY autori";
+        GROUP BY tElemento.isbn";
     $get_elements_res = mysqli_query($db, $get_elements);
     $products = array_merge($products, mysqli_fetch_all($get_elements_res, MYSQLI_ASSOC));
 }
