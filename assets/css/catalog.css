@@ -58,6 +58,7 @@ a {
 .cancel {
     width: 100px;
     display: flex;
+    font-weight: bold;
     justify-content: center;
     color: var(--mdc-theme-primary);
 }
